@@ -4,20 +4,20 @@
 *
 { 
     font-family: 'Tahoma', sans-serif;
-    color: #222020; /*Text color*/
+    color: #FFFFFF; /*Text color*/
     text-align: left;
 }
 
 body
 {
-    background: #a8aeb1; /*This is the background color for the whole site*/
+    background: #000000; /*This is the background color for the whole site*/
     margin-left: 3%;
     margin-right: 3%;
 }
 
 article
 {
-    background: #f0f0f0; /*This is the white boxes that the text is in. You can change this to anything you like*/
+    background: #424242; /*This is the white boxes that the text is in. You can change this to anything you like*/
     border-radius: 5px;
     margin-top: 5px;
     margin-left: 5%;
@@ -48,7 +48,7 @@ h2
 
 a
 {
-    color: #6f838b; /*This is the color for links, such as the download link*/
+    color: #848484; /*This is the color for links, such as the download link*/
     text-decoration: None;
     font-weight: bold;
 }
