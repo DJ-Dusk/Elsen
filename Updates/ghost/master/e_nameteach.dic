@@ -1,0 +1,310 @@
+﻿OnTeachName	
+{
+	if reference0 == "TEACHNAME" //ignore this
+		{
+			if dedanmode == "ON"
+			{
+				"\b[4]*Dedan would just call you insults if you tried. \w8Best wait 'til the Elsen comes back.\e"
+			}
+			elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+			{
+				"*You'll get nothing out of this.*\e"
+			}
+			elseif sugarlevel < 40
+			{
+				"\0\s[16]You... \w4want to change your name...? \w8What to...?\![open,inputbox,OnNameTeach,-1]\e"
+			}
+			else
+			{
+				"\0\s[3]O..\w4oh, \w4you need to change your name? \w8\0\s[7]What to?\![open,inputbox,OnNameTeach,-1]\e"
+			}
+		}
+	else
+		{
+
+		}
+}
+
+OnNameTeach
+{
+	tempname = reference0 //this stores the name value from reference0 in tempname
+	reference0 = TOLOWER(reference0) //changes it to lowercase
+	reference0 = REPLACE(reference0," ","") //removes spaces
+	reference0 = REPLACE(reference0,".","") //removes periods
+	reference0 = REPLACE(reference0,"-","") //removes dashes
+	
+	if reference0 == "batter" || reference0 == "judge" || reference0 == "sugar" || reference0 == "boxxer" || reference0 == "ballman"
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]That's...\w4 not a real name...\![open,inputbox,OnNameTeach,-1]"
+		}
+		else
+		{
+			"\0\s[7]I... \w4\0\s[6]d-don't think that is a real name. \w8\0\s[7]Please use a real name to go by.\![open,inputbox,OnNameTeach,-1]"
+		}
+	}
+	elseif reference0 == "dedan" || reference0 == "japhet" || reference0 == "enoch"
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]That's...\w4 the Queen's envoys' name...\![open,inputbox,OnNameTeach,-1]"
+		}
+		else
+		{
+			"\0\s[7]That's o-one of the Queen's envoys' name! \w8Please use your own name.\![open,inputbox,OnNameTeach,-1]"
+		}
+	}
+	elseif reference0 == "elsen" || reference0 == "damien" || reference0 == "pentel" || reference0 == "shachihata" || reference0 == "alma"
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]That's... \w4one of stations in Zone 1...\![open,inputbox,OnNameTeach,-1]"
+		}
+		else
+		{
+			"\0\s[7]B-But that's one of the metro station names in Zone 1! \w8That'd get confusing! \w8\0\s[6]Please use a different name.\![open,inputbox,OnNameTeach,-1]"
+		}
+	}
+	elseif reference0 == "bismark"
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]That's not a proper name...\![open,inputbox,OnNameTeach,-1]"
+		}
+		else
+		{
+			"\0\s[7]Bismark? \w8From Zone 2? \w8\0\s[6]I-I don't think that's a real name...\![open,inputbox,OnNameTeach,-1]"
+		}
+	}
+	elseif reference0 == "vesper"
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]The sugar factory of Zone 3... \w8Sugar...\![open,inputbox,OnNameTeach,-1]"
+		}
+		else
+		{
+			"\0\s[7]That's the sugar f-factory of Zone 3! \w8\0\s[6]Please use a real name to go by.\![open,inputbox,OnNameTeach,-1]"
+		}
+	}
+	elseif reference0 == "queen" || reference0 == "vadereloha" || reference0 == "elohavader" || reference0 == "vadreeloha" || reference0 == "elohavadre"
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]That's... \w4the Queen's name...\![open,inputbox,OnNameTeach,-1]"
+		}
+		else
+		{
+			"\0\s[7]That's... \w4the Queen's name! \w8Please use your own name.\![open,inputbox,OnNameTeach,-1]"
+		}
+	}
+	elseif reference0 == "mortis" || reference0 == "mortisghost" || reference0 == "ghostmortis"
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]That's... \w4not your name...\![open,inputbox,OnNameTeach,-1]"
+		}
+		else
+		{
+			"\0\s[7]That c-can't be your name. \w8Please use your own name.\![open,inputbox,OnNameTeach,-1]"
+		}
+	}
+	elseif reference0 == "erin" && sugarlevel >= 40
+	{
+		username = "Erin"
+		
+		"\0\s[6]O-oh, \w4Erin! \w8I've heard of you before f-from Zacharie, \w4I believe. \w8It's good to see you!\w8\w8"
+		--
+		" \0\s[7]Would y-you like a title, \w4Erin?"
+		--
+		"\n\n[half]\![*]\q[Nope,titlenone]\n"
+		--
+		if presuffix == "masculine"
+		{
+			"\![*]\q[Mr.,titlemr]\n/
+			\![*]\q[Master,titlemaster]\n/
+			\![*]\q[Lord,titlelord]\n/
+			\![*]\q[Sir,titlesir]\e"
+		}
+		elseif presuffix == "feminine"
+		{
+			"\![*]\q[Ms.,titlems]\n/
+			\![*]\q[Mistress,titlemistress]\n/
+			\![*]\q[Lady,titlelady]\n/
+			\![*]\q[Madam,titlemadam]\e"
+		}
+	}
+	elseif reference0 == "dusk" || reference0 == "djdusk" || reference0 == "duskie"
+	{
+		if duskname != 1
+		{
+			if sugarlevel < 40
+			{
+				"\0\s[16]That's... \w8not your name...\![open,inputbox,OnNameTeach,-1]"
+			}
+			else
+			{
+				"\0\s[7]That's not your n-name, \w4though... \w8\0\s[6]Please use your correct name.\![open,inputbox,OnNameTeach,-1]"
+			}
+		}
+		elseif duskname == 1
+		{
+			username = "Dusk"
+			
+			if sugarlevel < 40
+			{
+				"\0\s[16]You've... \w6gained access to that name...\w8\w8"
+				--
+				" \0\s[16]Do... \w4you go by a title...?\w4"
+				--
+				"\n\n[half]\![*]\q[Nope,titlenone]\n"
+				--
+				if presuffix == "masculine"
+				{
+					"\![*]\q[Mr.,titlemr]\n/
+					\![*]\q[Master,titlemaster]\n/
+					\![*]\q[Lord,titlelord]\n/
+					\![*]\q[Sir,titlesir]\e"
+				}
+				elseif presuffix == "feminine"
+				{
+					"\![*]\q[Ms.,titlems]\n/
+					\![*]\q[Mistress,titlemistress]\n/
+					\![*]\q[Lady,titlelady]\n/
+					\![*]\q[Madam,titlemadam]\e"
+				}
+			}
+			else
+			{
+				"\0\s[7]A-ah, \w4looks like you've gained access to that name. \w8\0\s[8]A-alright... \w8\w8"
+				--
+				" \0\s[7]D-do you go by any title?\w4"
+				--
+				"\n\n[half]\![*]\q[Nope,titlenone]\n"
+				--
+				if presuffix == "masculine"
+				{
+					"\![*]\q[Mr.,titlemr]\n/
+					\![*]\q[Master,titlemaster]\n/
+					\![*]\q[Lord,titlelord]\n/
+					\![*]\q[Sir,titlesir]\e"
+				}
+				elseif presuffix == "feminine"
+				{
+					"\![*]\q[Ms.,titlems]\n/
+					\![*]\q[Mistress,titlemistress]\n/
+					\![*]\q[Lady,titlelady]\n/
+					\![*]\q[Madam,titlemadam]\e"
+				}
+				
+			}
+		}
+	}
+	elseif reference0 == "" || reference0 == " " || reference0 == "  "
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w4didn't say anything...\![open,inputbox,OnNameTeach,-1]"
+		}
+		else
+		{
+			"\0\s[7]D-did... \w4you say anything? \w8P-please speak up a bit more.\![open,inputbox,OnNameTeach,-1]"
+		}
+	}
+	else
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]Do... \w4you go by a title...?\w4"
+		}
+		else
+		{
+			"\0\s[8]....\w8\w8\0\s[7]D-do you go by any title?\w4"
+		}
+		--
+		"\n\n[half]\![*]\q[Nope,titlenone]\n"
+		--
+		if presuffix == "masculine"
+		{
+		"\![*]\q[Mr.,titlemr]\n/
+		\![*]\q[Master,titlemaster]\n/
+		\![*]\q[Lord,titlelord]\n/
+		\![*]\q[Sir,titlesir]\e"
+		}
+		elseif presuffix == "feminine"
+		{
+		"\![*]\q[Ms.,titlems]\n/
+		\![*]\q[Mistress,titlemistress]\n/
+		\![*]\q[Lady,titlelady]\n/
+		\![*]\q[Madam,titlemadam]\e"
+		}
+	}
+}
+
+Select.titlenone
+{
+		username = tempname
+		NameDone
+}
+
+Select.titlemr
+{
+		username = "Mr. " + tempname
+		NameDone
+}
+
+Select.titlemaster
+{
+		username = "Master " + tempname
+		NameDone
+}
+
+Select.titlelord
+{
+	username = "Lord " + tempname
+	NameDone
+}
+
+Select.titlesir
+{
+	username = "Sir " + tempname
+	NameDone
+}
+		
+Select.titlems
+{
+		username = "Ms. " + tempname
+		NameDone
+}
+
+Select.titlemistress
+{
+	username = "Mistress " + tempname
+	NameDone
+}
+
+Select.titlelady
+{
+		username = "Lady " + tempname
+		NameDone
+}
+
+Select.titlemadam
+{
+	username = "Madam " + tempname
+	NameDone
+}
+
+
+NameDone
+{
+	if sugarlevel < 40
+	{
+		"\0\s[16]Okay... \w8You're now %(username)...\e"
+	}
+	else
+	{
+		"\0\s[8]Okay... \w8\w8\0\s[7]You will now be referred to as %(username).\e"
+	}
+}

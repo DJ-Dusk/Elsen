@@ -1,0 +1,126 @@
+//---------------------------Communication--------------------------
+
+//I'm going to level with you, I don't really get a lot of what's going on in this .dic file. I'm pretty sure it's related to having ghosts talk to each other, or acknowledge each other's presence in some way, but I don't really know. If someone else knows more about this than I do, I'd love to hear about it, but for now, leave it all alone except for a few lines near the bottom.
+
+
+OnCommunicate
+ {
+	if reference0 == "user" || reference0 == "User"
+ 	{
+		//---- 사용자로부터의 이야기에 대답
+ 		ReplyToUser
+	}
+ 	else
+	{
+ 		//---- 유령로부터의 이야기에 대답
+		ReplyToGhost
+ 	}
+}
+
+ReplyToUser
+{
+	TalkToUser
+}
+
+OnStartTalking
+{
+	Talking = 1
+	
+	OnCommunicate
+}
+
+
+//Getting Elsen to talk to others...
+
+ReplyToGhost
+{
+ 	res_reference0 = reference0
+	{
+		if Talking == 1
+		{
+			if ElsenTalk == 1 //Elsen responding to other ghosts
+			{
+				Talking = 0
+				ElsenTalk = 0
+				
+				if reference0 == "Dusk" //Elsen's response to Dusk's response
+				{
+					"*Elsen hears Dusk's response, \w4and says...*\w8\w8\n\n\0\s[2]Eeeehhh...?\w8\e"
+				}
+				else
+				{
+					res_reference0 = ""
+					
+					""
+				}
+			}
+			else //Elsen starting the conversation
+			{
+				if ghostexcount > 0 // This checks if there are any other ghosts summoned.
+				{
+					ElsenTalk = 1
+						
+					_number = RAND(ghostexcount) // This checks the number of other ghosts summoned and chooses a random number based on it
+					--
+					checkname = "%(ghostexlist[_number])" // This grabs the reference name of the ghost to check against known names. It should be the sakura name.
+					--
+						
+					case checkname
+					{
+						when "Dusk"
+						{
+							res_reference0 = "Dusk"
+							
+							"*Elsen is the first to initiate conversation with Dusk and Dawn, \w4and says...*\w8\w8\n\n\0\s[2]H-Hello Dusk and Dawn...\w8\e"
+						}
+						when "Gaster"
+						{
+							res_reference0 == "Gaster"
+							
+							"\0\s[2]Aaaaaaaaahhhhhhh...\w8\e"
+						}
+						others //all other ghosts
+						{
+							//if res_reference isn't defined, the other ghost won't respond. it must equal something. checkname makes sure he uses the right name for whoever it is.
+							res_reference0 = checkname
+								
+							"\0\s[3]Ah, \w4h-hello %(res_reference0)...?\w8\e"
+						}
+					}
+				}
+			}
+		}
+		else //if Elsen did NOT talk first
+		{
+			Talking = 0
+			
+			if reference0 == "Dusk" //replying to Dusk
+			{
+				res_reference0 = "Dusk"
+					
+				if "buddy" _in_ reference1
+				{		
+					"*The Elsen hears Dusk's question, \w4and responds...*\w8\w8\n\n\0\s[2]A-ah... \w8I'm doing... \w8good?\w8\e"
+				}
+				elseif "cows" _in_reference1
+				{
+					"\0\s[3]Well, \w4cows are extremely adorable animals! \w8They have lots of uses in life, \w4but I personally enjoy them as they are.\w8\e"
+				}
+				elseif "ethical" _in_reference1
+				{
+					"\0\s[0]It's very upsetting, \w4but unfortunately at least in our world, \w4necessary. \w8Without them, \w4we wouldn't have meat to eat or metal to stand on.\w8\e"
+				}
+				else
+				{
+					"*The Elsen hears Dusk initiate conversation, \w4and says...*\w8\w8\n\n\0\s[2]H-Hello Dusk and Dawn...\w8\e"
+				}
+			}
+			else
+			{
+				res_reference0 = reference0 //this makes it so he can use the proper name when he replies to a generic ghost.
+					
+				"\0\s[3]Ah, \w4h-hello %(res_reference0)...?\w8\e"
+			}
+		}
+	}
+}

@@ -1,0 +1,188 @@
+﻿OnMouseMove
+ {
+  	if nowmode != "QUIZ"
+ 	{
+		//---- reference3 determines the character in question
+		if reference3 == 0 //if the character is 0, aka the main character
+		{
+			//---- it will run the mouse functions for that character
+			MouseMoveSakura
+		}
+		else //if the character isn't 0, then it must be the side character.
+		{
+			//---- this will run the mouse functions for the side character.
+			MouseMoveKero
+		}
+	}
+ }
+ 
+
+ //--MouseMoveSakura
+ 
+MouseMoveSakura
+ {
+	if reference4 != "" //ignore
+ 	{
+ 		stroke++ //if you move the mouse over the right areas, the stroke count will go up.
+ 		if stroke >= 40
+		{
+ 			stroke = 0 //resetting the stroke count
+			if reference4 == "Head"
+ 			{
+				elsenpets++
+				
+				if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+				{
+					"*Petting the Elsen is probably not a good idea.*\e"
+				}
+				elseif sugarlevel < 40
+				{
+					"\0\s[16]Hh... \w8why are you petting my head...?\e"
+					"\0\s[16]*You pet the Elsen's head, \w4but he doesn't seem to care for it.*\e"
+					"\0\s[16]*The Elsen isn't reacting to your petting at all.*\e"
+				}
+				else
+				{
+					if pausestatus == "OFF"
+					{
+						credits += 25
+						
+						"\0\s[0]*You pet the Elsen, \w4and find 25 Credits! \w8What an odd place to find Credits.*\e"
+					}
+					
+					"\0\s[11]A-ah, \w4be careful with that mouse of yours...\e"
+					"\0\s[9]*You pet the Elsen's head. \w8He flinches a bit, \w4but doesn't react too much.*\e"
+					"\0\s[11]W-why are you petting m-my head, \w4%(username)...? \w8Is there dust on it...?\e"
+					"\0\s[0]*You gently pat the top of Elsen's head.*\e"
+					"\0\s[0]*Pet pet pet*\e"
+				}
+ 			}
+			elseif reference4 == "Dedanhead"
+			{
+				"\b[4]\0\s[31]DO NOT TOUCH ME!\e"
+			}
+ 		}
+	}
+ 	else
+	{
+ 		// If the mouse isn't over the ghost, it'll zero out the stroke value.
+		stroke = 0
+ 	}
+}
+
+ //---- MouseMoveKero -----------------------------------------------------------------
+ //MouseMoveKero is exactly like the above, except set up for your second character. 
+ 
+MouseMoveKero
+ {
+	if reference4 != ""
+ 	{
+ 		stroke++
+ 		if stroke >= 40
+		{
+			""
+ 		}
+	}
+ 	else
+	{
+ 		// If the mouse isn't over the ghost, it'll zero out the stroke value.
+		stroke = 0
+ 	}
+}
+
+//---- OnMouseDoubleClick -------------------------------------------------------
+
+OnMouseDoubleClick
+ {
+	//---- like with the OnMouseMove function above, this determines who the user is clicking on.
+	
+ 	if reference3 == 0 //if the character is 0, aka your main character
+	{
+		MouseDoubleClickSakura
+ 	}
+	else
+ 	{
+ 		MouseDoubleClickKero
+	}
+ }
+
+ //---- MouseDoubleClickSakura ----------------------------------------------------------
+
+MouseDoubleClickSakura
+ {
+	if spectremode == "ON"
+	{
+		"*No time to interact with the Elsen with that spectre here.*\e"
+	}
+ 	elseif reference4 == "Face"
+	{	
+		if pausestatus == "OFF"
+		{
+			elsenpokes += 1
+			stresslevel += 1
+		}
+		--
+		if elsenpokes == 10 && pausestatus == "OFF"
+		{
+			credits += 10
+			
+			"You've booped the Elsen 10 times. \w8In turn, you've been awarded 10 Credits! \w8Be careful not to stress him out too much by booping, \w4though.\e"
+		}
+		elseif elsenpokes == 30 && pausestatus == "OFF"
+		{
+			credits += 30
+			
+			"*You've booped the Elsen 30 times now. \w8Have an extra 30 Credits!\e"
+		}
+		elseif elsenpokes == 50 && pausestatus == "OFF"
+		{
+			credits += 50
+			
+			"*The Elsen has been booped 50 times now. \w8Here's 50 Credits as an award!\e"
+		}
+		elseif elsenpokes == 70 && pausestatus == "OFF"
+		{
+			credits += 70
+			
+			"You're at 70 boops now. \w8Take 70 Credits!\e"
+		}
+		elseif elsenpokes == 100 && pausestatus == "OFF"
+		{
+			credits += 100
+			
+			"100 boops! \w8Astonishing! \w8Take these 100 Credits as an award!\e"
+		}
+		else
+		{
+			"*Boop.*\e"
+		}
+ 	}
+	else
+ 	{
+ 		OpenSakuraMenu
+	}
+ }
+
+ 
+ //---- MouseDoubleClickKero -----------------------------------------------------------
+ //This is just the same as MouseDoubleClickSakura above, except for your secondary character. The same principles apply, including how to make your character unhittable.
+ 
+ 
+MouseDoubleClickKero
+ {
+	 spectremode = "OFF"
+	 --
+	 if pausestatus == "OFF"
+	 {
+		 credits += 45
+	 }
+	 
+ 	"\0\s[26]*Purification in progress...*\w8\w8\w8\_v[mp3\strike.wav]\1\s[41]\w2\1\s[42]\w8\1\s[-1]\w8\w8\0\s[11]\cA-are they gone...? \w8I t-thought this place was safe from the spectres... \w8I guess they're showing up everywhere..."
+	--
+	if pausestatus == "OFF"
+	{
+		"\w8\w8\n\n*The spectre seemed to have dropped 45 credits. \w8Nice!*"
+	}
+	--
+	"\e"
+ }

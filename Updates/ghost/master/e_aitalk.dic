@@ -1,0 +1,889 @@
+﻿AiTalk
+ {
+	if RAND(100) < communicateratio
+ 	{
+ 		StartCommunicate
+	}
+ 	else
+	{
+ 		if mikireflag == 0
+		{
+			if CHAIN.IDName == "" {
+ 				lastTalk = RandomTalk
+			}
+			else {
+				lastTalk = ChainTalk
+			}
+			lastTalk
+		}
+ 		else
+		{ 
+		MikireTalk
+ 		}
+	}
+ }
+
+
+RandomTalk : nonoverlap
+{
+	if dedanmode == "ON"
+	{
+		if passhour == 1
+		{
+			"\0\s[31]\b[4]I've been here for an HOUR now. \w8For what reason must you keep me here against my will??\e"
+		}
+		if passhour >= 3
+		{
+			"\0\s[30]\b[4]I don't have TIME to be here when I have business to do back in Zone 1. \w8\0\s[31]WHY don't you let me LEAVE?\e"
+		}
+		if passhour == 10
+		{
+			"\![raise,OnTiredofYourShit]\0\s[31]\b[4]FUCK THIS!! \w8I'm not going spend FOREVER in this GODDAMN PLACE!!\w8\w8\n\n\_v[mp3\Teleport.mp3]\0\s[-1]*You hear a teleportation-like sound, \w4and just like that, \w4Dedan's gone.*\-\e"
+		}
+		if dayslot == "6month 3day"
+		{
+			"\0\s[30]\b[4]It's June 3rd... \w8isn't it? \w8\0\s[32]Hm...\e"
+		}
+		if hour == 9 || hour == 21
+		{
+			"\0\s[32]\b[4]It's 9 'o clock... \w8Always feel like it's been that forever...\e"
+		}
+		if RAND(100) < 10 && spectreattack != 1
+		{
+			"\![raise,OnDedanSpectre]\1\s[40]\0\b[4]*What the?? \w8A spectre suddenly appeared on your computer!*\w8\w8\n\n\0\s[30]A spectre? \w8They DARE bother me here as well?? \w8\0\s[31]PISS OFF YOU FUCKING PHANTOM!\w8\w8\_v[mp3\strike.wav]\1\s[41]\w2\1\s[42]\w8\1\s[-1]\w8\w8\0\s[32]\b[4]\c*Well, \w4that solves that problem..."
+			--
+			if pausestatus == "OFF"
+			{
+				" \w8The spectre dropped 45 credits as well, \w4so that's nice."
+			}
+			--
+			"*\e"
+		}
+		if spectreattack == 1 //attack instead of encounter this time, since you can get an encounter without Dedan. Attack makes it so he'll only comment if he encountered it
+		{
+			"\0\s[30]\b[4]Those damn phantoms... \w8\0\s[31]If I ever find out who keeps on sending those bastards...\e"
+		}
+		
+		"\b[4]*Dedan doesn't really look up for talking...*\e"
+		
+		"\0\s[32]\b[4]Well? \w8Are you going to send me back?? \w8\0\s[31]I don't have all fucking day to wait!\e"
+		
+		"\0\s[32]\b[4]*Dedan's just glaring at you very menacingly.*\e"
+		
+		"\0\s[30]\b[4]Where even is this place, \w4anyway? \w8\0\s[32]This looks nothing like any of the Zones...\e"
+		
+		"\0\s[32]\b[4]*You hear Dedan grumble something about Zone 1 to himself.*\e"
+		
+		"\b[4]*Dedan is a very creepy looking creature... \w8You can't help but stare at him in wonder.*\e"
+		
+		"\b[4]*Does Dedan ever blink...? \w8CAN he ever blink...?*\e"
+		
+		"\b[4]*Is that a general's coat Dedan is wearing...?*\e"
+		
+		"\0\s[32]\b[4]*Dedan lowly grumbles something about the time.*\e"
+		
+		{
+			"\0\s[30]\b[4]What time is it...? \w8"
+			--
+			if hour == 12 || hour == 0
+			{
+				"12:%(nowmin) %(ap)? \w8\0\s[32]Hmph.\e"
+			}
+			else
+			{
+				"%(nowhour):%(nowmin) %(ap)? \w8\0\s[32]Hmph.\e"
+			}
+		}
+		
+		{
+			"\0\s[32]\b[4]What day is it again...? \w8"
+			--
+			if month == 1
+			{
+				"January"
+			}
+			elseif month == 2
+			{
+				"Febuary"
+			}
+			elseif month == 3
+			{
+				"March"
+			}
+			elseif month == 4
+			{
+				"April"
+			}
+			elseif month == 5
+			{
+				"May"
+			}
+			elseif month == 6
+			{
+				"June"
+			}
+			elseif month == 7
+			{
+				"July"
+			}
+			elseif month == 8
+			{
+				"August"
+			}
+			elseif month == 9
+			{
+				"September"
+			}
+			elseif month == 10
+			{
+				"October"
+			}
+			elseif month == 11
+			{
+				"November"
+			}
+			else
+			{
+				"December"
+			}
+			--
+			" %(day)"
+			--
+			if day == 1 || day == 21 || day == 31
+			{
+				"st"
+			}
+			elseif day == 2 || day == 22
+			{
+				"nd"
+			}
+			elseif day == 3 || day == 23
+			{
+				"rd"
+			}
+			else
+			{
+				"th"
+			}
+			--
+			"...?\e"
+		}
+	}
+	elseif spectremode == "ON"
+	{
+		"*No time to chat.*\e"
+	}
+	elseif burntstatus == "sugarburnt"
+	{
+		"\0\s[24]\f[italic,true]H E L P\f[italic,false]\e"
+	}
+	elseif burntstatus == "stressburnt"
+	{
+		""
+	}
+	elseif sugarlevel < 40
+	{
+		if gavesugar > 0
+		{
+			"\0\s[16]*The Elsen still looks deprived of sugar even after giving him some... \w8Does he need more?*\e"
+		}
+		
+		"\0\s[16]Hhh...\e"
+		
+		"\0\s[16]*The Elsen looks rather sugar deprived... \w8He's definitely not acting normally.*\e"
+		
+		"\0\s[16]I need to get... \w4back to Alma... \w8To get... \w4sugar...\e"
+	}
+	else
+	{
+		if RAND(100) < 20 && spectreattack != 1 //NOTE: when raising something, it HAS to start with On for some damn reason
+		{
+			"\![raise,OnEngagetheSpectreMotherfucker]\1\s[40]\0*What the?? \w8A spectre suddenly appeared on your computer!*\w8\w8\n\n\0\s[3]H-huh?? \w8\0\s[25]WAAH!! \w8A SPECTRE!! \w8I-I THOUGHT THIS PLACE WAS SAFE!! \w8\0\s[26]GET IT AWAY GET IT AWAY GET IT AWAY!!!\e"
+		}
+		if spectreencountered != 1
+		{
+			"\0\s[11]This place seems to be s-safe from the spectres... \w8\0\s[9]Perhaps it is best to stay here for a time...\e"
+		}
+		if spectreencountered == 1
+		{
+			"\0\s[11]I-I really hope no more spectres show up... \w8They can be very deadly...\e"
+			
+			"\0\s[3]So the spectres are showing up here as well... \w8\0\s[4]I-I guess they're showing up everywhere...\e"
+		}
+		if stresslevel >= 10
+		{
+			"\0\s[0]*The Elsen looks a bit stressed... \w8Perhaps he could use a snack?*\e"
+			
+			if stresslevel >= 30
+			{
+				"\0\s[0]*The Elsen looks rather stressed out... \w8Something must be able to calm him down...*\e"
+			}
+		}
+		if sugarlevel == 100
+		{
+			"\0\s[5]*You can see the Elsen tapping his fingers. \w8All that sugar must've made him a bit hyperactive.*\e"
+		}
+		if dedanseen == 1
+		{
+			"%(idle)*You consider telling the Elsen that Dedan came by... \w8But you don't.*\e"
+			
+			"*You ask the Elsen if Dedan leaves Alma or Zone 1 often.*\w8\w8\n\n\0\s[4]Hm? \w8\0\s[3]N-not really... \w8Master Dedan seems to only appear when necessary... \w8So we don't see him much anyway...\e"
+		}
+		if gavesugar > 0
+		{
+			"\0\s[4]*The Elsen looks rather calm for once. \w8Maybe it's the sugar he ate.*\e"
+		}
+		if gavemeat > 0
+		{
+			"\0\s[4]*You ask the Elsen if they eat anything other than meat and sugar.*\w8\w8\n\n\0\s[3]Uh, \w4n-no? \w8With the meat fountains and the sugar factory over in Zone 3, \w4there's no need for anything else...\e"
+		}
+		if gotcow == 1 && stresslevel == 0
+		{
+			"\0\s[29]*You see the Elsen play with his cow plushie. \w8He looks happy.*\e"
+		}
+		if uninstalled == 1
+		{
+			"%(idle)*You wonder if the Elsen actually remembers being uninstalled or not...*\e"
+		}
+		if reset == 1
+		{
+			if wasburnt == 1
+			{
+				"%(idle)*You really hope the Elsen doesn't remember being burnt before the reset...*\e"
+			}
+			
+			"%(idle)*You wonder if the Elsen knows he's been reset. \w8Hopefully not.*\e"
+		}
+		if timeslot == "earlymorning"
+		{
+			"\0\s[9]Hope I don't fall asleep here... \w8I need to try and stay up for the day...\e"
+		}
+		if timeslot == "morning"
+		{
+			"\0\s[3]Sometimes Master Dedan's comes around the morning to make sure everyone is up and working... \w8\0\s[11]I-I really hope he isn't doing that today...\e"
+		}
+		if timeslot == "lunch"
+		{
+			"\0\s[3]It's... \w4near afternoon, \w4right? \w8\0\s[2]Usually around this t-time we'll eat lunch. \w8\0\s[3]Though... \w6the meat fountains are constantly f-filling up... \w8we have no time to rest...\e"
+		}
+		if timeslot == "afternoon"
+		{
+			"\0\s[1]I'm a bit tired from working... \w8\0\s[11]B-but if I sleep, \w4I may be returned to Alma and get caught. \w8\0\s[9]I should just try to stay awake.\e"
+		}
+		if timeslot == "evening"
+		{
+			"\0\s[4]Hmm... \w8\0\s[8]*The Elsen looks to be trying to do some work.*\e"
+		}
+		if timeslot == "latenight"
+		{
+			"\0\s[11]I-if I stay up too late... \w8I wonder if I'll be too tired to work tomorrow...\e"
+		}
+		if timeslot == "midnight"
+		{
+			"\0\s[4]It's very late to still be awake... \w8\0\s[9]I-I hope I can still manage to be up and energized tomorrow...\e"
+		}
+		if ghostexcount == 0
+		{
+			"\0\s[11]A-am I the only one here...? \w8Perhaps... \w8\0\s[9]it's best no one else knows...\e"
+			
+			"\0\s[3]Can you bring others here, \w4%(username)...? \w8\0\s[11]I-I'd ask you not to bring Master Dedan... \w8he'd be extremely upset.\e"
+		}
+		
+		"\0\s[8]*It seems the Elsen is doing some work on his clipboard.*\e"
+		
+		"\0\s[3]I-I really hope Master Dedan doesn't notice that I'm gone... \w8\0\s[11]It'd be devestating to lose my position...\e"
+		
+		"\0\s[3]It is rather nice taking a b-break from being in Alma... \w8\0\s[4]There's not many chances to relax over there.\e"
+		
+		"\0\s[2]O-one nice thing about being here is that it doesn't smell like anything. \w8\0\s[3]Meat has a very metalic smell and it stays with you... \w8Not as bad as Pentel, \w4though.\e"
+		
+		"\0\s[2]I used to work over in Pentel at the metal farmsteads, \w4where we raise the cows. \w8I-I really enjoyed raising them, \w4\0\s[3]but we sadly also had to kill and harvest them. \w8\0\s[4]It's better I'm not there anymore...\e"
+		
+		"\0\s[11]Working has been rather hectic recently with all the s-spectres around... \w8\0\s[9]They even appear in the meat fountains, \w4so we a-always have to be careful...\e"
+		
+		"\0\s[2]Do you like cows, \w4%(username)? \w8They're probably my favourite.\e"
+		
+		"\0\s[11]Have you ever seen or ridden a pedalo, \w4%(username)? \w8\0\s[100]They're actually rather fun to ride in, \w4\0\s[9]b-but we only use them when traversing the meat fountains for any reason...\e"
+		
+		"\0\s[5]*The Elsen seems to be studying your computer.*\e"
+		
+		"\0\s[5]*The Elsen is just dazing off. \w8Probably enjoying the brief break from Alma.*\e"
+		
+		"\0\s[3]Although it is a bit stressful to work in Alma... \w8I think it's m-much better than being in Damien or Shachihata. \w8\0\s[4]I enjoy breathing the f-fresh air instead of smoke, \w4and the postal service is very boring...\e"
+		
+		"\0\s[11]I-I'm really glad I don't work in Pentel anymore... \w8\0\s[9]I couldn't stand harming those poor cows. \w8\0\s[100]B-but I still did my job honestly, \w4and as such, \w4got promoted to Alma!\e"
+		
+		"\0\s[1]The masked merchant came by Alma again yesterday... \w8\0\s[0]I-I don't know why, \w4since none of us can ever buy anything from him...\e"
+		
+		"\0\s[11]I-is this place apart of Zone 1...? \w8O-or maybe the other Zones...?\e"
+		
+		"\0\s[3]I-I go to Shachihata sometimes for errands... \w8\0\s[4]I'm glad I never had to work there, \w4s-since it's always looked pretty boring. \w8Staying in a building all day doesn't sound very fun...\e"
+		
+		"\0\s[11]I met up with someone who works at the smoke mines in Damien. \w8H-he was coughing quite a lot... \w8\0\s[9]It must not be good to breathe that stuff all day...\e"
+		
+		"\0\s[3]I should go back to the library in Bismark some day... \w8\0\s[2]They have a n-nice selection of books that I like to read on my time off.\e"
+		
+		"\0\s[100]It rained a l-lot yesterday, \w4a-as usual. \w8The rain is so peaceful... \w8It makes working in Zone 1 all the more worth it.\e"
+		
+		"\0\s[3]Y-yesterday I went to Shachihata, \w4since Master Dedan has an office there. \w8\0\s[4]Everyone working there l-looked so bored and tired. \w8It looks like easy work, \w4but it's more tediously boring than anything.\e"
+		
+		"\0\s[11]I-I wonder where all the spectres come from... \w8\0\s[9]We'd ask Master Dedan, \w4b-but he's always too busy to be bothered. \w8\0\s[11]I'm sure he's strong enough to eliminate them...\e"
+		
+		"%(InspectTheWindowsMotherFucker)\e"
+		
+		{
+			"\0\s[8]*You take a look at what the Elsen is writing on his clipboard...*\w8\w8\n\n"
+			--
+			"*Looks like some sort of math.*"
+			
+			"*Is he doodling Dedan...?*"
+			
+			"*He's writing a note to someone, \w4it seems.*"
+			
+			"*He looks to be writing down reminders.*"
+			
+			"*You can't tell if he's doodling another Elsen or himself.*"
+			
+			"*He's drawing a bunch of hearts around another Elsen.*"
+			
+			"*Looks like he's writing %(username) with a bunch of question marks around it.*"
+			--
+			"\e"
+		}
+		
+	
+	
+	if ghostexcount > 0 
+		{
+		_number = RAND(ghostexcount)
+		--
+		checkname = "%(ghostexlist[_number])"
+		--
+		// This will tell you the reference names of your summoned ghosts to use in the "when" cases below, along with the number of ghosts.
+		// Comment it out when you no longer need it for reference.
+		//"\0\s[0]Ghost List: %(ghostexlist)\n\n[half]Noticed %(checkname), %(_number) of %(ghostexcount)\x"
+		--
+		// Checking the selected loaded ghost's name vs known names to comment on them
+		case checkname
+			{    
+				when "Hunter and Smoker Beta"
+				{
+				    "\0\s[3]That smell... \w8\0\s[11]I-it kind of smells like Damien in here... \w8\0\s[9]but worse.\e"
+				}
+				when "Gaster"
+				{
+					"\0\s[5]That gentleman in the white coat over there... \w8H-he looks a bit like Master Dedan...\e"
+					
+					"\0\s[5]D-don't some of the workers in Zone 3 wear coats l-like that...? \w8Does he work in Vesper...?\e"
+				}
+				when "Zacharie"
+				{
+					"\0\s[11]Is that... \w4the masked merchant who runs the park in Bismark? \w8What's he doing here...?"
+					
+					"\0\s[3]It looks like Zacharie is here... \w8I-I suppose he does travel a lot...\e"
+				}
+				when "MVSans"
+				{
+					"\0\s[5]*The Elsen seems fixated on Sans over there. \w8You can't tell if it's out of curiousity or fear.*\e"
+				}
+				when "Papyrus"
+				{
+					"\0\s[11]I-is that Master Dedan over there?? \w8\0\s[9]W-wait, \w4no, \w4he just looks a lot like him...\e"
+				}
+				when "CheeryBot"
+				{
+					"\0\s[9]Hmm... \w8I-is that a spectre over there...? \w8\0\s[11]They look too simple to be one...\e"
+					
+					"%(idle)*You wonder if CheeryBot would somehow be able to calm the Elsen down for once...*\e"
+				}
+				when "Dusk"
+				{
+					"\0\s[11]W-what are those strange creatures over there...? \w8Are they spectres...?\e"
+				}
+				when "Riccardo"
+				{
+					"\0\s[11]I-is that gentleman over there alright...? \w8\0\s[9]He doesn't look too good...\e"
+				}
+			}
+		}
+	}
+}
+
+//Taken from Zarla - I hope you don't mind! This is gonna be real fun using methinks...
+InspectTheWindowsMotherFucker //second time using this joke in this ghost but I don't care it's still hilarious
+{
+	
+	//Window Class names
+	//Calculator = CalcFrame
+	//Firefox = MozillaWindowClass
+	//Notepad++ = Notepad++
+	//Sai = sfl_window_class = 2368
+	//Steam Chat = SDL_app
+	//Discord = Chrome_WidgetWin_1
+	//Chrome = Chrome_WidgetWin_1
+	//File Explorer = CabinetWClass
+	//iTunes = iTunes
+	//VLC Media Player = wxWindowClassNR
+	//Winamp = Winamp v1.x
+	//Undertale/Deltarune - YYGameMakerYY
+	//OFF (Both French Original and English Translation V3.0) - TFormLcfGameMain
+	//Windows Media Player - WMPlayerApp
+
+	//Notepad++
+	
+	NotepadplusOpen = FUNCTIONEX("findwin.dll","find",,"Notepad++")
+	NotepadplusMin = FUNCTIONEX ("findwin.dll","count",,"Notepad++")
+	
+	if NotepadplusOpen == 1
+	{
+		if NotepadplusMin == 1
+		{
+			"\0\s[5]Notepad++... \w8S-some kind of note-taking program...?\e"
+			"\0\s[3]I-I guess you take a lot of notes too, \w4seeing as you h-have a notepad open...\e"
+		}
+		else
+		{
+			"\0\s[2]So what notes do you usually t-take in your Notepad++ p-program? \w8I like to write d-down a lot of things so I never forget them.\e"
+		}
+		
+	}
+	
+	//Sai
+	
+	SaiOpen = FUNCTIONEX("findwin.dll","find",,"sfl_window_class")
+	SaiMin = FUNCTIONEX("findwin.dll","count",,"sfl_window_class")
+	
+	if SaiOpen == 1
+	{
+		if SaiMin == 1
+		{
+			"\0\s[11]I-is that some sort of art program you have there? \w8\0\s[100]So you must also l-like to draw, \w4huh?\e"
+			"\0\s[3]So what are you d-drawing on that program? \w8\0\s[2]I'm not very g-good at drawing myself, \w4but I find it fun t-to in indulge in.\e"
+		}
+		else
+		{
+			"\0\s[3]I see you have an a-art program here. \w8\0\s[2]Are you an artist?\e"
+		}
+	}
+	
+	//Chrome or Discord - have to check the caption for this one to see which is which
+	
+	DiscordOpen = FUNCTIONEX("findwin.dll","find",,"Chrome_WidgetWin_1")
+	DiscordMin = FUNCTIONEX("findwin.dll","count",,"Chrome_WidgetWin_1")
+	DiscordorChrome = FUNCTIONEX("findwin.dll","getcaption","Chrome_WidgetWin_1")
+	
+	if DiscordOpen == 1
+	{
+		if "Discord" _in_ DiscordorChrome
+		{
+			if DiscordMin == 1
+			{
+				"\0\s[3]Is that a chatting service you g-got there? \w8\0\s[2]Being able to talk to others is very important. \w8It's why I'm glad to have a position where I have m-many co-workers.\e"
+				"\0\s[100]So who d-do you like to chat with? \w8A good friend, \w4I'd hope...\e"
+			}
+			else
+			{
+				"\0\s[11]That 'Discord' service of yours... \w8I w-wonder how nice it must be to have a s-service like that on you all the time...\e"
+			}
+		}
+		elseif "Google Chrome" _in_ DiscordorChrome
+		{
+			if DiscordMin == 1
+			{
+				"\0\s[5]*The Elsen is intently watching you browse the internet. \w8He seems kind of confused about it all.*\e"
+			}
+			else
+			{
+				""
+			}
+		}	
+	}
+	
+	//Windows Media Player
+	
+	MediaPlayerOpen = FUNCTIONEX("findwin.dll","find",,"WMPlayerApp")
+	MediaPlayerMin = FUNCTIONEX("findwin.dll","count",,"WMPlayerApp")
+	
+	if MediaPlayerOpen == 1
+	{
+		if MediaPlayerMin == 1
+		{
+			"\0\s[5]*The Elsen's looking to see what's on your Media player.*\e"
+			"\0\s[2]Listening t-to music as you work can be v-very helpful. \w8I really recommend it.\e"
+		}
+		else
+		{
+			"%(idle)*You're not sure if the Elsen's really listening to any of the music you may or may not be playing on your Media player...*\e"
+		}
+	}
+	
+	//OFF
+	
+	OFFOpen = FUNCTIONEX("findwin.dll","find",,"TFormLcfGameMain")
+	OFFMin = FUNCTIONEX("findwin.dll","count",,"TFormLcfGameMain")
+	ActuallyOFF = FUNCTIONEX("findwin.dll","getcaption","TFormLcfGameMain") //this reads the top left caption of the window to ensure it's actually reading OFF
+	
+	 if "OFF" _in_ ActuallyOFF || "Off" _in_ActuallyOFF
+	 {
+		if OFFOpen == 1
+		{
+			if OFFMin == 1
+			{
+				"\0\s[11]What's that y-you're playing over there...?\w8\w8\n\n\0\s[9]*You think about trying to explain the whole situation to the Elsen... \w8but decide it's for the best he doesn't know. \w8You wouldn't want him to have an existential crisis right here right now.*\e"
+				"\0\s[3]Those areas in that game look v-very similar to my world... \w8Do all places look like that, \w4I w-wonder...?\e"
+			}
+			else
+			{
+				"\0\s[3]Y-you have 'OFF' down there, \w4I see... \w8\0\s[4]Is that a g-game or something?\e"
+			}
+		} 
+	 }
+	
+/*
+	WindowTest1 = FUNCTIONEX ("findwin.dll","count",,"CalcFrame")
+	WindowTest2 = FUNCTIONEX("findwin.dll","find",,"CalcFrame")
+	
+	if WindowTest2 == 0
+		{
+		"Calculator is not open."
+		}
+	elseif WindowTest2 == 1
+		{
+			if WindowTest1 == 0
+			{
+			"Calcuator is open, but minimized."
+			}
+			else
+			{
+			"Calculator is open."
+			}
+		}
+		*/
+		
+}
+
+//-----
+
+OnTiredofYourShit //when keeping Dedan for 10 hours
+{
+	gottiredofyourshit = 1
+}
+
+OnEngagetheSpectreMotherfucker //when the spectre attacks
+{
+	spectremode = "ON"
+	spectreattack = 1
+	spectreencountered = 1
+	--
+	if pausestatus == "OFF"
+	{
+		if reset == 1
+		{
+			stresslevel += 15
+		}
+		else
+		{
+			stresslevel += 10
+		}
+	}
+}
+
+OnDedanSpectre //for when Dedan encounters the spectre
+{
+	spectreattack = 1
+	--
+	if pausestatus == "OFF"
+	{
+		credits += 45
+	}
+}
+
+InitiateStressBurnt //sequence for turning the Elsen Burnt
+{
+	if burntsequence != 1
+	{
+		burntsequence = 1
+		
+		"\0\s[19]I... \w8I don't f-feel... \w4good...\w8\w8\w8\x\c\0\s[20]H-help... \w8me...!! \w8Aaah!! \w8AAHH!!\w8\w8\w8\x\c\0\s[23]*SPLOOSH*\e"
+	}
+	else
+	{
+		""
+	}
+}
+
+InitiateSugarBurnt //likewise, but for Critic Burnt
+{
+	if burntsequence != 1
+	{
+		burntsequence = 1
+		
+		"\0\s[21]Hhh... \w8I-I don't... \w8f-feel... \w8well...\w8\w8\w8\x\c\0\s[22]Hhhh help... \w8HHELP...\w8\w8\w8\x\c\0\s[24]\f[italic,true]H E L P\f[italic,false]\e"
+	}
+	else
+	{
+		""
+	}
+}
+
+//-----
+
+SugarSequence //sequence for sugar deprivation
+{
+	if sugarsequence != 1
+	{
+		sugarsequence = 1
+		
+		"\0\s[0]...\w4hhh... \w8\w8\0\s[16]HHhhh.... \w8Sugar... \w4how long has it been... \w4since I had sugar...\w8\w8\n\n*The Elsen looks to be... \w8sugar deprived? \w8That's probably not good.*\e"
+	}
+	else
+	{
+		""
+	}
+}
+
+//-----
+
+BurntCheck //checks for burnt status
+{
+	if stresslevel < 50 && sugarlevel > 0
+	{
+		burntstatus = "normal"
+	}
+	else
+	{
+		burntstatus = "burnt" //looks like if one is already in play, it won't add the other - which is perfect
+		--
+		if stresslevel >= 50
+		{
+			burntstatus = "stress" + burntstatus
+			InitiateStressBurnt
+		}
+		--
+		if sugarlevel < 0
+		{
+			burntstatus = "sugar" + burntstatus
+			InitiateSugarBurnt
+		}
+	}
+}
+
+HourCheck
+{
+if passmin >= 60
+	{
+		passmin = 0
+		passhour = passhour + 1
+		cumuhour = cumuhour + 1
+		playwithcow = 0
+		--
+		if pausestatus == "OFF" && dedanmode == "OFF"
+		{
+			if reset == 1
+			{
+				stresslevel += 20
+				sugarlevel -= 20
+				credits += 50
+				--
+				if sugarlevel < 40
+				{
+					SugarSequence
+					stresslevel += 10
+				}
+			}
+			else
+			{
+				stresslevel += 10
+				sugarlevel -= 20
+				credits += 100
+				--
+				if sugarlevel < 40
+				{
+					SugarSequence
+					stresslevel += 5
+				}
+			}	
+		}
+		--
+		if pausestatus == "OFF" && dedanmode == "ON"
+		{
+			dedanpoints += 5
+		}
+	}
+}
+
+//-OnMinuteChange
+
+OnMinuteChange
+ {
+	HourCheck
+	timeslot = GetTimeSlot
+	--
+	if pausestatus == "OFF" && dedanmode == "OFF"
+	{
+		BurntCheck
+	}
+	--
+ 	if minute == 0
+	{
+ 		if hour == 12 && hournotif == "ON"
+		{
+			if dedanmode == "ON"
+			{
+				"\b[4]*It's noon.*\e"
+			}
+ 			else
+			{
+				"*It's noon.*\e"
+			}
+		}
+ 		elseif hour == 0 && hournotif == "ON"
+		{
+ 			if dedanmode == "ON"
+			{
+				"\b[4]*It's midnight.*\e"
+			}
+			else
+			{
+				"*It's midnight.*\e"
+			}
+		}
+		elseif hour == 9 && hournotif == "ON" || hour == 21 && hournotif == "ON"
+		{
+			if dedanmode == "ON"
+			{
+				"\0\s[32]\b[4]It's 9 'o clock...\e"
+			}
+			else
+			{
+				"*It's %(hour12) 'o clock.*\e"
+			}
+		}
+		elseif hournotif == "ON"
+		{
+			if dedanmode == "ON"
+			{
+				"\b[4]*It's %(hour12)'o clock.*\e"
+			}
+			else
+			{
+				"*It's %(hour12) 'o clock.*\e"
+			}
+		}
+	}
+	//Don't touch this part.
+	elseif mikireflag == 1
+ 	{
+ 		MikireTalk
+	}
+ }
+
+//--OnSecondChange
+
+OnSecondChange
+ {
+	if passsec == 60
+ 		{
+	 	passsec = 0
+ 		passmin = passmin + 1
+		cumumin = cumumin + 1
+		}
+ 	else
+ 		{
+	 	passsec = passsec + 1
+		}
+	if mikireflag == 1 && reference1 == 0
+		{
+			EndMikireTalk
+ 		}
+		mikireflag = reference1
+	if reference2 == 1
+	{
+ 		""
+	}
+ }
+
+ //---- MikireTalk ---------------------------------------------------------------------
+ 
+MikireTalk
+ {
+	""
+ }
+
+ //----EndMikireTalk--------------------------------------------------------------------
+ 
+EndMikireTalk
+ {
+	""
+ }
+
+
+//**** OnSurfaceRestore *****************************************************************
+
+
+OnSurfaceRestore
+ {
+	if dedanmode == "ON"
+	{
+		"\0\s[30]\e"
+	}
+	elseif spectremode == "ON"
+	{
+		"\1\s[40]\0\s[26]\e"
+	}
+	elseif burntstatus == "stressburnt"
+	{
+		"\0\s[23]\e"
+	}
+	elseif burntstatus == "sugarburnt"
+	{
+		"\0\s[24]\e"
+	}
+ 	elseif reference0 == 12
+	{
+		"\0\s[0]*The Elsen is done eating his meat.*\e"
+	}
+	elseif reference0 == 14
+	{
+		"\0\s[0]*The Elsen finished his sugar.*\e"
+	}
+	elseif reference0 == 17 && sugarlevel == 40
+	{
+		sugarsequence = 0
+		stresslevel -= 10
+		
+		"\0\s[0]*The Elsen finished off the sugar, \w4and looks much better.*\e"
+	}
+	elseif reference0 == 17 && sugarlevel < 40
+	{
+		"\0\s[16]*The Elsen finished off the sugar.*\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]\e"
+	}
+	else
+	{
+		"%(idle)\e"
+	}
+ }
+
+ 
+ //--OnKeyPress
+ //This defines the hotkeys your ghost will use. You can change these to whatever you want, but I don't really know why you would. I'd just leave this alone. Advanced Users can add new hotkeys attached to whatever function if you want.
+ 
+OnKeyPress
+{
+	if reference0 == "t"
+	{
+	OnAiTalk
+	}
+	elseif reference0 == "r"
+	{
+	OnLastTalk
+	}
+	elseif reference0 == "f1"
+	{
+	"\![open,readme]"
+	}
+}

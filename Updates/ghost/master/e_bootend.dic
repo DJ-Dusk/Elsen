@@ -1,0 +1,537 @@
+﻿OnFirstBoot
+{
+ 	lastTalk = ""
+	passhour = 0
+	passmin = 0 
+	cumumin = 0
+	passsec = 0
+ 	username         = "USER"
+	stroke           = 0	
+ 	teachusername    = 0	
+	mikireflag       = 0	
+ 	aitalkinterval = 400
+ 	birthdayprint = "????"
+	talktime = "5 minutes"
+	deleteshitai = "OFF"
+	nowshell = "default_shell"
+	SetValues
+	
+	
+	if reference0 == 0 //Don't touch this line.
+ 	{
+		
+		"\![enter,passivemode]\0\s[5].....\w8\0\s[4]? \w8\w8\0\s[25]WHA?? \w8W-WHERE AM I?? \w8W-WHY AM I NO LONGER IN ALMA?? \w8\0\s[26]What if Master Dedan finds out I'm not working??\w8\w8\n\n*Well, \w4that was not the intro you were quite expecting...*\x\c*You ensure the Elsen that he's completely fine, \w4and that no one will notice his disappearance.*\w8\w8\n\n\0\s[11]A-are you sure? \w8I know Master Dedan doesn't show himself often, \w4but if he ever found out...\x\c\0\s[4]W-well, \w4I-I suppose I'll just... \w8have to believe you... \w8\0\s[3]W-who are you, \w4anyway? \w8Perhaps someone of the superior personnel if you're able to summon me...? \w8\n\n[half]W-whatever the case, \w4suppose I should get to know you better...\w8\w8\n\n\0\s[8]*The Elsen gets out a clipboard.*\x\c\0\s[7]What pronouns do you go by, \w4if I may ask...?\n\n[half]/
+		\w5\_q\![*]\q[He/Him/His,choicefirsthehim]\n\n[half]/
+		\![*]\q[She/Her/Hers,choicefirstsheher]\n\n[half]/
+		\![*]\q[They/Them/Their,choicefirsttheythem]\n\n[half]/
+		\![*]\q[I have my own,choicefirstunique]\e"
+
+ 	}
+	else
+ 	{
+		//---- If you reinstall the Elsen...
+ 		{
+			uninstalled = 1
+			
+			"\![enter,passivemode]\0\s[5].....\w8\0\s[4]? \w8\w8\0\s[25]WHA?? \w8W-WHERE AM I?? \w8W-WHY AM I... \w8\0\s[27]Huh? \w8\0\s[11]D-Do... \w8I know you...? \w8Y-You seem very familiar...\w8\w8\n\n*Well, \w4that DEFINITELY was not the intro you were quite expecting...*\x\c\0\s[4]W-well, \w4I-I don't really remember you... \w8Are you perhaps someone of the superior personnel if you're able to summon me...? \x\cW-whatever the case, \w4suppose I should get to know you better...\w8\w8\n\n\0\s[8]*The Elsen gets out a clipboard.*\x\c\0\s[7]What pronouns do you go by, \w4if I may ask...?\n\n[half]/
+			\w5\_q\![*]\q[He/Him/His,choicefirsthehim]\n\n[half]/
+			\![*]\q[She/Her/Hers,choicefirstsheher]\n\n[half]/
+			\![*]\q[They/Them/Their,choicefirsttheythem]\n\n[half]/
+			\![*]\q[I have my own,choicefirstunique]\e"
+		}
+ 	}
+}
+
+Select.choicefirsthehim
+{
+	presuffix = "masculine"
+	himher = "him"
+	heshe = "he"
+	hisher = "his"
+	--
+	NameInput
+}
+
+Select.choicefirstsheher
+{
+	presuffix = "feminine"
+	himher = "her"
+	heshe = "she"
+	hisher = "her"
+	--
+	NameInput
+}
+
+Select.choicefirsttheythem
+{
+	himher = "them"
+	heshe = "they"
+	hisher = "their"
+	--
+	NameInput
+}
+
+//-----
+Select.choicefirstunique
+{
+	"\0\s[7]Okay! \w8What do you want for him/her?\![open,inputbox,OnHimHerTeach1,-1]"
+}
+
+OnHimHerTeach1
+{
+	himher = reference0
+	--
+	if reference0 == "" || reference0 == " " || reference0 == "   "
+	{
+		himher = "hir"
+	}
+	--
+	OnUniqueFirst1
+}
+
+OnUniqueFirst1
+{
+	"\0\s[8]...\w8\w8\0\s[7]Okay! \w8And what do you want for he/she?\![open,inputbox,OnHeSheTeach1,-1]"
+}
+
+OnHeSheTeach1
+{
+	heshe = reference0
+	--
+	if reference0 == "" || reference0 == " " || reference0 == "   "
+	{
+		heshe = "zie"
+	}
+	--
+	OnUniqueFirst2
+}
+
+OnUniqueFirst2
+{
+	"\0\s[8]...\w8\w8\0\s[7]Okay! \w8And for his/her?\![open,inputbox,OnHisHerTeach1,-1]"
+}
+
+OnHisHerTeach1
+{
+	hisher = reference0
+	--
+	if reference0 == "" || reference0 == " " || reference0 == "   "
+	{
+		hisher = "hirs"
+	}
+	--
+	NameInput
+}
+
+//-----
+
+NameInput
+{	
+	"\![leave,passivemode]\0\s[8]...\w8\w8\0\s[7]Okay! \w8\0\s[6]W-what about your name?\![open,inputbox,OnNameTeach,-1]\e"
+}
+
+//--GetTimeSlot
+
+
+GetTimeSlot
+{
+	if hour >= 5 && hour <= 8
+	{
+		"earlymorning"
+	}
+	elseif hour >= 9 && hour <= 11
+	{
+		"morning"
+	}
+	elseif hour >= 12 && hour <= 14
+	{
+		"lunch"
+	}
+	elseif hour >= 15 && hour <= 17
+	{
+		"afternoon"
+	}
+	elseif hour >= 18 && hour <= 20
+	{
+		"evening"
+	}
+	elseif hour >= 21 && hour <= 24
+	{
+		"latenight"
+	}
+	else
+	{
+		"midnight"
+	}
+}
+
+//--GetDaySlot
+
+GetDaySlot
+{
+	"%(month)month %(day)day"
+}
+
+
+//-----------------------Normal Booting----------------------------
+
+
+OnBoot
+ {
+	lastTalk = ""
+	passhour = 0
+	passmin = 0
+	cumumin = 0
+	passsec = 0
+	gavemeat = 0
+	gavesugar = 0
+	gamewon = 0
+	spectreattack = 0
+	spectremode = "OFF"
+	dedanmode = "OFF"
+	
+ 	"\0\s[0]"
+	
+	dayslot = GetDaySlot
+	timeslot = GetTimeSlot
+	--
+	"%(normalboottalk)"
+}
+
+
+//--normalboottalk
+
+
+normalboottalk
+{
+	if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*The Elsen is still Burnt... \w8Nothing can be done to help.*\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]Hh... \w8hello there %(username)...\e"
+	}
+	//elseif RAND(100) < 20 && burntstatus == "normal" && gotleocard == 1
+	//{
+	//	if dedanseen == 1
+	//	{
+	//		dedanmode = "ON"
+	//		
+	//		if gottiredofyourshit == 1
+	//		{
+	//			"\0\s[31]Here again?? \w8After you kept me for 10 hours? \w8\0\s[32]You're more fucking annoying than those goddamn PHANTOMS.\e"
+	//		}
+	//		
+	//		"\0\s[30]\b[4]Bah, \w4here again?? \w8\0\s[31]Are you completely insane, \w4or just simply idiotic? \w8Why must you be such a pain in my ass and bring me here?\e"
+	//	}
+	//	elseif dedanseen != 1
+	//	{
+	//		dedanmode = "ON"
+	//		dedanseen = 1
+	//		
+	//		"\0\s[30]\b[4]...\w8What?? \w8Where the hell am I? \w8This isn't Zone 1 at all... \w8\0\s[31]And who the hell are you??\w8\w8\n\n*Somehow, \w4you ended up summoning Dedan himself rather than the Elsen...*\x\c\0\s[30]\b[4]Whoever you are, \w4I don't have time to be dealing with you. \w8\0\s[31]Take me back to my Zone this instant before I fucking make you!\w8\w8\n\n*This will be an unpleasant time, \w4but you see no alternative right now.*\e"
+	//	}
+	//}
+	//elseif dedanleft == 1
+	//{
+	//	dedanleft = 0
+	//	
+	//	"\0\s[3]A-ah, \w4hello again %(username)...\w8\w8\n\n\0\s[4]*Looks like the Elsen was summoned correctly this time. \w8You decide to ask about Dedan out of curiousity.*\w8\w8\c\0\s[3]M-Master Dedan? \w8He was a bit more agitated than usual... \w8\0\s[4]but nothing out of the ordinary. \w8\0\s[11]I-I hope he doesn't know I'm here...\e"
+	//}
+	elseif RAND(100) < 40
+	{
+		"\0\s[11]A-ah, \w4hello again %(username)...\e"
+		
+		"\0\s[3]Back here again...? \w8\0\s[4]Guess it's not too bad right now...\e"
+		
+		"\0\s[8]*The Elsen seems too preoccupied to notice he's been summoned...*\w8\w8\n\n\0\s[6]Hm? \w8\0\s[7]O-oh, \w4hello %(username). \w8\0\s[3]Guess I'll work on that later...\e"
+	}
+ 	else
+ 	{		
+		if timeslot == "earlymorning"
+		{
+		"\0\s[11]It's really early to be up... \w8\s[9]But I can manage.\e"
+		}
+		elseif timeslot == "morning"
+		{
+		"\0\s[3]Ah, \w4g-good morning %(username)...\e"
+		}
+		elseif timeslot == "lunch"
+		{
+		"\0\s[3]H-hello there, \w4%(username). \w8\0\s[2]It's lunchtime right now, \w4s-so I'm not too busy for once...\e"
+		}
+		elseif timeslot == "afternoon"
+		{
+		"\0\s[3]Hello, \w4%(username). \w8D-did you need something...?\e"
+		}
+		elseif timeslot == "evening"
+		{
+ 		"\0\s[7]O-oh, \w4%(username). \w8\0\s[6]I-I was just working and writing some things down - \w8\0\s[8]s-so don't mind me...\e"
+		}
+		elseif timeslot == "latenight"
+		{
+ 		"\0\s[3]It's getting a b-bit late, \w4isn't it...? \w8\0\s[4]Suppose I'm not doing anything right now...\e"
+		}
+		else //the last timeslot we haven't done is midnight, which is what's under here.
+		{
+		"\0\s[11]A-ah, \w4it's really late right now %(username)... \w8\0\s[9]and I need to sleep for tomorrow...\e"
+		}
+	}
+}
+
+
+//--OnClose
+
+OnClose
+ {
+ timeslot = GetTimeSlot //as you saw above, it's checking the time.
+ --
+	if cumumin >= 5	//This checks to see if you've had them open for at least five minutes.
+		{
+			if dedanmode == "ON"
+			{
+				dedanleft = 1
+				
+				"\0\s[30]\b[4]FINALLY. \w8If I ever end up back here again... \w8\0\s[31]You're dead.\w8"
+			}
+			elseif burntstatus == "sugarburnt" || burntstatus == "stressburnt"
+			{
+				"*You wonder what will happen once they return to Alma...*\w8"
+			}
+			elseif sugarlevel < 40
+			{
+				"\0\s[16]Hh... \w8I need to go back... \w8to work...\w8"
+			}
+			elseif RAND(100) < 40 //see above about the random number generator
+			{
+				"\0\s[4]S-see you later, \w4%(username)...\w8"
+				
+				"\0\s[3]Ah, \w4y-yes, \w4I really should go back to Alma now... \w8\0\s[4]Hope no one noticed I was gone...\w8"
+				
+				"\0\s[11]The others must be working hard without m-me... \w8\0\s[9]I should go back and help them...\w8"
+			}
+			else
+			{
+			if timeslot == "earlymorning"
+				{
+					"\0\s[4]G-guess I should just stay awake now that I'm up... \w8See you later, \w4%(username).\w8"
+				}
+			elseif timeslot == "morning"
+ 				{
+ 					"\0\s[4]Goodbye, \w4%(username)\w8"
+ 				}
+ 			elseif timeslot == "lunch"
+ 				{
+ 					"\0\s[4]It m-might not be too late to eat once I get back...\w8"
+ 				}
+ 			elseif timeslot == "afternoon"
+ 				{
+ 					"\0\s[9]Hope the others d-didn't notice my absence...\w8"
+ 				}
+  			elseif timeslot == "evening"
+ 				{
+ 					"\0\s[3]Y-yes, \w4I should get back to work before something bad happens... \w8\0\s[4]Goodbye.\w8"
+ 				}
+			elseif timeslot == "latenight"
+			 	{
+ 					"\0\s[3]It's about time to get some sleep... \w8work n-never ends for us in Alma. \w8\0\s[4]Goodnight, \w4%(username).\w8"
+ 				}
+			else //like above, this is the midnight time slot since it's the last one left.
+ 				{
+ 					"\0\s[9]I should get some sleep... \w8Goodnight.\w8"
+				}
+			}
+				
+ 		}
+ 		
+ 		
+ 	else //This dialogue is for if they haven't been open for at least five minutes.
+ 	{
+		if dedanmode == "ON"
+		{
+			dedanleft = 1
+				
+			"\0\s[30]\b[4]FINALLY. \w8If I ever end up back here again... \w8\0\s[31]You're dead.\w8"
+		}
+		elseif burntstatus == "sugarburnt" || burntstatus == "stressburnt"
+		{
+			"*You wonder what will happen once they return to Alma...*\w8"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]Hh... \w8was that it...? \w8Fine then...\w8"
+		}
+		else
+		{
+			"\0\s[3]Was that all you needed? \w8\0\s[4]I-if so, \w4I'll take my leave...\w8\w8"
+		}
+ 	}
+ 	--
+	"\-\e" //this bit of code actually closes and ends the ghost. Because \e is here, you don't have to end each line above with it. Again, this will come up very rarely, so OnClose is an unusual case.
+ }
+
+
+ //-------------------------State Changing--------------------
+ //From here on, most of the dialogue will have to do with changing shells, ghosts, or states in some way.
+ 
+
+//--OnWindowStateRestore
+
+//This will run when you minimize them and then bring them back up. Replace with what you like.
+
+OnWindowStateRestore
+{
+	if dedanmode == "ON"
+	{
+		"\0\s[30]\e"
+	}
+	elseif burntstatus == "stressburnt"
+	{
+		"\0\s[23]\e"
+	}
+	elseif burntstatus == "sugarburnt"
+	{
+		"\0\s[24]\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]\e"
+	}
+	else
+	{
+		"\0\s[0]\e"
+	}
+}
+
+
+//--OnGhostChanging
+
+OnGhostChanging
+ {
+	if reference0 == "Elsen"
+	{
+		if dedanmode == "ON"
+		{
+			"\b[4]*Maybe refreshing will bring the Elsen back...*\w8\w8\e"
+		}
+		elseif spectremode == "ON"
+		{
+			"*Perhaps refreshing will get rid of the spectre...*\w8\w8\e"
+		}
+		elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+		{
+			"*Refreshing in progress...*\w8\w8\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]Hh... \w4alright...\w8\w8\e"
+		}
+		else
+		{
+			"\0\s[1]A-alright, \w4I'll be right back.\w8\w8\e"
+		}
+	}
+ 	else //If you're switching to another Ghost.
+	{
+		if dedanmode == "ON"
+		{
+			"\b[4]*Maybe this will get rid of him...*\w8\w8\e"
+		}
+		elseif spectremode == "ON"
+		{
+			"*Perhaps changing ghosts will get rid of the spectre...*\w8\w8\e"
+		}
+		elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+		{
+			"*Switching to %(reference0)...*\w8\w8\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]You're...\w4 going to see %(reference)? \w8Alright...\w8\w8\e"
+		}
+		else
+		{
+			"\0\s[1]Oh, \w4y-you want to see %(reference0)? \w8\0\s[3]Alright, \w4I'll, \w4uh... \w8\0\s[4]leave.\w8\w8\e"
+		}
+	}
+}
+
+
+//--OnGhostChanged
+
+
+OnGhostChanged
+{
+	if dedanmode == "ON"
+	{
+		"\0\s[30]"
+	}
+	elseif spectremode == "ON"
+	{
+		"\1\s[40]\0\s[26]"
+	}
+	elseif burntstatus == "stressburnt"
+	{
+		"\0\s[23]"
+	}
+	elseif burntstatus == "sugarburnt"
+	{
+		"\0\s[24]"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]"
+	}
+	else
+	{
+		"\0\s[0]"
+	}
+	--
+	if reference0 == "Elsen"
+	{
+		if dedanmode == "ON"
+		{
+			"\b[4]*Nope. \w8Still here.*\e"
+		}
+		elseif spectremode == "ON"
+		{
+			"*Nope, \w4that spectre is still here.*\e"
+		}
+		elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+		{
+			"*The Elsen is still Burnt.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]I'm back...\e"
+		}
+		else
+		{
+			"\0\s[2]I'm back!\e"
+		}
+	}
+	else //If you're switching to them from another ghost...
+	{
+		if dedanmode == "ON"
+		{
+			"\0\s[31]\b[4]Why am I still here??\e"
+		}
+		elseif spectremode == "ON"
+		{
+			"*That did not work.*\e"
+		}
+		elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+		{
+			"*The Elsen is still Burnt.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]Hhh... \w8bye %(reference0)...\e"
+		}
+		else
+		{
+			"\0\s[3]O-oh, \w4hello %(username)! \w8Done seeing %(reference0)?\e"
+		}
+	}
+}

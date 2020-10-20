@@ -1,0 +1,1412 @@
+﻿
+OpenSakuraMenu
+{	
+        if dedanmode == "ON"
+		{
+			if dedanpoints >= 10
+			{
+				"\0\s[32]\b2What do you want?"
+			}
+			else
+			{
+				"\0\s[32]\b2The fuck do you want?"
+				"\0\s[32]\b2What?"
+			}
+		}
+		elseif spectremode == "ON"
+		{
+			"*No time to interact with the Elsen with that spectre here.*\e"
+		}
+        elseif burntstatus == "stressburnt"
+		{
+			"\0\s[23]\b2"
+		}
+		elseif burntstatus == "sugarburnt"
+		{
+			"\0\s[24]\b2"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]\b2Hhh...?"
+		}
+		else
+		{
+			"\0\s[3]\b2Huh?"
+			"\0\s[4]\b2Hm?"
+			"\0\s[2]\b2Y-yes, \w4%(username)?"
+		}
+		--
+		MenuRun
+}
+
+//--MenuRun
+
+
+MenuRun
+ {	
+ 	wd = GetWeekDay
+ 	ap = GetAP
+ 	nowmin = Getnowmin
+ 	nowhour = Getnowhour
+	--
+	"\n\n\_q\b2"
+	--
+	if lastTalk != ""
+	{
+	  "\![*]\q[Repeat that?,OnLastTalk]\n\n[half]"
+
+	}
+	--
+ 	"\![*]\q[Talk,altalk]\n\n/
+	\![*]\q[Wide Angle,wideangle]\n\n[half]/
+	\![*]\q[Ask,askelsen]\n\n[half]/
+	\![*]\q[Speak,speaktoelsen]\n\n[half]/
+	\![*]\q[Object,givetoelsen]\n\n[half]/
+	\![*]\q[Shop,openshop]\n\n[half]/
+	\![*]\q[Quiz!,quiztime]\n\n[half]/
+	\![*]\q[Balloon Game!,balloongame]\n\n"
+	--
+	"\![*]\q[Stats,stats]\n\n[half]/
+	\![*]\q[Configure Settings,configmenu]\n\n[half]/
+	\![*]\q[Use Functions,dosomething]\n\n/
+//	\![*]\q[Modify,modify]\n\n/
+ 	\![*]\q[Nevermind,CANCEL]\n\n\n[half]%(wd) %(nowhour):%(nowmin) %(ap), %(month)/%(day)/%(year)\e"
+}
+
+//---------------------
+
+//WIDE ANGLE
+//Kind of like CHECK in UNDERTALE, this will give that status of the Elsen depending on certain things, but this time OFF related
+Select.wideangle
+{
+	"\_v[mp3\wideangle.mp3]\w8\w8"
+	--
+	if dedanmode == "ON" && dedanpoints >= 10
+	{
+		"\b[4]\_q\f[color,247,174,41]Dedan\f[color,default]\n\n[half]Royal guardian of Zone 1.\n\n[half]HP : ?? / CP : ??\n\n[half]Is complacent here.\e"
+	}
+	elseif dedanmode == "ON"
+	{
+		"\b[4]\_q\f[color,247,174,41]Dedan\f[color,default]\n\n[half]Royal guardian of Zone 1.\n\n[half]HP : ?? / CP : ??\n\n[half]Doesn't want to be here.\e"
+	}
+	elseif burntstatus == "stressburnt"
+	{
+		"\_q\f[color,247,174,41]Burnt\f[color,default]\n\n[half]This Elsen is in poor health.\n\n[half]HP : 70 / CP : 10\n\n[half]Nothing can be done.\e"
+	}
+	elseif burntstatus == "sugarburnt"
+	{
+		"\_q\f[color,247,174,41]Critic Burnt\f[color,default]\n\n[half]This Elsen is on sugar deprivation.\n\n[half]HP : 1000 / CP : ??\n\n[half]Nothing can be done.\e"
+	}
+	elseif stresslevel >= 30
+	{
+		"\_q\f[color,247,174,41]Elsen\f[color,default]\n\n[half]This Elsen looks quite stressed.\n\n[half]HP : ?? / CP : ??\n\n[half]SSP Ghost.\e"
+	}
+	elseif stresslevel >= 10
+	{
+		"\_q\f[color,247,174,41]Elsen\f[color,default]\n\n[half]This Elsen looks a bit stressed.\n\n[half]HP : ?? / CP : ??\n\n[half]SSP Ghost.\e"
+	}
+	elseif sugarlevel < 20
+	{
+		"\_q\f[color,247,174,41]Elsen\f[color,default]\n\n[half]This Elsen is very sugar deprived.\n\n[half]HP : ?? / CP : ??\n\n[half]Sugar dependant.\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\_q\f[color,247,174,41]Elsen\f[color,default]\n\n[half]An Elsen begging for sugar.\n\n[half]HP : ?? / CP : ??\n\n[half]Sugar dependant.\e"
+	}
+	elseif sugarlevel == 100
+	{
+		"\_q\f[color,247,174,41]Elsen\f[color,default]\n\n[half]An Elsen high on sugar.\n\n[half]HP : ?? / CP : ??\n\n[half]SSP Ghost.\e"
+	}
+	else
+	{
+		"\_q\f[color,247,174,41]Elsen\f[color,default]\n\n[half]Your common, paranoid Elsen.\n\n[half]HP : ?? / CP : ??\n\n[half]SSP Ghost.\e"
+	}
+}
+
+//---------------------
+
+//ASK
+
+Select.askelsen
+{
+	if dedanmode == "ON"
+	{
+		"\b[4]*Perhaps not best to bother Dedan with questions at this time.*\e"
+	}
+	elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*You can't ask it anything.*\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]*The Elsen doesn't look up to answering any questions...*\e"
+	}
+	else
+	{
+		"\_q*You ask the Elsen about...*\n\n"
+	}
+	--
+	"\![*]\q[The Queen,askaboutqueen] \![*]\q[Zacharie,askaboutzacharie] \![*]\q[Guardians,askaboutguardians]\n\n[half]/
+	\![*]\q[Zone 1,askaboutzone1] \![*]\q[Zone 2,askaboutzone2] \![*]\q[Zone 3,askaboutzone3]\n\n[half]"
+	--
+	"\![*]\q[Back,BACKTOMENU]  \![*]\q[Done,blankCANCEL]\e"
+}
+
+//----------
+
+Select.askaboutqueen
+{
+	"\0\s[3]No one has ever seen the Queen outside of the Guardians; \w4a-all we know is that she runs everything...%(AskReturn)"
+	
+	"\0\s[1]We wonder if the Queen is aware of the spectres... \w8They s-seem to have came from nowhere all of a sudden. \w8If anyone knows what's going on, \w4it'd be the Queen.%(AskReturn)"
+	
+	"\0\s[11]The Queen is the one who created all of the Zones... \w8\0\s[9]N-no one knows where she resides, \w4however...%(AskReturn)"
+}
+
+Select.askaboutzacharie
+{
+	if dedanmode == "ON"
+	{
+		""
+	}
+	else
+	{
+		"\0\s[3]Zacharie's the one who runs Bismark, \w4right...? \w8O-or did he only run the park over there...?%(AskReturn)"
+		
+		"\0\s[4]He's a rather strange merchant who appears e-every now and again... \w8I don't know what he sells or why.%(AskReturn)"
+		
+		"\0\s[11]Some say the story of the Toad King is based off of him. \w8\0\s[9]I-I wonder if that rumour is true...%(AskReturn)"
+		
+		"\0\s[3]I-I've never seen him without his mask on... \w8Why does he hide his face so much...?%(AskReturn)"
+		
+		"\0\s[3]I've seen him in Alma a f-few times... \w8He wasn't there for long. \w8\0\s[4]Zacharie is very strange.%(AskReturn)"
+		
+	}
+}
+
+Select.askaboutguardians
+{
+	if dedanmode == "ON"
+	{
+		""
+		
+	}
+	else
+	{
+		"\0\s[3]Master Dedan's house resides in Alma - \w6in the center of the meat fountains. \w8\0\s[4]B-but no one has ever found it... \w4n-no matter which doors we go through, \w4we find ourselves back to the beginning...%(AskReturn)"
+		
+		"\0\s[4]M-master Dedan is the Queen's inspector. \w8He also runs just about everything in Zone 1. \w8\0\s[3]He... \w4usually stays in his house in Alma.%(AskReturn)"
+		
+		"\0\s[1]Japhet was the one who created Zone 2, \w4\0\s[3]but n-mo one really knows where he is. \w8The books in the library mention him, \w4b-but that's about it...%(AskReturn)"
+		
+		"\0\s[3]There's a cat in Bismark that claims he is Japhet... \w8B-but Japhet was a firebird, \w4not a cat.%(AskReturn)"
+		
+		"\0\s[3]I-I think Enoch is the one who directs everything in Zone 3... \w8He runs the sugar factory, \w4so he must not be too bad.%(AskReturn)"
+		
+		"\0\s[11]The Guardians are the ones who r-run each Zone. \w8\0\s[9]Without them, \w4everything would eventually lose balance and control...%(AskReturn)"
+		
+		"\0\s[2]We owe everything t-to the Guardians, \w4really. \w8They alongside the Queen make everything possible...%(AskReturn)"
+	}
+}
+
+Select.askaboutzone1
+{
+	if dedanmode == "ON"
+	{
+		""
+	}
+	else
+	{
+		"\0\s[3]Zone 1 is where we work o-our jobs. \w8From the smoke mines of Damien, \w4to the metal farmsteads of Pentel, \w4plastic administrations of Shachihata, \w4or the meat fountains of Alma.%(AskReturn)"
+		
+		"\0\s[2]All of the names of the metro stations in Zone 1 are named after important people of the p-past. \w8Truly, \w4they must have been specatular people.%(AskReturn)"
+		
+		"\0\s[2]Zone 1 is truly the m-most important Zone there is. \w8Without it, \w4the other Zones probably wouldn't exist...%(AskReturn)"
+		
+		"\0\s[1]It's a shame all the c-cows raised must eventually be cut for meat and metal. \w8\0\s[4]It's hard not to get attached to them over time... \w8But they s-supply us with essential elements. \w8\0\s[0]It's hard to think about.%(AskReturn)"
+		
+		"\0\s[3]The l-lights down in the smoke mines haven't worked for a long time. \w8It's really hard to traverse... \w8and easy to get lost in...%(AskReturn)"
+		
+		"\0\s[2]It's a big honour to work in Alma. \w8\0\s[3]You need proper authorization to get there in the first place, \w4or p-promoted to work there. \w8Since Master Dedan's house resides there, \w4it's a big deal.%(AskReturn)"
+		
+		"\0\s[3]It's pretty s-stressful working in Alma, \w4honestly... \w8We bottle up the meat before the fountains overflow, \w4which means working nonstop. \w8\0\s[2]But it's still an honour to work there!%(AskReturn)"
+		
+		"\0\s[3]It rains a lot in Zone 1... \w8Makes it v-very humid there. \w8\0\s[4]You eventually get used to it.%(AskReturn)"
+	}
+}
+
+Select.askaboutzone2
+{
+	"\0\s[11]There was a r-rollercoaster in the amusement park over at Zone 2. \w8\0\s[9]It was shut down before it was even finished. \w8It's... \w4probably for the best. \w8Rollercoasters can be very dangerous.%(AskReturn)"
+	
+	"\0\s[3]There's so many books in the library... \w8It's almost overwhelming.%(AskReturn)"
+	
+	"\0\s[3]That weird masked merchant runs the park over at Bismark... \w8H-he sometimes visits Alma.%(AskReturn)"
+	
+	"\0\s[2]The plastic oceans in Zone 2 are v-very relaxing to watch. \w8I'm more used to watching meat flowing rather than plastic, \w4s-so it can be a nice change...%(AskReturn)"
+	
+	"\0\s[3]H-have you read The Toad King at the library? \w8\0\s[4]I wonder if that story is true...%(AskReturn)"
+	
+	"\0\s[3]I've been to the mall over in Bismark before. \w8\0\s[11]I-I got lost rather easily... \w8it's like a maze in there.%(AskReturn)"
+}
+
+Select.askaboutzone3
+{
+	"\0\s[1]Zone 3... \w4is where the sugar factory is located. \w8\0\s[3]I've never been there personally, \w4\0\s[2]but I hear it's a great p-place to work.%(AskReturn)"
+	
+	"\0\s[3]All the sugar we recieve comes from Vesper. \w8\0\s[2]Working there must be a t-treat.%(AskReturn)"
+	
+	"\0\s[11]Zone 1 doesn't seem to be the only zone where nearly everyone works. \w8\0\s[9]I-I suppose it makes sense that the sugar factory would take a lot of people to keep it running... \w8S-sounds stressful,  \w4though.%(AskReturn)"
+	
+	"\0\s[4]I wonder how the sugar factory actually works... \w8I've never seen it in motion.%(AskReturn)"
+}
+
+AskReturn
+{
+	"\n\n[half]\![*]\q[Ask something else?,askelsen]\n\![*]\q[Done,blankCANCEL]\e"
+}
+
+//---------------------
+//SPEAK
+
+Select.speaktoelsen
+{
+	if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*There's nothing you can say to him now that'll bring him back.*\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"*This Elsen probably won't really pay attention to what you're saying at this state...*\e"
+	}
+	else
+	{
+		"\0\s[3]O-oh, \w4you have something to say...? \w8\0\s[2]O-okay, \w4u-um, \w4speak.\![open,inputbox,OnTellStuff,-1]\e"
+	}
+}
+
+OnTellStuff
+{
+	reference0 = TOLOWER(reference0)
+	
+	if reference0 == "" || reference0 == " " || reference0 == "   "
+	{
+		"\0\s[3]Changed y-your mind? \w8That's alright.%(SpeakReturn)"
+		"*You change your mind.*%(SpeakReturn)"
+	}
+	elseif reference0 == "teriyaki wings"
+	{
+		duskname = 1
+		
+		"\0\s[3]W-what? \w8Wait, \w4I think that m-may be a secret password... \w8\0\s[4]I-I forget what it unlocks though, \w4sorry.\w8\w8\n\n*You've gained access to... \w8something.*%(SpeakReturn)"
+	}
+	elseif reference0 == "will there be an off sequel?"
+	{
+		"\0\s[3]W-what? \w8What are you talking about...?%(SpeakReturn)"
+	}
+	elseif "purify" _in_reference0
+	{
+		"\0\s[11]P-purify...? \w8W-what are you talking about...%(SpeakReturn)?"
+	}
+	elseif "spectre" _in_reference0 || "spectres" _in_reference0 || "specter" _in_reference0 || "specters" _in_reference0
+	{
+		"\0\s[11]A-ah, \w4d-don't mention spectres here! \w8Y-you might somehow make them show up...%(SpeakReturn)"
+	}
+	elseif "4982659C" _in_reference0
+	{
+		"\0\s[4]Hm? \w8Isn't that some sort of c-code to Master Dedan's house...?%(SpeakReturn)"
+	}
+	elseif "rainy day" _in_reference0
+	{
+		"\0\s[2]I-I actually quite like rainy days... \w8It rains a lot in Zone 1, \w4s-so I got pretty used to it. \w8\0\s[3]Only problem is that it helps overflow the meat fountains...%(SpeakReturn)"
+	}
+	elseif "over the rainbow" _in_reference0
+	{
+		"\0\s[11]Oh, \w4t-that song sounds familiar... \w8How does it go again...? \w8\0\s[9]It's a really soothing song.%(SpeakerReturn)"
+	}
+	elseif "dusk" _in_reference0 || "dj-dusk" _in_reference0
+	{
+		"\0\s[3]Dusk...? \w8\0\s[4]T-that name sounds familiar... \w8\0\s[11]I think she may be a member of the superior personnel...%(SpeakReturn)"
+		"\0\s[3]That's... \w6a familiar s-sounding name... \w8I-I think I heard something about her really liking... \w8some kind of wings? \w8\0\s[4]I-I don't really remember...%(SpeakReturn)"
+	}
+	elseif "batter" _in_reference0
+	{
+		"\0\s[1]W-who's the Batter...? \w8I've never heard of them...%(SpeakReturn)"
+	}
+	elseif "hugo" _in_reference0
+	{
+		"\0\s[3]H-hugo? \w8Who is Hugo? \w8\0\s[4]N-not too sure that name is familiar to me...%(SpeakReturn)"
+	}
+	elseif "stutter" _in_reference0
+	{
+		"\0\s[11]S-sorry, \w4I do stutter a bit... \w8\0\s[9]It's something I-I've had forever... %(SpeakReturn)"
+	}
+	else
+	{
+		"\0\s[8]*The Elsen writes down what you said.*%(SpeakReturn)"
+	}
+}
+
+SpeakReturn
+{
+	"\n\n[half]\![*]\q[Say something else?,speaktoelsen]\n\![*]\q[Back,BACKTOMENU]\n\![*]\q[Done,blankCANCEL]\e"
+}
+	
+
+//---------------------
+
+//OBJECT
+Select.givetoelsen
+{
+	if dedanmode == "ON"
+	{
+		if gotstopwatch == 1
+		{
+			"\b[4]\_q*Give something to Dedan?*\n\n"
+			--
+			"\![*]\q[Stopwatch,givestopwatch]"
+			--
+			"\n\n\![*]\q[Back,BACKTOMENU]\n\n[half]/
+			\![*]\q[Done,blankCANCEL]\e"
+		}
+		elseif dedanpoints >= 10
+		{
+			"\b[4]*You have nothing to give to Dedan at the moment.\e"
+		}
+		else
+		{
+			"\0\s[31]\b[4]Unless you have something to get me out of this god forsaken place, \w4I don't want whatever the hell it is you have.\e"
+		}
+	}
+	elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*There's nothing you can give that will fix this.*\e"
+	}
+	else
+	{
+		"\b[2]\_q*You can either use a certain item, or give something like food or sugar to the Elsen.*\n\n"
+		--
+		"\![*]\q[Moloch's Meat,givemomeat] : %(molochsmeat)\n\n[half]/
+		\![*]\q[Belial's Meat,givebmeat] : %(belialsmeat)\n\n[half]/
+		\![*]\q[Abaddon's Meat,giveameat]: %(abaddonsmeat)\n\n[half]/
+		\![*]\q[Sugar,givesugar] : %(sugar)"
+		--
+		if gotmusicbox == 1
+		{
+			"\n\n[half]\![*]\q[Musicbox,usemusicbox]"
+		}
+		--
+		if gothardhat == 1
+		{
+			"\n\n[half]\![*]\q[Hardhat,putonhat]"
+		}
+		--
+		if gotcow == 1
+		{
+			"\n\n[half]\![*]\q[Cow Plush,usecowplush]"
+		}
+		--
+		if gotleocard == 1
+		{
+			"\n\n[half]\![*]\q[Leo Card,useleocard]"
+		}
+		--
+		"\n\n\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+}
+
+//----------
+//MEAT
+//all meat will reduce stress; moloch by 5, belial by 10, and abaddon will reduce it to 0
+
+Select.givemomeat
+{
+	if sugarlevel < 40
+	{
+		"\0\s[16]I'm... \w8not hungry...\n\n"
+		--
+		"\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+	elseif molochsmeat == 0
+	{
+		"*You have no Moloch's Meat to offer the Elsen. \w8Buy some at the shop!*\n\n"
+		--
+		"\![*]\q[To the shop?,openshop]\n\n[half]/
+		\![*]\q[Back,BACKTOMENU]\e"
+	}
+	elseif gavemeat >= 3
+	{
+		"\0\s[3]Oh, \w4I'm not hungry right now. \w8But uh, \w4thanks for the offer...\n\n"
+		--
+		"\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+	else
+	{
+		if pausestatus == "OFF"
+		{
+			LowerStress
+		}
+		--
+		gavemeat += 1
+		molochsmeat -= 1
+		
+		"\0\s[3]You're... \w4offering me some meat? \w8Guess I can eat some for now...\w8\w8\0\s[12]\e"
+	}
+}
+
+Select.givebmeat
+{
+	if sugarlevel < 40
+	{
+		"\0\s[16]I'm... \w8not hungry...\n\n"
+		--
+		"\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+	elseif belialsmeat == 0
+	{
+		"*You have no Belial's Meat to offer the Elsen. \w8Buy some at the shop!*\n\n"
+		--
+		"\![*]\q[To the shop?,openshop]\n\n[half]/
+		\![*]\q[Back,BACKTOMENU]\e"
+	}
+	elseif gavemeat >= 3
+	{
+		"\0\s[3]Oh, \w4I'm not hungry right now. \w8But uh, \w4thanks for the offer...\n\n"
+		--
+		"\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+	else
+	{
+		if pausestatus == "OFF"
+		{
+			LowerStressB
+		}
+		--
+		gavemeat += 1
+		belialsmeat -= 1
+		
+		"\0\s[3]You're... \w4offering me some meat? \w8Guess I can eat some for now...\w8\w8\0\s[12]\e"
+	}
+}
+
+Select.giveameat
+{
+	if sugarlevel < 40
+	{
+		"\0\s[16]I'm... \w8not hungry...\n\n"
+		--
+		"\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+	elseif abaddonsmeat == 0
+	{
+		"*You have no Abaddon's Meat to offer the Elsen. \w8Buy some at the shop!*\n\n"
+		--
+		"\![*]\q[To the shop?,openshop]\n\n[half]/
+		\![*]\q[Back,BACKTOMENU]\e"
+	}
+	elseif gavemeat >= 3
+	{
+		"\0\s[3]Oh, \w4I'm not hungry right now. \w8But uh, \w4thanks for the offer...\n\n"
+		--
+		"\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+	else
+	{
+		if pausestatus == "OFF"
+		{
+			stresslevel = 0
+		}
+		--
+		gavemeat += 1
+		abaddonsmeat -= 1
+		
+		"\0\s[3]You're... \w4offering me some meat? \w8Guess I can eat some for now...\w8\w8\0\s[12]\e"
+	}
+}
+
+//----------
+
+//SUGAR
+Select.givesugar
+{
+	if sugarlevel == 100
+	{
+		"*You've given the Elsen enough sugar for now.*\e"
+	}
+	elseif sugar == 0
+	{
+		"*You have no sugar to offer the Elsen. \w8Buy some at the shop!*\n\n"
+		--
+		"\![*]\q[To the shop?,openshop]\n\n[half]/
+		\![*]\q[Back,BACKTOMENU]\e"
+	}
+	elseif sugarlevel < 40
+	{
+		if pausestatus == "OFF"
+		{
+			GiveElsenSugar
+			LowerStress
+		}
+		--
+		sugar -= 1
+		
+		"\0\s[16]SUGAR! \w8\w8\n\n\0\s[17]*The Elsen starts devouring the sugar immediately...*\e"
+	}
+	else
+	{
+		if pausestatus == "OFF"
+		{
+			GiveElsenSugar
+			LowerStress
+		}
+		--
+		sugar -= 1
+		
+		"\0\s[1]Are you... \w4giving me sugar? \w8I.. \w4suppose it wouldn't hurt to have some...\w8\w8\0\s[14]\e"
+	}
+}
+
+GiveElsenSugar //a function to modify sugar intake and levels
+{
+    gavesugar++ 
+    if sugarlevel >= 80 //if sugarlevel is 80, it'll just snap to 100 and stay that way if it tries to increase even more
+    {
+        sugarlevel = 100
+    }
+    else
+    {
+        sugarlevel += 20 
+    }
+} 
+
+//----------
+
+Select.usemusicbox
+{
+	if sugarlevel < 40
+	{
+		"\_v[mp3\musicbox.mp3]*You start playing the musicbox. \w8The Elsen does not seem to care.*\e"
+	}
+	elseif stresslevel >= 5
+	{
+		if pausestatus == "OFF"
+		{
+			LowerStress
+		}
+		--
+		"\_v[mp3\musicbox.mp3]*You start playing the musicbox. \w8\0\s[0]The Elsen looks a bit calmer hearing it.*\e"
+	}
+	elseif stresslevel == 0
+	{
+		"\_v[mp3\musicbox.mp3]*You start playing the musicbox.*\e"
+	}
+}
+
+//----------
+
+Select.usecowplush
+{
+	if sugarlevel < 40
+	{
+		"*Doesn't look like the Elsen cares to play with the cow right now.*\e"
+	}
+	elseif playwithcow == 1
+	{
+		"*The Elsen already played with his cow plushie. \w8Perhaps wait another hour.*\e"
+	}
+	elseif stresslevel >= 5
+	{
+		if pausestatus == "OFF"
+		{
+			LowerStressB
+		}
+		--
+		
+		playwithcow = 1
+		
+		"\0\s[28]*You give the Elsen the cow plush, \w4and he starts playing with it a little. \w8You see him calm down a fair bit as he does.*\e"
+		
+		"\0\s[29]*You give him the cow plushie you bought, \w4and he plays with a bit. \w8He looks a bit calmer in the process.*\e"
+	}
+	elseif stresslevel == 0
+	{
+		"\0\s[29]T-this looks like one of the little cows I raised back in Pentel...\w8\w8\n\n*He looks happy with his little cow plushie.*\e"
+		
+		"\0\s[28]*You give the Elsen the cow plush, \w4and he holds and admires it. \w8He looks happy to have it.*\e"
+	}
+}
+
+//----------
+
+Select.putonhat
+{
+	if hardhat == 1
+	{
+		hardhat = 0 
+		
+		"\0\![bind,Head,Hardhat,false]"
+		--
+		"*You take the hardhat off the Elsen.*\n\n"
+		--
+		"\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+	else
+	{
+		hardhat = 1
+		
+		"\0\![bind,Head,Hardhat,true]"
+		--
+		"*You put the hardhat on the Elsen.*\n\n"
+		--
+		"\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+}
+
+Select.useleocard
+{
+	"*You take a look at the Leo Card to see what it does. \w8It... \w4doesn't do anything. \w8It's just a Leo Card. \w8Why did you spend 500 Credits on this...?*\e"
+}
+
+//----------
+//STOPWATCH
+
+Select.givestopwatch
+{
+	
+}
+
+//---------------------
+
+//SHOP
+//like a lowkey Zacharie shop
+Select.openshop
+{
+	if dedanmode == "ON"
+	{
+		"\b[4]*Shopping for Dedan would be more than pointless at this time.*\e"
+	}
+	elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*There's no point in buying items now.*\e"
+	}
+	else
+	{
+		"\b[2]\_q*You can buy some things using the credits you've acquired.*\n\n"
+		--
+		"\![*]\q[Moloch's Meat,buymoloch] - 30 Credits\n\n[half]/
+		\![*]\q[Belial's Meat,buybelial] - 90 Credits\n\n[half]/
+		\![*]\q[Abaddon's Meat,buyabaddon] - 1000 Credits\n\n[half]/
+		\![*]\q[Sugar,buysugar] - 50 Credits"
+		--
+		if gothardhat != 1
+		{
+			"\n\n[half]\![*]\q[Hardhat,buyhardhat] - 100 Credits"
+		}
+		--
+		if gotmusicbox != 1
+		{
+			"\n\n[half]\![*]\q[Music Box,buymusicbox] - 300 Credits"
+		}
+		--
+		if gotcow != 1
+		{
+			"\n\n[half]\![*]\q[Cow Plush,buycowplush] - 400 Credits"
+		}
+		--
+		if gotleocard != 1
+		{
+			"\n\n[half]\![*]\q[Leo Card,buyleocard] - 500 Credits"
+		}
+		--
+		if dedanpoints >= 5 && gotstopwatch != 1
+		{
+			"\n\n[half]\![*]\q[Stopwatch,buystopwatch] - 200 Credits"
+		}
+		--
+		"\n\n%(credits) \f[color,247,174,41]Credits\f[color,default]\n\n/
+		\![*]\q[Back,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"	
+	}
+}
+
+Select.buymoloch
+{
+	if credits < 30
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w8don't have enough credits...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[11]I-I'm sorry %(username), \w4but you don't have enough credits! \w8You need to gather more...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+	else
+	{
+		credits -= 30
+		molochsmeat += 1
+		
+		if sugarlevel < 40
+		{
+			"\0\s[16]One Moloch's Meat... \w8has been purchased...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[100]Okay, \w4one Moloch's Meat purchased!\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+}
+
+Select.buybelial
+{
+	if credits < 90
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w8don't have enough credits...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[11]I-I'm sorry %(username), \w4but you don't have enough credits! \w8You need to gather more...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+	else
+	{
+		credits -= 90
+		belialsmeat += 1
+		
+		if sugarlevel < 40
+		{
+			"\0\s[16]One Belial's Meat... \w8has been purchased...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[100]Okay, \w4one Belial's Meat purchased!\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+}
+
+Select.buyabaddon
+{
+	if credits < 1000
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w8don't have enough credits...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[11]I-I'm sorry %(username), \w4but you don't have enough credits! \w8You need to gather more...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+	else
+	{
+		credits -= 1000
+		abaddonsmeat += 1
+		
+		if sugarlevel < 40
+		{
+			"\0\s[16]One Abaddon's Meat... \w8has been purchased...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[100]Okay, \w4one Abaddon's Meat purchased!\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+}
+
+Select.buysugar
+{
+	if credits < 50
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w8don't have enough credits...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[11]I-I'm sorry %(username), \w4but you don't have enough credits! \w8You need to gather more...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+	else
+	{
+		credits -= 50
+		sugar += 1
+		
+		if sugarlevel < 40
+		{
+			"\0\s[16]The Sugar... \w8has been purchased... \w8The precious sugar...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[100]Okay, \w4one Sugar has been purchased!\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+}
+
+Select.buyhardhat
+{
+	if credits < 100
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w8don't have enough credits...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[11]I-I'm sorry %(username), \w4but you don't have enough credits! \w8You need to gather more...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+	else
+	{
+		credits -= 100
+		gothardhat = 1
+		
+		if sugarlevel < 40
+		{
+			"\0\s[16]The Hardhat... \w4has been purchased...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[100]Okay, \w4the hardhat has been purchased! \w8\0\s[11]Though... \w4I don't work in the smoke mines, \w4I don't have any need for one...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+}
+
+Select.buymusicbox
+{
+	if credits < 300
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w8don't have enough credits...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[11]I-I'm sorry %(username), \w4but you don't have enough credits! \w8You need to gather more...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+	else
+	{
+		credits -= 300
+		gotmusicbox = 1
+		
+		if sugarlevel < 40
+		{
+			"\0\s[16]The Music Box... \w8has been purchased...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[100]Okay, \w4the music box has been purchased!\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+}
+
+Select.buycowplush
+{
+	if credits < 400
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w8don't have enough credits...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[11]I-I'm sorry %(username), \w4but you don't have enough credits! \w8You need to gather more...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+	else
+	{
+		credits -= 400
+		gotcow = 1
+		
+		if sugarlevel < 40
+		{
+			"\0\s[16]The Cow Plush... \w8has been purchased...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[100]Okay, \w4the cow plush has been purchased! \w8It looks really adorable... \w8D-did you buy that for me...?\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+}
+
+Select.buyleocard
+{
+	if credits < 500
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w8don't have enough credits...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[11]I-I'm sorry %(username), \w4but you don't have enough credits! \w8You need to gather more...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+	else
+	{
+		credits -= 500
+		gotleocard = 1
+		
+		if sugarlevel < 40
+		{
+			"\0\s[16]The Leo Card... \w8has been purchased...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[100]Okay, \w4the Leo Card has been purchased! \w8\0\s[9]...\w8\0\s[11]What... \w4does a Leo Card do...?\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+}
+
+Select.buystopwatch
+{
+	if credits < 200
+	{
+		if sugarlevel < 40
+		{
+			"\0\s[16]You... \w8don't have enough credits...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[11]I-I'm sorry %(username), \w4but you don't have enough credits! \w8You need to gather more...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+	else
+	{
+		credits -= 200
+		gotstopwatch = 1
+		
+		if sugarlevel < 40
+		{
+			"\0\s[16]The stopwatch... \w8has been purchased...\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+		else
+		{
+			"\0\s[100]Okay, \w4the stopwatch has been purchased! \w8\0\s[9]It's a nice looking stopwatch... \w8I'm sure Master Dedan would love to have one like that.\n\n[half]"
+			--
+			"\![*]\q[Back,openshop]\n\n[half]/
+		    \![*]\q[Done,blankCANCEL]\e"
+		}
+	}
+}
+
+//---------------------
+
+LowerStress //this will modify any decreasing stress levels so it doesn't go below a certain point
+//don't care about how high the stress can go since once it hits 50 it's game over, so this is just for decreasing
+{
+	if stresslevel <= 5
+	{
+		stresslevel = 0
+	}
+	else
+	{
+		stresslevel -= 5
+	}
+}
+
+//---------------------
+
+LowerStressB //specifically for Belial's Meat and Cow Plush
+{
+	if stresslevel <= 10
+	{
+		stresslevel = 0
+	}
+	else
+	{
+		stresslevel -= 10
+	}
+}
+
+//---------------------
+
+//Leave this next bit alone.
+Select.altalk
+{
+	AiTalk
+}
+
+//Leave this alone
+OnLastTalk 
+{
+"%(lastTalk)\e"
+}
+
+//This is figuring out what day of the week it is. Leave it alone.
+GetWeekDay
+{
+	if weekday == 0
+	{"Sun"}
+	elseif weekday == 1
+	{"Mon"}
+	elseif weekday == 2
+	{"Tue"}
+	elseif weekday == 3
+	{"Wed"}
+	elseif weekday == 4
+	{"Thu"}
+	elseif weekday == 5
+	{"Fri"}
+	else
+	{"Sat"}
+}
+
+//This is finding out whether it's AM or PM. Leave it alone.
+GetAP
+{
+ 	if hour >= 0 && hour <= 11
+ 		{
+ 			"AM"
+ 		}
+ 	else
+ 		{
+ 			"PM"
+ 		}
+}
+
+//This is figuring out the minute. Leave it alone.
+Getnowmin
+{
+	if minute >= 0 && minute <=9
+		{
+			"0%(minute)"
+		}
+	else
+		{
+			"%(minute)"
+		}
+}
+
+//This is figuring out the hour. Leave it alone.
+Getnowhour
+{
+	if hour12 >= 0 && hour12 <=9
+		{
+			"0%(hour12)"
+		}
+	else
+		{
+			"%(hour12)"
+		}
+}
+
+//If someone selects an option linked to BACKTOMENU, it will go back to MenuRun.
+
+Select.BACKTOMENU
+	{
+		MenuRun
+	}
+	
+	
+//Going back to the MenuRun function we finished above, this is if someone selects the Functions option, linked to dosomething. As you can see, it ends up as Select.dosomething.
+
+Select.dosomething
+{
+	if dedanmode == "ON"
+	{
+		"\0\s[30]\b[4]You dare ask ME to do something as I sit here unwilling? \w8\0\s[31]Fuck off!\e"
+	}
+	elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"\b[2]\_q*You can do things like check email or open the SSP Preferences here.*\n\n"
+	}
+	else
+	{
+		"\b[2]\_q*You can ask the Elsen to do some things, like check email or open the SSP Preferences menu here.*\n\n"
+		--
+		"\![*]\q[Open Calendar,CALENDAR]\n\n[half]/
+		\![*]\q[Check for updates,checkupdates]\n\n[half]/
+		\![*]\q[Check Email,MailCheck]\n\n[half]/
+		\![*]\q[How to set up emails,emailsetup]\n\n[half]/
+		\![*]\q[Open SSP Preferences,sspconfig]\n\n[half]/
+		\![*]\q[Empty Recycle Bin,ChoiceGarbagecan]\n\n[half]/
+		\![*]\q[System Information,ChoiceSystemInformation]\n\n[half]/
+		\![*]\q[There's a bug!,bugreport]\n\n/
+		\![*]\q[Back to main menu,BACKTOMENU]\e"
+	}
+}
+
+Select.checkupdates
+{
+	"\![updatebymyself]\e"
+}
+
+Select.bugreport
+{
+	if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*If you think there's a bug, \w4report it to DJ-Dusk via her social medias. \w8You can find them by right clicking the Elsen and going to 'Finding DJ-Dusk', \w4or by pressing F1 and reading the readme.txt.*\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]A bug...? \w8You... \w4can report bugs to DJ-Dusk... \w4at her social media pages... \w8You can find them either by right clicking and going to 'Finding-DJ Dusk', \w4or reading the readme.txt by pressing F1...\e"
+	}
+	else
+	{
+		"\0\s[11]A bug? \w8If you think so, \w4then you n-need to file a report to DJ-Dusk via her social media pages. \w8\0\s[9]You can f-find them by either right clicking m-me and going to 'Finding DJ-Dusk', \w4or by pressing F1 and reading the readme.txt file.\e"
+	}
+}
+
+Select.emailsetup
+{
+	if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*You can look at a guide \_a[http://zarla-s.tumblr.com/post/167925002903/how-do-you-set-up-your-email-on-ukagaka-could-you/]here\_a to help with the SSP email system.*\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]You... \w4can look at a guide \_a[http://zarla-s.tumblr.com/post/167925002903/how-do-you-set-up-your-email-on-ukagaka-could-you/]here\_a... \w4that can help you set it up...\e"
+	}
+	else
+	{
+		"\0\s[1]The email system is a b-bit... \w4odd, \w4to figure out. \w8\0\s[2]But thankfully someone made a guide to help! \w8You can f-find it right \_a[http://zarla-s.tumblr.com/post/167925002903/how-do-you-set-up-your-email-on-ukagaka-could-you/]here\_a.\e"
+	}
+}
+
+Select.CALENDAR
+{
+	if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*You open up the calender.*\![open,calender]\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]The calender...? \w8Okay... \w8Here...\![open,calender]\e"
+	}
+	else
+	{
+		"\0\s[1]Y-you... \w4want the calender opened? \w8\0\s[3]Okay. \w8Here.\![open,calendar]\e"
+	}
+
+}
+
+Select.sspconfig
+{
+	if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*You open up the SSP Preference menu.*\![open,configurationdialog]\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]The... \w4Preference menu...? \w8Okay... \w8Here...\![open,configurationdialog]\e"
+	}
+	else
+	{
+		"\0\s[1]The SSP Preference menu...? \w8\0\s[3]O-okay... \w4Here.\![open,configurationdialog]\e"
+	}
+}
+
+Select.ChoiceGarbagecan
+{
+	_gomicheck = FUNCTIONEX("gomi.dll", "-n")
+	
+	if _gomicheck == 0
+	{
+		if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+		{
+			"*You go empty the Recycle Bin yourself.*\w8\w8\w8\w8\w8\w8\w8\c*It was empty.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]Hhh... \w4the Recylcle Bin...? \w8Sure...\w8\w8\s[-1]\w8\w8\w8\w8\w8\w8\c\0\s[16]It... \w4was already empty...\e"
+		}
+		else
+		{
+			"\0\s[1]You want me to empty your Recycle Bin? \w8Sure... \w4I-I guess I can do that... \w8Be right back.\w8\w8\s[-1]\w8\w8\w8\w8\w8\w8\c\0\s[3]I-it was already empty, \w4so I didn't do anything.\e"
+		}
+	}
+	elseif _gomicheck >= 1 //If the recycle bin is full.
+	{
+		if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+		{
+			"*You go empty the Recycle Bin yourself.*\w8\w8\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9*Done.*\e"
+		}
+		sugarlevel < 40
+		{
+			"\0\s[16]Hhh... \w4the Recylcle Bin...? \w8Sure...\w8\w8\s[-1]\w8\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[16]Done...\e"
+		}
+		else
+		{
+			"\0\s[1]You want me to empty your Recycle Bin? \w8Sure... \w4I-I guess I can do that... \w8Be right back.\w8\w8\s[-1]\w8\w8\w8\w8\w8\w8\![raise,OnGarbagecanEmpty]\w9\w9\w9\0\s[2]Done.\e"
+		}
+	}
+}
+
+
+//This is for the SAORI, don't touch it.
+OnGarbagecanEmpty
+{
+	_gomi = FUNCTIONEX("gomi.dll", "-f")
+}
+
+Select.ChoiceSystemInformation
+{
+	os_name = FUNCTIONEX("saori_cpuid.dll","os.name")
+	os_version = FUNCTIONEX("saori_cpuid.dll","os.version")
+	cpu_name = FUNCTIONEX("saori_cpuid.dll","cpu.name")
+	cpu_clockex = FUNCTIONEX("saori_cpuid.dll","cpu.clockex")
+	"/
+	\0\s[0]\b[2]/
+	\_q\f[bold,1]OS:\f[bold,0] %(os_name) %(os_version)\n/
+	\f[bold,1]Memory Load:\f[bold,0] %(memoryload)%\n/
+	\f[bold,1]Physical Memory:\f[bold,0] %(memoryavailphys) KB\n/
+	\f[bold,1]CPU:\f[bold,0] %(cpu_name) %(cpu_clockex)MHz\n/
+	\f[bold,1]Ukagaka:\f[bold,0] %property[baseware.version]/
+	\e"
+}
+	
+Select.MailCheck
+	{
+		"\![biff]\e"
+	}
+
+
+Select.HEADLINECANCEL
+ 	{
+ 		"\0\s[0]Finished with headlines.\e"
+	}
+
+	
+//---- OnChoiceTimeout ---------------------------------------------------------
+
+OnChoiceTimeout
+ {
+	 if dedanmode == "ON"
+	 {
+		 ""
+	 }
+	 elseif burntstatus == "stressburnt"
+	 {
+		 ""
+	 }
+	 elseif burntstatus == "sugarburnt"
+	 {
+		 ""
+	 }
+	 elseif sugarlevel < 40
+	 {
+		 "\0\s[16]Hhh...\e"
+	 }
+	 else
+	 {
+		 "\0\s[1]Ah... \w4hello...?\e"
+	 }
+ }

@@ -1,0 +1,1033 @@
+//--The Main Character's Poses---------------------------------------------------------
+
+surface0
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element0,overlay,surface0.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen normal
+surface1
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element0,overlay,surface1501.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen hand-on-belt smiling
+surface2
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element0,overlay,surface1502.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen hand-on-belt talking
+surface3
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element0,overlay,surface1503.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen hand-on-belt plain
+surface4
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element0,overlay,surface1504.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen looking off in the distance
+surface5
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element0,overlay,surface1505.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+
+}
+
+//Elsen with clipboard plain
+surface6
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element0,overlay,surface1506.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen with clipboard talking
+surface7
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element1,overlay,surface1507.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen writing on clipboard
+surface8
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element1,overlay,surface1508.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen worried plain
+surface9
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+	
+	element1,overlay,surface1509.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen worried but smiling?
+surface100
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+
+	element1,overlay,surface1510.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen worried talking
+surface11
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+
+	element1,overlay,surface1511.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen eating meat
+surface12
+{
+	element1,overlay,surface1512.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+
+	20interval,random
+	20pattern0,1513,60,replace,0,0
+	20pattern1,1512,60,replace,0,0
+}
+
+//Elsen eating sugar
+surface14
+{
+	element1,overlay,surface1514.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+
+	20interval,random
+	20pattern0,1515,60,replace,0,0
+	20pattern1,1514,60,replace,0,0
+}
+
+//Elsen in Withdrawal
+surface16
+{
+	collision0,104,98,187,125,Head
+	collision1,109,127,181,187,Face
+
+	element1,overlay,surface1516.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen in Withdrawl devouring sugar
+surface17
+{
+	element1,overlay,surface1517.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+
+	20interval,always
+	20pattern0,1518,30,replace,0,0
+	20pattern1,1517,30,replace,0,0
+}
+
+//Elsen stressburnt 1
+surface19
+{
+	element1,overlay,surface1519.png,0,0
+}
+
+//Elsen stressburnt 2
+surface20
+{
+	element1,overlay,surface1520.png,0,0
+}
+
+//Elsen sugarburnt 1
+surface21
+{
+	element1,overlay,surface1521.png,0,0
+}
+
+//Elsen sugarburnt 2
+surface22
+{
+	element1,overlay,surface1522.png,0,0
+}
+
+//Elsen Burnt
+surface23
+{
+	element1,overlay,surface1523.png,0,0
+}
+
+//Elsen Critic Burnt
+surface24
+{
+	element1,overlay,surface1524.png,0,0
+}
+
+//Elsen freaking out 1
+surface25
+{
+	element1,overlay,surface1525.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen freaking out 2
+surface26
+{
+	element1,overlay,surface1526.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen freaking out 3
+surface27
+{
+	element1,overlay,surface1527.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen playing with cow plush 1
+surface28
+{
+	element1,overlay,surface1528.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//Elsen playing with cow plush 2
+surface29
+{
+	element1,overlay,surface1529.png,0,0
+	910interval,bind
+	910pattern0,3000,0,add,0,0
+}
+
+//-----
+
+//Dedan
+surface30
+{
+	collision0,89,2,171,26,Dedanhead
+
+	element1,overlay,surface1530.png,0,0
+}
+
+//Dedan angry. News at 11: Water is wet
+surface31
+{
+	collision0,89,2,171,26,Dedanhead
+
+	element1,overlay,surface1531.png,0,0
+}
+
+//Dedan crossed
+surface32
+{
+	collision0,89,2,171,26,Dedanhead
+
+	element1,overlay,surface1532.png,0,0
+}
+
+//-----
+
+//BALLOON GAME SURFACES
+
+//Balloon Game window untouched
+surface400
+{
+element1,overlay,surface4000.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//5
+41interval,always
+41pattern0,4005,20,overlay,0,0
+41pattern1,4006,20,overlay,0,0
+41pattern2,4005,20,overlay,0,0
+41pattern3,4007,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//13
+43interval,always
+43pattern0,4013,20,overlay,0,0
+43pattern1,4014,20,overlay,0,0
+43pattern2,4013,20,overlay,0,0
+43pattern3,4015,20,overlay,0,0
+
+//17
+44interval,always
+44pattern0,4017,20,overlay,0,0
+44pattern1,4018,20,overlay,0,0
+44pattern2,4017,20,overlay,0,0
+44pattern3,4019,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+
+//29
+47interval,always
+47pattern0,4029,20,overlay,0,0
+47pattern1,4030,20,overlay,0,0
+47pattern2,4029,20,overlay,0,0
+47pattern3,4031,20,overlay,0,0
+
+//33
+48interval,always
+48pattern0,4033,20,overlay,0,0
+48pattern1,4034,20,overlay,0,0
+48pattern2,4033,20,overlay,0,0
+48pattern3,4035,20,overlay,0,0
+
+//37
+49interval,always
+49pattern0,4037,20,overlay,0,0
+49pattern1,4038,20,overlay,0,0
+49pattern2,4037,20,overlay,0,0
+49pattern3,4039,20,overlay,0,0
+
+//41
+50interval,always
+50pattern0,4041,20,overlay,0,0
+50pattern1,4042,20,overlay,0,0
+50pattern2,4041,20,overlay,0,0
+50pattern3,4043,20,overlay,0,0
+
+//45
+51interval,always
+51pattern0,4045,20,overlay,0,0
+51pattern1,4046,20,overlay,0,0
+51pattern2,4045,20,overlay,0,0
+51pattern3,4047,20,overlay,0,0
+
+//49
+52interval,always
+52pattern0,4049,20,overlay,0,0
+52pattern1,4050,20,overlay,0,0
+52pattern2,4049,20,overlay,0,0
+52pattern3,4051,20,overlay,0,0
+}
+
+//Balloon Game window 1 popped
+surface401
+{
+element1,overlay,surface4053.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//5
+41interval,always
+41pattern0,4005,20,overlay,0,0
+41pattern1,4006,20,overlay,0,0
+41pattern2,4005,20,overlay,0,0
+41pattern3,4007,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//17
+44interval,always
+44pattern0,4017,20,overlay,0,0
+44pattern1,4018,20,overlay,0,0
+44pattern2,4017,20,overlay,0,0
+44pattern3,4019,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+
+//29
+47interval,always
+47pattern0,4029,20,overlay,0,0
+47pattern1,4030,20,overlay,0,0
+47pattern2,4029,20,overlay,0,0
+47pattern3,4031,20,overlay,0,0
+
+//33
+48interval,always
+48pattern0,4033,20,overlay,0,0
+48pattern1,4034,20,overlay,0,0
+48pattern2,4033,20,overlay,0,0
+48pattern3,4035,20,overlay,0,0
+
+//37
+49interval,always
+49pattern0,4037,20,overlay,0,0
+49pattern1,4038,20,overlay,0,0
+49pattern2,4037,20,overlay,0,0
+49pattern3,4039,20,overlay,0,0
+
+//41
+50interval,always
+50pattern0,4041,20,overlay,0,0
+50pattern1,4042,20,overlay,0,0
+50pattern2,4041,20,overlay,0,0
+50pattern3,4043,20,overlay,0,0
+
+//45
+51interval,always
+51pattern0,4045,20,overlay,0,0
+51pattern1,4046,20,overlay,0,0
+51pattern2,4045,20,overlay,0,0
+51pattern3,4047,20,overlay,0,0
+
+//49
+52interval,always
+52pattern0,4049,20,overlay,0,0
+52pattern1,4050,20,overlay,0,0
+52pattern2,4049,20,overlay,0,0
+52pattern3,4051,20,overlay,0,0
+}
+
+//Balloon Game window 2 popped
+surface402
+{
+element1,overlay,surface4054.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//5
+41interval,always
+41pattern0,4005,20,overlay,0,0
+41pattern1,4006,20,overlay,0,0
+41pattern2,4005,20,overlay,0,0
+41pattern3,4007,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//17
+44interval,always
+44pattern0,4017,20,overlay,0,0
+44pattern1,4018,20,overlay,0,0
+44pattern2,4017,20,overlay,0,0
+44pattern3,4019,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+
+//29
+47interval,always
+47pattern0,4029,20,overlay,0,0
+47pattern1,4030,20,overlay,0,0
+47pattern2,4029,20,overlay,0,0
+47pattern3,4031,20,overlay,0,0
+
+//33
+48interval,always
+48pattern0,4033,20,overlay,0,0
+48pattern1,4034,20,overlay,0,0
+48pattern2,4033,20,overlay,0,0
+48pattern3,4035,20,overlay,0,0
+
+//37
+49interval,always
+49pattern0,4037,20,overlay,0,0
+49pattern1,4038,20,overlay,0,0
+49pattern2,4037,20,overlay,0,0
+49pattern3,4039,20,overlay,0,0
+
+//45
+51interval,always
+51pattern0,4045,20,overlay,0,0
+51pattern1,4046,20,overlay,0,0
+51pattern2,4045,20,overlay,0,0
+51pattern3,4047,20,overlay,0,0
+
+//49
+52interval,always
+52pattern0,4049,20,overlay,0,0
+52pattern1,4050,20,overlay,0,0
+52pattern2,4049,20,overlay,0,0
+52pattern3,4051,20,overlay,0,0
+}
+
+//Balloon Game window 3 popped
+surface403
+{
+element1,overlay,surface4055.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//5
+41interval,always
+41pattern0,4005,20,overlay,0,0
+41pattern1,4006,20,overlay,0,0
+41pattern2,4005,20,overlay,0,0
+41pattern3,4007,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//17
+44interval,always
+44pattern0,4017,20,overlay,0,0
+44pattern1,4018,20,overlay,0,0
+44pattern2,4017,20,overlay,0,0
+44pattern3,4019,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+
+//29
+47interval,always
+47pattern0,4029,20,overlay,0,0
+47pattern1,4030,20,overlay,0,0
+47pattern2,4029,20,overlay,0,0
+47pattern3,4031,20,overlay,0,0
+
+//37
+49interval,always
+49pattern0,4037,20,overlay,0,0
+49pattern1,4038,20,overlay,0,0
+49pattern2,4037,20,overlay,0,0
+49pattern3,4039,20,overlay,0,0
+
+//45
+51interval,always
+51pattern0,4045,20,overlay,0,0
+51pattern1,4046,20,overlay,0,0
+51pattern2,4045,20,overlay,0,0
+51pattern3,4047,20,overlay,0,0
+
+//49
+52interval,always
+52pattern0,4049,20,overlay,0,0
+52pattern1,4050,20,overlay,0,0
+52pattern2,4049,20,overlay,0,0
+52pattern3,4051,20,overlay,0,0
+}
+
+//Balloon Game window 4 popped
+surface404
+{
+element1,overlay,surface4056.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//5
+41interval,always
+41pattern0,4005,20,overlay,0,0
+41pattern1,4006,20,overlay,0,0
+41pattern2,4005,20,overlay,0,0
+41pattern3,4007,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//17
+44interval,always
+44pattern0,4017,20,overlay,0,0
+44pattern1,4018,20,overlay,0,0
+44pattern2,4017,20,overlay,0,0
+44pattern3,4019,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+
+//29
+47interval,always
+47pattern0,4029,20,overlay,0,0
+47pattern1,4030,20,overlay,0,0
+47pattern2,4029,20,overlay,0,0
+47pattern3,4031,20,overlay,0,0
+
+//37
+49interval,always
+49pattern0,4037,20,overlay,0,0
+49pattern1,4038,20,overlay,0,0
+49pattern2,4037,20,overlay,0,0
+49pattern3,4039,20,overlay,0,0
+
+//45
+51interval,always
+51pattern0,4045,20,overlay,0,0
+51pattern1,4046,20,overlay,0,0
+51pattern2,4045,20,overlay,0,0
+51pattern3,4047,20,overlay,0,0
+}
+
+//Balloon Game window 5 popped
+surface405
+{
+element1,overlay,surface4057.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//5
+41interval,always
+41pattern0,4005,20,overlay,0,0
+41pattern1,4006,20,overlay,0,0
+41pattern2,4005,20,overlay,0,0
+41pattern3,4007,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+
+//29
+47interval,always
+47pattern0,4029,20,overlay,0,0
+47pattern1,4030,20,overlay,0,0
+47pattern2,4029,20,overlay,0,0
+47pattern3,4031,20,overlay,0,0
+
+//37
+49interval,always
+49pattern0,4037,20,overlay,0,0
+49pattern1,4038,20,overlay,0,0
+49pattern2,4037,20,overlay,0,0
+49pattern3,4039,20,overlay,0,0
+
+//45
+51interval,always
+51pattern0,4045,20,overlay,0,0
+51pattern1,4046,20,overlay,0,0
+51pattern2,4045,20,overlay,0,0
+51pattern3,4047,20,overlay,0,0
+}
+
+//Balloon Game window 6 popped
+surface406
+{
+element1,overlay,surface4058.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//5
+41interval,always
+41pattern0,4005,20,overlay,0,0
+41pattern1,4006,20,overlay,0,0
+41pattern2,4005,20,overlay,0,0
+41pattern3,4007,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+
+//29
+47interval,always
+47pattern0,4029,20,overlay,0,0
+47pattern1,4030,20,overlay,0,0
+47pattern2,4029,20,overlay,0,0
+47pattern3,4031,20,overlay,0,0
+
+//37
+49interval,always
+49pattern0,4037,20,overlay,0,0
+49pattern1,4038,20,overlay,0,0
+49pattern2,4037,20,overlay,0,0
+49pattern3,4039,20,overlay,0,0
+}
+
+//Balloon Game window 7 popped
+surface407
+{
+element1,overlay,surface4059.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//5
+41interval,always
+41pattern0,4005,20,overlay,0,0
+41pattern1,4006,20,overlay,0,0
+41pattern2,4005,20,overlay,0,0
+41pattern3,4007,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+
+//37
+49interval,always
+49pattern0,4037,20,overlay,0,0
+49pattern1,4038,20,overlay,0,0
+49pattern2,4037,20,overlay,0,0
+49pattern3,4039,20,overlay,0,0
+}
+
+//Balloon Game window 8 popped
+surface408
+{
+element1,overlay,surface4060.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//5
+41interval,always
+41pattern0,4005,20,overlay,0,0
+41pattern1,4006,20,overlay,0,0
+41pattern2,4005,20,overlay,0,0
+41pattern3,4007,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+}
+
+//Balloon Game window 9 popped
+surface409
+{
+element1,overlay,surface4061.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+
+//25
+46interval,always
+46pattern0,4025,20,overlay,0,0
+46pattern1,4026,20,overlay,0,0
+46pattern2,4025,20,overlay,0,0
+46pattern3,4027,20,overlay,0,0
+}
+
+//Balloon Game window 10 popped
+surface410
+{
+element1,overlay,surface4062.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//9
+42interval,always
+42pattern0,4009,20,overlay,0,0
+42pattern1,4010,20,overlay,0,0
+42pattern2,4009,20,overlay,0,0
+42pattern3,4011,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+}
+
+//Balloon Game window 11 popped
+surface411
+{
+element1,overlay,surface4063.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+
+//21
+45interval,always
+45pattern0,4021,20,overlay,0,0
+45pattern1,4022,20,overlay,0,0
+45pattern2,4021,20,overlay,0,0
+45pattern3,4023,20,overlay,0,0
+}
+
+//Balloon Game window 12 popped
+surface412
+{
+element1,overlay,surface4064.png,0,0	
+	
+//1
+40interval,always
+40pattern0,4001,20,overlay,0,0
+40pattern1,4002,20,overlay,0,0
+40pattern2,4001,20,overlay,0,0
+40pattern3,4003,20,overlay,0,0
+}
+
+//Balloon Game window 13 popped
+surface413
+{
+element1,overlay,surface4000.png,0,0
+}
+
+
+//--The Side Character's poses------------------
+
+//Spectre
+surface40
+{
+	element1,overlay,surface2400.png,0,0
+}
+
+//Spectre hit
+surface41
+{
+	element1,overlay,surface2401.png,0,0
+}
+
+//Spectre fade
+surface42
+{
+	element1,overlay,surface2400.png,0,0	
+
+	40interval,always
+	40pattern0,2402,10,replace,0,0
+	40pattern1,2403,10,replace,0,0
+	40pattern2,2404,10,replace,0,0
+}

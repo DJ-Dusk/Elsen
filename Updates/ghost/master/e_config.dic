@@ -1,0 +1,977 @@
+//Having a seperate .dic file for the config menu does make things a bit more organized...
+
+//If someone selects configmenu, this will lead to TalkConfig.
+Select.configmenu
+	{
+		TalkConfig
+	}
+
+//--TalkConfig
+
+TalkConfig
+{
+	"\0\b[2]\_q\" 
+	--
+	"f[bold,1]\f[color,247,174,41]Your name:\f[bold,0]\f[color,default] %(username) \f[sup,1](\q[Change it?,TEACHNAME])\f[sup,0]\n\n[half]"
+	--
+	"\f[bold,1]\f[color,247,174,41]Your pronouns:\f[bold,0]\f[color,default] %(heshe)/%(himher)/%(hisher) \f[sup,1](\q[Change them?,TEACHPRONOUN])\f[sup,0]\n\n[half]"
+	--
+	"\f[bold,1]\f[color,247,174,41]Talk Rate:\f[bold,0]\f[color,default] every %(talktime) \f[sup,1](\q[Change it,talkinter])\f[sup,0]\n\n[half]"
+	--
+	"\f[bold,1]\f[color,247,174,41]Pause:\f[bold,0]\f[color,default] %(pausestatus) \f[sup,1](\q[Change it,changepause])\f[sup,0]\n\n[half]"
+	--
+	"\f[bold,1]\f[color,247,174,41]Sound Effects:\f[bold,0]\f[color,default] %(sfx) \f[sup,1](\q[Change it,changesfx])\f[sup,0]\n\n[half]"
+	--
+    "\f[bold,1]\f[color,247,174,41]Hour Notifications:\f[bold,0]\f[color,default] %(hournotif) \f[sup,1] (\q[Change it,changehournotif])\f[sup,0]\n\n[half]"	
+	--
+	"\f[bold,1]\f[color,247,174,41]Uninstallation Status:\f[bold,0]\f[color,default] %(deleteshitai) \n\q[ON,deleteon] / \q[OFF,deleteoff]\n\n"
+	--
+	"\f[bold,1]\f[color,247,174,41]\![*]\q[Make a Back-Up,createbackup]\f[bold,0]\f[color,default]\n\n[half]"
+	--
+	"\f[bold,1]\f[color,247,174,41]\![*]\q[Reset,resetelsen]\f[bold,0]\f[color,default]\n\n"
+	--
+	"\![*]\q[Back to the menu,BACKTOMENU]\n\n[half]/
+	\![*]\q[Done,blankCANCEL]\e"
+}
+
+
+Select.TEACHPRONOUN
+{
+	if dedanmode == "ON"
+	{
+		"\b[4]*Dedan literally couldn't care less right now about that. \w8Sorry.*\e"
+	}
+	elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*It's pointless now.*\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"\0\s[16]You... \w4want to change pronouns...? \w9What to...?\w5"
+	}
+	else
+	{
+		"\0\s[1]O-oh, \w4you want to change your pronouns? \w8\0\s[7]Okay, \w4what to?\w5"
+	}
+	--
+	"\n\n[half]\_q/
+	\![*]\q[He-His-Him,choicemasc]\n/
+	\![*]\q[She-Her-Her,choicefem]\n/	
+	\![*]\q[They-Their-Them,choiceneither]\n/
+	\![*]\q[I have my own,choiceunique]\n\n/
+	\![*]\q[Back to config menu,configmenu]\e"
+}
+
+Select.choicemasc
+{
+	presuffix = "masculine"
+	himher = "him"
+	heshe = "he"
+	hisher = "his"
+	--
+	if sugarlevel < 40
+	{
+		"\0\s[16]Okay... \w8you're now he,\w4 him,\w4 and his...\e"
+	}
+	else
+	{
+		"\0\s[8]...\w8\w8\0\s[7]Okay, \w4your pronouns are now he,\w4 him,\w4 and his.\e"
+	}
+}
+
+Select.choicefem
+{
+	presuffix = "feminine"
+	himher = "her"
+	heshe = "she"
+	hisher = "her"
+	--
+	if sugarlevel < 40
+	{
+		"\0\s[16]Okay... \w8you're now she,\w4 her,\w4 and her...\e"
+	}
+	else
+	{
+		"\0\s[8]...\w8\w8\0\s[7]Okay, \w4your pronouns are now she,\w4 her,\w4 and her.\e"
+	}
+}
+
+Select.choiceneither
+{
+	presuffix = "undefine"
+	himher = "them"
+	heshe = "they"
+	hisher = "their"
+	--
+	if sugarlevel < 40
+	{
+		"\0\s[16]Okay... \w8you're now they,\w4 them,\w4 and their...\e"
+	}
+	else
+	{
+		"\0\s[8]...\w8\w8\0\s[7]Okay, \w4your pronouns are now they,\w4 them,\w4 and their.\e"
+	}
+}
+
+//-----
+
+Select.choiceunique
+{
+	OnUniquePronouns
+}
+
+OnUniquePronouns
+{
+	if sugarlevel < 40
+	{
+		"\0\s[16]Alright... \w8What do you want for him/her...?\![open,inputbox,OnHimHerTeach,-1]"
+	}
+	else
+	{
+		"\0\s[7]Okay! \w8What d-do you want for him/her?\![open,inputbox,OnHimHerTeach,-1]"
+	}
+}
+
+OnHimHerTeach
+{
+	himher = reference0
+	--
+	if reference0 == "" || reference0 == " " || reference0 == "   "
+	{
+		himher = "hir"
+	}
+	--
+	OnUniquePronouns2
+}
+
+OnUniquePronouns2
+{
+	if sugarlevel < 40
+	{
+		"\0\s[16]Alright... \w8What do you want for he/she...?\![open,inputbox,OnHeSheTeach,-1]"
+	}
+	else
+	{
+		"\0\s[8]...\w8\w8\0\s[7]Okay! \w8And what do you want for he/she?\![open,inputbox,OnHeSheTeach,-1]"
+	}
+}
+
+OnHeSheTeach
+{
+	heshe = reference0
+	--
+	if reference0 == "" || reference0 == " " || reference0 == "   "
+	{
+		heshe = "zie"
+	}
+	--
+	OnUniquePronouns3
+}
+
+OnUniquePronouns3
+{
+	if sugarlevel < 40
+	{
+		"\0\s[16]Alright... \w8What do you want for his/her...?\![open,inputbox,OnHisHerTeach,-1]"
+	}
+	else
+	{
+		"\0\s[8]...\w8\w8\0\s[7]Okay! \w8And f-for his/her?\![open,inputbox,OnHisHerTeach,-1]"
+	}
+}
+
+OnHisHerTeach
+{
+	hisher = reference0
+	--
+	if reference0 == "" || reference0 == " " || reference0 == "   "
+	{
+		hisher = "hirs"
+	}
+	--
+	OnPronounDone
+}
+
+OnPronounDone
+{
+	if sugarlevel < 40
+	{
+		"\0\s[16]Okay... \w8you're now %(heshe),\w4 %(himher),\w4 and (hisher)...\e"
+	}
+	else
+	{
+		"\0\s[8]...\w8\w8\0\s[7]Okay, \w4your pronouns are now %(heshe),\w4 %(himher),\w4 and %(hisher).\e"
+	}
+}
+
+//-----
+
+Select.deleteon
+{
+	deleteshitai = "ON"
+	TalkConfig
+}
+
+Select.deleteoff
+{
+	deleteshitai = "OFF"
+	TalkConfig
+}
+
+//BACKUP
+
+Select.createbackup
+{
+	"\b[2]\_q*In the event that something goes wrong, you can make a back up of all your progress. That way you can use that copy to continue playing with the Elsen and keep all the progress that \nyou've made.*\n\n*If you see a 1 or 'Done.' message, that means it was successful. To find your backup copy, go to the Elsen's ghost > master > backup folder.*\n\n"
+	--
+	"\![*]\q[Make it!,makebackup]\n\n[half]/
+	\![*]\q[Nevermind,configmenu]\e"
+}
+
+Select.makebackup
+{
+	MKDIR ("backup")
+	FCOPY ("aya5_variable.cfg","\backup")
+	
+	"*Done.*\e"
+}
+
+//HOUR NOTIF
+
+Select.changehournotif
+{
+	"\b[2]\_q*Each hour, the Elsen will notify you what time it now is. If you want, you can disable it so he no longer tells you.*\n\n*Right now hour notifications are \f[color,247,174,41]%(hournotif)\f[color,default].*\n\n"
+	--
+	if hournotif == "ON"
+	{
+		"*Turn the hour notifications OFF?*\n\n"
+		--
+		"\![*]\q[Yes,turnoffhournotif]\n\n[half]/
+		\![*]\q[Back to config menu,configmenu]"
+	}
+	elseif hournotif == "OFF"
+	{
+		"*Turn the hour notifications ON?\n\n"
+		--
+		"\![*]\q[Yes,turnonhournotif]\n\n[half]/
+		\![*]\q[Back to config menu,configmenu]"
+	}
+}
+
+Select.turnoffhournotif
+{
+	hournotif = "OFF"
+	
+	"*The hour notifcations are now OFF, \w4and you will no longer recieve them.*\n\n"
+	--
+	"\![*]\q[Back to config menu,configmenu]\n\n[half]/
+	\![*]\q[Done,blankCANCEL]\e"	
+}
+
+Select.turnonhournotif
+{
+	hournotif = "ON"
+	
+	"*The hour notifcations are now ON, \w4and you will recieve them every hour.*\n\n"
+	--
+	"\![*]\q[Back to config menu,configmenu]\n\n[half]/
+	\![*]\q[Done,blankCANCEL]\e"	
+}
+
+//--Talk Rate
+
+Select.talkinter
+ 	{
+		if dedanmode == "ON"
+		{
+			"\0\s[30]\b2*Dedan's most likely not going to change it for you, \w4so you must do it yourself. \w8The interval is currently at %(talktime)."
+		}
+		elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+		{
+			"*This Elsen can't talk anymore.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]\b2How... \w4often should I speak...?"
+		}
+		else
+		{
+			"\0\s[1]\b2You... \w4w-want to change how often I speak? \w8Okay... \w8\0\s[7]The interval is currently set to %(talktime), \w4what should it be?"
+		}
+		--
+ 		"\0\n\n[half]/
+ 		\![*]\q[Every 30 seconds,TALKMAX]\n/
+		\![*]\q[Every minute,TALKHIGH]\n/
+ 		\![*]\q[Every 3 minutes,TALKNORMAL]\n/
+		\![*]\q[Every 5 minutes,TALKPOOR]\n/
+ 		\![*]\q[Don't speak,TALKNONE]\n\n[half]/
+		\![*]\q[Don't change,TalksTill]\n\n/
+		\![*]\q[Back to config menu,configmenu]\e"
+	}
+
+Select.TalksTill
+	{
+		if dedanmode == "ON"
+		{
+			"\b[4]*The interval has not been changed.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]No change then...\e"
+		}
+		else
+		{
+			"\0\s[7]Ah, \w4changed your mind? \w8\0\s[6]Okay, \w4no changes then.\e"
+		}
+	}
+
+//If the user chooses every 30 seconds.
+Select.TALKMAX
+	{
+ 		talktime = "30 seconds" //this sets up the envelope properly
+		aitalkinterval = 45 //this changes the actual rate
+		
+		if dedanmode == "ON"
+		{
+			"\b[4]*The interval has been changed to every 30 seconds.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]Every 30 seconds then... \w8I'll talk...\e"
+		}
+ 		else
+		{
+			"\0\s[8]...\w8\w8\0\s[7]Okay, \w4I'll talk every 30 seconds then. \w8That's... \w4a-a lot...\e"
+		}
+	}
+
+//If the user chooses every minute.
+Select.TALKHIGH
+	{
+ 		talktime = "minute"
+		aitalkinterval = 90
+		
+ 		if dedanmode == "ON"
+		{
+			"\b[4]*The interval has been changed to every minute.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]Every minute then... \w8I'll talk...\e"
+		}
+ 		else
+		{
+			"\0\s[8]...\w8\w8\0\s[7]Okay, \w4I'll talk every minute then.\e"
+		}
+	}
+
+//If the user chooses every three minutes.
+Select.TALKNORMAL
+	{
+ 		talktime = "3 minutes"
+		aitalkinterval = 270
+		
+ 		if dedanmode == "ON"
+		{
+			"\b[4]*The interval has been changed to every 3 minutes.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]Every 3 minutes then... \w8I'll talk...\e"
+		}
+ 		else
+		{
+			"\0\s[8]...\w8\w8\0\s[7]Okay, \w4I'll talk every 3 minutes then.\e"
+		}
+	}
+
+//If the user chooses every five minutes. This is the default rate the ghost will start up in, as seen in bootend.dic.
+Select.TALKPOOR
+	{
+ 		talktime = "5 minutes"
+		aitalkinterval = 400
+		
+ 		if dedanmode == "ON"
+		{
+			"\b[4]*The interval has been changed to every 5 minutes.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]Every 5 minutes then... \w8I'll talk...\e"
+		}
+ 		else
+		{
+			"\0\s[8]...\w8\w8\0\s[7]Okay, \w4I'll talk every 5 minutes then.\e"
+		}
+	}
+
+//If the user chooses to not have them speak. This is one case where you MIGHT want to make talktime equal something else, if you have a snappier way of saying the ghost won't talk. Make sure it flows well in your menus though, since it will be displayed in your config menu.
+Select.TALKNONE
+	{
+ 		talktime = "never"
+		aitalkinterval = 0
+		
+		if dedanmode == "ON"
+		{
+			"\b[4]*The interval has been changed to cease entirely.*\e"
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]I... \w4won't talk then...\e"
+		}
+ 		else
+		{
+			"\0\s[8]...\w8\w8\0\s[7]Okay, \w4I won't talk at all then. \w8I-I'll still say things when prompted, \w4however.\e"
+		}
+	}
+
+	
+//This is when the user chooses to change their name. It's linked to the functions outlined in nameteach.dic. Nothing to touch here.
+Select.TEACHNAME
+	{
+		OnTeachName	
+	}
+
+	
+//If the user selects cancel in a menu. Replace as you like, or just leave them blank.
+Select.CANCEL
+	{
+		if dedanmode == "ON"
+		{
+			"\0\s[30]\b[4]Hmph.\e"
+		}
+		elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+		{
+			""
+		}
+		elseif sugarlevel < 40
+		{
+			"\0\s[16]Hh...\e"
+		}
+		else
+		{
+			"\0\s[1]A-alright...\e"
+		}
+ 	}
+
+//PAUSE
+Select.changepause
+{
+	if dedanmode == "ON"
+	{
+		"\b[4]*No need to pause when Dedan's here - \w8nothing can progress without the Elsen.*\e"
+	}
+	else
+	{
+		"\b[2]\_q*If you are pre-occupied with something and want to keep the Elsen open, but don't want to have to tend to his needs - or perhaps just don't want to deal with his needs at all, you can pause them here.*\n\n[half]*However, you will no longer gain Credits when paused. Also note that pausing will not set him to normal - it will just freeze everything in place.*\n\n*Pause status is currently \f[color,247,174,41]%(pausestatus)\f[color,default]*\n\n"
+		--
+		{
+			if pausestatus == "OFF"
+			{
+				"Turn pause status ON?\n\n"
+				--
+				"\![*]\q[Yes,turnpauseON]\n\n[half]/
+				\![*]\q[Back to config menu,configmenu]"
+			}
+			elseif pausestatus == "ON"
+			{
+				"Turn pause status OFF?\n\n"
+				--
+				"\![*]\q[Yes,turnpauseOFF]\n\n[half]/
+				\![*]\q[Back to config menu,configmenu]"
+			}
+		}
+	}
+}
+
+Select.turnpauseON
+{
+	pausestatus = "ON"
+	
+	"\b[2]\_q*Pause status is now ON. The Elsen will no longer grow more hungry, stressed, or sugar deprived whilst he is paused - and you no longer will gain Credits.*\n\n[half]*You are still allowed to feed and interact with him, however, but he won't gain anything from it.*\n\n"
+	--
+	"\![*]\q[Back to config menu,configmenu]\n\n[half]/
+	\![*]\q[Done,blankCANCEL]\e"	
+}
+
+Select.turnpauseOFF
+{
+	pausestatus = "OFF"
+	
+	"\b[2]\_q*Pause status is now OFF. \The Elsen will go back to growing more hungry, stressed, and sugar deprived - and you'll gain Credits, as usual.*\n\n"
+	--
+	"\![*]\q[Back to config menu,configmenu]\n\n[half]/
+	\![*]\q[Done,blankCANCEL]\e"	
+}
+
+
+//SFX
+
+Select.changesfx
+{
+	"\b[2]\_q*This is mainly for the Balloon Game when the balloon pops. It plays a basic popping sound, but some still may find the sound to be annoying or perhaps even triggering, so you can turn it off here.*\n\n*Sound effects are currently \f[color,247,174,41]%(sfx)\f[color,default]*\n\n"
+	--
+	{
+		if sfx == "OFF"
+		{
+			"Turn sound effects ON?\n\n"
+			--
+			"\![*]\q[Yes,turnsfxON]\n\n[half]/
+			\![*]\q[Back to config menu,configmenu]"
+		}
+		elseif sfx == "ON"
+		{
+			"Turn sound effects OFF?\n\n"
+			--
+			"\![*]\q[Yes,turnsfxOFF]\n\n[half]/
+			\![*]\q[Back to config menu,configmenu]"
+		}
+	}
+}
+
+Select.turnsfxON
+{
+	sfx = "ON"
+	
+	"*Sound effects are now ON, \w4and will play the popping sound during the Balloon Game.*\n\n"
+	--
+	"\![*]\q[Back to config menu,configmenu]\n\n[half]/
+	\![*]\q[Done,blankCANCEL]\e"	
+}
+
+Select.turnsfxOFF
+{
+	sfx = "OFF"
+	
+	"*Sound effects are now OFF, \w4and will not play the popping sound during the Balloon Game.*\n\n"
+	--
+	"\![*]\q[Back to config menu,configmenu]\n\n[half]/
+	\![*]\q[Done,blankCANCEL]\e"	
+}
+
+//---------------------
+//Gonna shove testing things in here as well to make the menu easier to traverse
+
+//STATS
+//Behind the scenes testing stats and normal stats
+//Will disable debug stats upon release
+Select.stats
+{
+	if statdebug == 1
+	{
+		"\b[2]\_q*You've given the Elsen meat %(gavemeat) time(s)\n\n[half]/
+		*You've given the Elsen sugar %(gavesugar) time(s)\n\n[half]/
+		*Sugar levels are at %(sugarlevel)\n\n[half]/
+		*Stress levels are at %(stresslevel)"
+		--
+		if gotleocard == 1
+		{
+			"\n\n[half]*You have a Leo Card"
+		}
+		--
+		if dedanseen == 1
+		{
+			"\n\n[half]*You have seen Dedan"
+		}
+		--
+		if spectreencountered == 1
+		{
+			"\n\n[half]*You have encountered a Spectre"
+		}
+		--
+		if dedanmode == "ON"
+		{
+			"\n\n[half]*Dedanpoints are at %(dedanpoints)"
+		}
+		--
+		"\n\n[half]*Dedan mode is %(dedanmode)\n\n[half]/
+		*Spectre mode is %(spectremode)\n\n[half]/
+		*Pause status is %(pausestatus)\n\n/
+		\![*]\q[Switch to release stats,statswitch2]\n\n[half]/
+		\![*]\q[Back to main menu,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+	else
+	{
+		"\b[2]\_q*You have \f[color,247,174,41]%(credits) Credits\f[color,default]\n\n[half]/
+		*You have \f[color,247,174,41]%(molochsmeat) Moloch's Meat\f[color,default]\n\n[half]/
+		*You have \f[color,247,174,41]%(belialsmeat) Belial's Meat\f[color,default]\n\n[half]/
+		*You have \f[color,247,174,41]%(abaddonsmeat) Abaddon's Meat\f[color,default]\n\n[half]/
+		*You have \f[color,247,174,41]%(sugar) Sugar\f[color,default]\n\n/
+		*You've petted the Elsen \f[color,247,174,41]%(elsenpets) times\f[color,default]\n\n[half]/
+	    *You've booped the Elsen \f[color,247,174,41]%(elsenpokes) times\f[color,default]\n\n/
+		*Time spent open: \f[color,247,174,41]%(passhour):%(passmin)\f[color,default]\n\n[half]/
+		*Hours spent in total: \f[color,247,174,41]%(cumuhour)\f[color,default]"
+		--
+		if pausestatus == "ON"
+		{
+			"\n\n*The Elsen is currently \f[color,247,174,41]PAUSED\f[color,default]"
+		}
+		--
+	//	"\n\n\![*]\q[Switch to debug stats,statswitch1]\n\n[half]/
+		"\n\n\![*]\q[Back to main menu,BACKTOMENU]\n\n[half]/
+		\![*]\q[Done,blankCANCEL]\e"
+	}
+}
+
+Select.statswitch1
+{
+	statdebug = 1
+	
+	"\b[2]\_q*You've given the Elsen meat %(gavemeat) time(s)\n\n[half]/
+	*You've given the Elsen sugar %(gavesugar) time(s)\n\n[half]/
+	*Sugar levels are at %(sugarlevel)\n\n[half]/
+	*Stress levels are at %(stresslevel)"
+	--
+	if sugarsequence == 1
+	{
+		"\n\n[half]*The Elsen has gone sugar deprived"
+	}
+	--
+	if gotleocard == 1
+	{
+		"\n\n[half]*You have a Leo Card"
+	}
+	--
+	if dedanseen == 1
+	{
+		"\n\n[half]*You have seen Dedan"
+	}
+	--
+	if spectreencountered == 1
+	{
+		"\n\n[half]*You have encountered a Spectre"
+	}
+	--
+	if dedanmode == "ON"
+	{
+		"\n\n[half]*Dedanpoints are at %(dedanpoints)"
+	}
+	--
+	"\n\n[half]*Dedan mode is %(dedanmode)\n\n[half]/
+	*Spectre mode is %(spectremode)\n\n[half]/
+	*Pause status is %(pausestatus)\n\n/
+	\![*]\q[Switch to release stats,statswitch2]\n\n[half]/
+	\![*]\q[Back to main menu,BACKTOMENU]\n\n[half]/
+	\![*]\q[Done,blankCANCEL]\e"
+}
+
+Select.statswitch2
+{
+	statdebug = 0
+	
+	"\b[2]\_q*You have \f[color,247,174,41]%(credits) Credits\f[color,default]\n\n[half]/
+	*You have \f[color,247,174,41]%(molochsmeat) Moloch's Meat\f[color,default]\n\n[half]/
+	*You have \f[color,247,174,41]%(belialsmeat) Belial's Meat\f[color,default]\n\n[half]/
+	*You have \f[color,247,174,41]%(abaddonsmeat) Abaddon's Meat\f[color,default]\n\n[half]/
+	*You have \f[color,247,174,41]%(sugar) Sugar\f[color,default]\n\n/
+	*You've petted the Elsen \f[color,247,174,41]%(elsenpets) times\f[color,default]\n\n[half]/
+	*You've booped the Elsen \f[color,247,174,41]%(elsenpokes) times\f[color,default]\n\n/
+	*Time spent open: \f[color,247,174,41]%(passhour):%(passmin)\f[color,default]\n\n[half]/
+	*Hours spent in total: \f[color,247,174,41]%(cumuhour)\f[color,default]"
+	--
+	if pausestatus == "ON"
+	{
+		"\n\n*The Elsen is currently \f[color,247,174,41]PAUSED\f[color,default]"
+	}
+	--
+//	"\n\n\![*]\q[Switch to debug stats,statswitch1]\n\n[half]/
+	"\n\n![*]\q[Back to main menu,BACKTOMENU]\n\n[half]/
+	\![*]\q[Done,blankCANCEL]\e"
+}
+
+//---------------------
+
+//REFRESH
+//Refreshes all values to 0 and turns all modes OFF for testing
+Select.refresh
+{
+	SetValues
+	
+	"\0\s[0]Done.\e"
+}
+
+//---------------------
+
+//MODIFY
+//Modifies values and modes for testing
+//gods I told myself I wouldn't do this again but here we are
+Select.modify
+{
+	"\b[2]\_qModify what?\n\n"
+	--
+	"\![*]\q[Stress level by 10,modifystress10]\n\n[half]/
+	\![*]\q[Stress level by 60,modifystress60]\n\n[half]/
+	\![*]\q[Sugarlevel by 20,modifysugar]\n\n[half]/
+	\![*]\q[Credits by 100,modifycredits]\n\n[half]/
+	\![*]\q[Dedanpoints by 5,modifydedanpoints]\n\n[half]/
+	\![*]\q[Give object,modifyobject]\n\n[half]/
+	\![*]\q[Dedan Mode,modifydedanmode]\n\n[half]/
+	\![*]\q[Dusk name,modifyduskname]\n\n[half]/
+	\![*]\q[Test,testvariable]\n\n[half]/
+	\![*]\q[Refresh,refresh]\n\n/
+	\![*]\q[Back,BACKTOMENU]\n\n[half]/
+	\![*]\q[Nevermind,blankCANCEL]\e"
+}
+
+//----------
+
+Select.testvariable
+{
+	hournotif = "ON"
+}
+
+
+Select.modifystress10
+{
+	stresslevel += 10
+	
+	"Stress level as been increased by 10, now at %(stresslevel).\n\n"
+	--
+	"\![*]\q[Again?,modifystress10]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+Select.modifystress60
+{
+	stresslevel += 60
+	
+	"Stress level as been increased by 60, now at %(stresslevel).\n\n"
+	--
+	"\![*]\q[Again?,modifystress60]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+//----------
+
+Select.modifysugar
+{
+	"\![*]\q[Increase,increasesugar]\n\n[half]/
+	\![*]\q[Decrease,decreasesugar]\n\n/
+	\![*]\q[Back,BACKTOMENU]\n\n[half]/
+	\![*]\q[Nevermind,blankCANCEL]\e"
+}
+
+Select.increasesugar
+{
+	sugarlevel += 20
+	
+	"Sugarlevel has been increased by 20, now at %(sugarlevel).\n\n"
+	--
+	"\![*]\q[Again?,increasesugar]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+Select.decreasesugar
+{
+	sugarlevel -= 20
+	
+	"Sugarlevel has been decreased by 20, now at %(sugarlevel).\n\n"
+	--
+	"\![*]\q[Again?,decreasesugar]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+//----------
+//CREDITS
+
+Select.modifycredits
+{
+	credits += 100
+	
+	"100 Credits have been acquired, now at %(credits).\n\n"
+	--
+	"\![*]\q[Again?,modifycredits]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+//----------
+//DEDANPOINTS
+
+Select.modifydedanpoints
+{
+	dedanpoints += 5
+	
+	"Dedanpoints are now at %(dedanpoints).\n\n"
+	--
+	"\![*]\q[Again?,modifydedanpoints]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+//----------
+//OBJECTS
+Select.modifyobject
+{
+	"\b[2]\![*]\q[Moloch's Meat,modifymomeat]\n\n[half]/
+	\![*]\q[Belial's Meat,modifybmeat]\n\n[half]/
+	\![*]\q[Abaddon's Meat,modifyameat]\n\n[half]/
+	\![*]\q[Sugar,modifyobjsugar]\n\n[half]/
+	\![*]\q[Hardhat,modifyhardhat]\n\n[half]/
+	\![*]\q[Music Box,modifymusicbox]\n\n[half]/
+	\![*]\q[Cow Plush,modifycowplush]\n\n[half]/
+	\![*]\q[Leo Card,modifyleocard]\n\n[half]/
+	\![*]\q[Stopwatch,modifystopwatch]\n\n/
+	\![*]\q[Back,BACKTOMENU]\n\n[half]/
+	\![*]\q[Nevermind,blankCANCEL]\e"
+}
+
+Select.modifymomeat
+{
+	molochsmeat += 1
+	
+	"1 Moloch's Meat has been given, now at %(molochsmeat).\n\n"
+	--
+	"\![*]\q[Again?,modifymomeat]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+Select.modifybmeat
+{
+	belialsmeat += 1
+	
+	"1 Belial's Meat has been given, now at %(belialsmeat).\n\n"
+	--
+	"\![*]\q[Again?,modifybmeat]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+Select.modifyameat
+{
+	abaddonsmeat += 1
+	
+	"1 Abaddon's Meat has been given, now at %(abaddonsmeat).\n\n"
+	--
+	"\![*]\q[Again?,modifyameat]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+Select.modifyobjsugar
+{
+	sugar += 1
+	
+	"1 Sugar has been given, now at %(sugar).\n\n"
+	--
+	"\![*]\q[Again?,modifyobjsugar]\n\n[half]/
+	\![*]\q[No,blankCANCEL]\e"
+}
+
+Select.modifyhardhat
+{
+	gothardhat = 1
+	
+	"Hardhat has been given.\e"
+}
+
+Select.modifymusicbox
+{
+	gotmusicbox = 1
+	
+	"Music Box has been given.\e"
+}
+
+Select.modifycowplush
+{
+	gotcow = 1
+	
+	"Cow Plush has been given.\e"
+}
+
+Select.modifyleocard
+{
+	gotleocard = 1
+	
+	"Leo Card has been given.\e"
+}
+
+Select.modifystopwatch
+{
+	gotstopwatch = 1
+	
+	"Stopwatch has been given.\e"
+}
+
+//----------
+//DEDAN MODE
+
+Select.modifydedanmode
+{
+	if dedanmode == "OFF"
+	{
+		"Turn Dedan mode ON?\n\n"
+		--
+		"\![*]\q[Yes,turndedanmodeon]\n\n[half]/
+		\![*]\q[No,blankCANCEL]\e"
+	}
+	elseif dedanmode == "ON"
+	{
+		"Turn Dedan mode OFF?\n\n"
+		--
+		"\![*]\q[Yes,turndedanmodeoff]\n\n[half]/
+		\![*]\q[No,blankCANCEL]\e"
+	}
+}
+
+Select.turndedanmodeon
+{
+	dedanmode = "ON"
+	pausestatus = "ON"
+	dedanseen = 1
+	
+	"\0\s[30]\b[4]What the fuck do you want??\e"
+}
+
+Select.turndedanmodeoff
+{
+	dedanmode = "OFF"
+	dedanseen = 0
+	
+	"\0\s[0]Done.\e"
+}
+
+//----------
+Select.modifyduskname
+{
+	duskname = 1
+	username = "Dusk"
+	
+	"\0\s[0]Done. \w8Your name is now %(username).\e"
+}
+
+
+//---------------------
+//RESET
+//This resets the Elsen - mainly for post Burnt status. Not too unlike refreshing, but it's not for testing and there are penalties
+
+Select.resetelsen
+{
+	"\b[2]\_q*If you failed to take care of the Elsen and he can no longer be saved, you may reset him. This will bring him back to a normal state, but you'll lose all of your Credits. However, you will have all the items you bought before the reset.*\n\n[half]*If you reset the Elsen, he may get more easily stresed than before, and you'll gain less Credits hourly.*\n\n[half]*Reset the Elsen?*\n\n"
+	--
+	"\![*]\q[Yes,reset]\n\n[half]/
+	\![*]\q[Nevermind,configmenu]\e"
+}
+
+Select.reset
+{
+	if burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		wasburnt = 1
+	}
+	--
+	burntstatus = "normal"
+	pausestatus = "OFF"
+	gamewon = 0
+	spectreattack = 0
+	spectreencountered = 0
+	burntsequence = 0
+	sugarsequence = 0
+	sugarlevel = 40
+	stresslevel = 0
+	gavesugar = 0
+	gavemeat = 0
+	credits = 0
+	elsenpets = 0
+	elsenpokes = 0
+	reset = 1
+	--
+	"\0\s[0]*The Elsen has been reset. \w8You have also been unpaused.*\w8\w8\n\n*Take proper care of the Elsen this time.*\e"
+}

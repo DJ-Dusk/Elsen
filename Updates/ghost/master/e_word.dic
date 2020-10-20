@@ -1,0 +1,372 @@
+﻿SetValues //instead of having a bunch a' shit on the bootend, I'm just throwin' 'em all here
+{
+	burntstatus = "normal"
+	pausestatus = "OFF"
+	sfx = "ON"
+	hournotif = "ON"
+	spectremode = "OFF"
+	dedanmode = "OFF"
+	dedanpoints = 0
+	dedanseen = 0
+	dedanleft = 0
+	gottiredofyourshit = 0
+	cumuhour = 0
+	statdebug = 0
+	uninstalled = 0
+	gamewon = 0
+	spectreattack = 0
+	spectreencountered = 0
+	burntsequence = 0
+	sugarsequence = 0
+	sugarlevel = 40
+	stresslevel = 0
+	gavesugar = 0
+	gavemeat = 0
+	credits = 0
+	molochsmeat = 0
+	belialsmeat = 0
+	abaddonsmeat = 0
+	sugar = 0
+	gothardhat = 0
+	gotmusicbox = 0
+	gotleocard = 0
+	gotcow = 0
+	gotstopwatch = 0
+	hardhat = 0
+	playwithcow = 0
+	elsenpets = 0
+	elsenpokes = 0
+	duskname = 0
+	reset = 0
+	wasburnt = 0
+}
+
+idle
+{
+	"\0\s[0]"
+	"\0\s[4]"
+	"\0\s[5]"
+	"\0\s[8]"
+}
+
+pop
+{
+	if sfx == "ON"
+	{
+		"\_v[mp3\Baloon.wav]"
+	}
+	elseif sfx == "OFF"
+	{
+		""
+	}
+}
+
+prizelist
+{
+	"molochsmeat"
+	"belialsmeat"
+	"abaddonsmeat"
+	"sugar"
+	"credits1"
+	"credits2"
+}
+
+prize
+{
+	case prizelist
+	{
+		when "molochsmeat"
+		{
+			molochsmeat += 1
+			
+			"*A Moloch's Meat has been acquired!*"
+		}
+		when "belialsmeat"
+		{
+			belialsmeat += 1
+			
+			"*A Belial's Meat has been acquired!*"
+		}
+		when "abaddonsmeat"
+		{
+			abaddonsmeat += 1
+			
+			"*An Abaddon's Meat has been acquired!*"
+		}
+		when "sugar"
+		{
+			sugar += 1
+			
+			"*One Sugar has been acquired!*"
+		}
+		when "credits1"
+		{
+			credits += 25
+			
+			"*25 Credits have been acquired!*"
+		}
+		when "credits2"
+		{
+			credits += 50
+			
+			"*50 Credits have been acquired!*"
+		}
+	}
+}
+
+
+//BALLOONS
+
+bone
+{
+	balloon1 = 1
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[401]"
+}
+
+btwo
+{
+	balloon1 = 0
+	balloon2 = 1
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[402]"
+}
+
+bthree
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 1
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[403]"
+}
+
+bfour
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 1
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[404]"
+}
+
+bfive
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 1
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[405]"
+}
+
+bsix
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 1
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[406]"
+}
+
+bseven
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 1
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[407]"
+}
+beight
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 1
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[408]"
+}
+
+bnine
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 1
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[409]"
+}
+
+bten
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 1
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[410]"
+}
+
+beleven
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 1
+	balloon12 = 0
+	balloon13 = 0
+	
+	"\p[3]\s[411]"
+}
+
+btwelve
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 1
+	balloon13 = 0
+	
+	"\p[3]\s[412]"
+}
+
+bthirteen
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 1
+	
+	"\p[3]\s[413]"
+}
+
+ //**** Don't touch this ***************************************************************
+ //This is code stuff and nothing for you to worry about, just save the .dic and move on! You're done!
+ 
+ On_\person
+{
+ 	person
+}

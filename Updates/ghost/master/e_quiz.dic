@@ -1,0 +1,743 @@
+//QUIZ!
+//This here is just a fun lil thing I wanted to do. Basically it's a quiz of all sorts of OFF trivia - some questions are easy, and some are for the really hardcore guys. This is also an extra way to gain a small amount of credits
+
+Select.quiztime
+{
+	if dedanmode == "ON"
+	{
+		"\b[4]*Now is really not the time to do a quiz.*\e"
+	}
+	elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*There's no point now.*\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"*He doesn't look in the mood to do any sort of quiz...*\e"
+	}
+	else
+	{
+		"\b[2]\_q*This here is a fun quiz minigame you can do to earn a few Credits quickly. Get them right, you'll get 5 Credits, but if you get them wrong, you'll lose 5 Credits.*\n\n[half]*The questions are all OFF related and you'll get multiple choice answers - and some questions are harder than others for those without OFF knowledge. The Elsen will ask random questions and you can stop whenever.*"
+		--
+		if pausestatus == "ON"
+		{
+			"\n\n[half]*You are currently \f[color,247,174,41]PAUSED\f[color,default], which means you will not gain/lose Credits from this.*"
+		}
+		--
+		"\n\n[half]*Would you like to start the quiz?*\n\n"
+		--
+		"\![*]\q[Yes!,commencequiz]\n\n[half]/
+		\![*]\q[Back to menu,BACKTOMENU]\e"
+	}
+}
+
+Select.commencequiz
+{
+	"%(question)"
+}
+
+//--------------------
+
+//THE QUESTIONS
+
+Select.wronganswer
+{
+	if pausestatus == "OFF"
+	{
+		if credits <= 5
+		{
+			credits = 0
+		}
+		else
+		{
+			credits -= 5
+		}
+	}
+	--
+	"\0\s[8]\w8\w8\0\s[7]Wrong answer! \w8\0\s[6]Sorry.\w8\w8\c%(question)"
+}
+
+Select.rightanswer
+{
+	if pausestatus == "OFF"
+	{
+		credits += 5
+	}
+	--
+	"\0\s[8]\w8\w8\0\s[7]Correct answer! \w8\0\s[6]Next one.\w8\w8\c%(question)"
+}
+
+QuizReturn
+{
+	"\n\n\![*]\q[Stop the quiz,cancelquiz]\e"
+}
+
+questionlist
+{
+	"1"
+	"2"
+	"3"
+	"4"
+	"5"
+	"6"
+	"7"
+	"8"
+	"9"
+	"10"
+	"11"
+	"12"
+	"13"
+	"14"
+	"15"
+	"16"
+	"17"
+	"18"
+	"19"
+	"20"
+	"21"
+	"22"
+	"23"
+	"24"
+	"25"
+	"26"
+	"27"
+	"28"
+	"29"
+	"30"
+	"31"
+	"32"
+	"33"
+	"34"
+	"35"
+	"36"
+	"37"
+	"38"
+	"39"
+	"40"
+	"41"
+	"42"
+	"43"
+	"44"
+	"45"
+	"46"
+	"47"
+	"48"
+	"49"
+	"50"
+	"51"
+	"52"
+	"53"
+	"54"
+	"55"
+	"56"
+	"57"
+	"58"
+	"59"
+	"60"
+}
+
+question //honestly I thought this code would be much more complicated to understand but it's actually kinda simple...
+{
+	case questionlist //uses the questionlist from above for values
+	{
+		when "1" //if it chooses "1"
+		{
+			"\0\s[7]\b[3]Who is the creator of OFF?\w8\n\n"
+			--
+			"\![*]\q[Alias Conrad Coldwood,wronganswer]\n\n[half]/
+			\![*]\q[Toby Fox,wronganswer]\n\n[half]/
+			\![*]\q[Mortis Ghost,rightanswer]\n\n[half]/
+			\![*]\q[Hugo,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "2"
+		{
+			"\0\s[7]\b[3]Who do you play as in OFF?\w8\n\n"
+			--
+			"\![*]\q[The Ballman,wronganswer]\n\n[half]/
+			\![*]\q[The Batter,rightanswer]\n\n[half]/
+			\![*]\q[The Boxxer,wronganswer]\n\n[half]/
+			\![*]\q[The Judge,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "3"
+		{
+			"\0\s[7]\b[3]Who created the soundtrack to OFF?\w8\n\n"
+			--
+			"\![*]\q[Alias Conrad Coldwood,rightanswer]\n\n[half]/
+			\![*]\q[Mortis Ghost,wronganswer]\n\n[half]/
+			\![*]\q[Kevin Macleod,wronganswer]\n\n[half]/
+			\![*]\q[It was all RPG Source Free music,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "4"
+		{
+			"\0\s[7]\b[3]What year was OFF created?\w8\n\n"
+			--
+			"\![*]\q[2005,wronganswer]\n\n[half]/
+			\![*]\q[2006,wronganswer]\n\n[half]/
+			\![*]\q[2007,wronganswer]\n\n[half]/
+			\![*]\q[2008,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "5"
+		{
+			"\0\s[7]\b[3]How many Zones are there in total?\w8\n\n"
+			--
+			"\![*]\q[3,wronganswer]\n\n[half]/
+			\![*]\q[4,wronganswer]\n\n[half]/
+			\![*]\q[5,rightanswer]\n\n[half]/
+			\![*]\q[6,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "6"
+		{
+			"\0\s[7]\b[3]Which Zodiac Card does Enoch give you?\w8\n\n"
+			--
+			"\![*]\q[Cancer-card,wronganswer]\n\n[half]/
+			\![*]\q[Aquarius-card,rightanswer]\n\n[half]/
+			\![*]\q[Leo-card,wronganswer]\n\n[half]/
+			\![*]\q[Pisces-card,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "7"
+		{
+			"\0\s[7]\b[3]Which is the first Zodiac Card you recieve?\w8\n\n"
+			--
+			"\![*]\q[Leo-card,rightanswer]\n\n[half]/
+			\![*]\q[Cancer-card,wronganswer]\n\n[half]/
+			\![*]\q[Libra-card,wronganswer]\n\n[half]/
+			\![*]\q[Pisces-card,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "8"
+		{
+			"\0\s[7]\b[3]Who is the Guardian of Zone 1?\w8\n\n"
+			--
+			"\![*]\q[Zacharie,wronganswer]\n\n[half]/
+			\![*]\q[Dedan,rightanswer]\n\n[half]/
+			\![*]\q[Japhet,wronganswer]\n\n[half]/
+			\![*]\q[Enoch,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "9"
+		{
+			"\0\s[7]\b[3]Who is the Guardian of Zone 2?\w8\n\n"
+			--
+			"\![*]\q[Enoch,wronganswer]\n\n[half]/
+			\![*]\q[Dedan,wronganswer]\n\n[half]/
+			\![*]\q[Zacharie,wronganswer]\n\n[half]/
+			\![*]\q[Japhet,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "10"
+		{
+			"\0\s[7]\b[3]Who is the Guardian of Zone 3?\w8\n\n"
+			--
+			"\![*]\q[Japhet,wronganswer]\n\n[half]/
+			\![*]\q[Zacharie,wronganswer]\n\n[half]/
+			\![*]\q[Enoch,rightanswer]\n\n[half]/
+			\![*]\q[Dedan,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "11"
+		{
+			"\0\s[7]\b[3]Who is the Guardian of Zone 4?\w8\n\n"
+			--
+			"\![*]\q[Hugo,rightanswer]\n\n[half]/
+			\![*]\q[The Queen,wronganswer]\n\n[half]/
+			\![*]\q[The Judge,wronganswer]\n\n[half]/
+			\![*]\q[Zacharie,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "12"
+		{
+			"\0\s[7]\b[3]Which of these is NOT a Zodiac Card?\w8\n\n"
+			--
+			"\![*]\q[Pisces,wronganswer]\n\n[half]/
+			\![*]\q[Cancer,wronganswer]\n\n[half]/
+			\![*]\q[Aquarius,wronganswer]\n\n[half]/
+			\![*]\q[Scorpio,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "13"
+		{
+			"\0\s[7]\b[3]Which of these is NOT apart of Zone 1?\w8\n\n"
+			--
+			"\![*]\q[Pentel,wronganswer]\n\n[half]/
+			\![*]\q[Vesper,rightanswer]\n\n[half]/
+			\![*]\q[Damien,wronganswer]\n\n[half]/
+			\![*]\q[Elsen,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "14"
+		{
+			"\0\s[7]\b[3]Which of these is within Shachihata?\w8\n\n"
+			--
+			"\![*]\q[Metal farmsteads,wronganswer]\n\n[half]/
+			\![*]\q[Sugar ovens,wronganswer]\n\n[half]/
+			\![*]\q[Plastic administrations,rightanswer]\n\n[half]/
+			\![*]\q[Smoke mines,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "15"
+		{
+			"\0\s[7]\b[3]Which of these is within Alma?\w8\n\n"
+			--
+			"\![*]\q[Meat fountains,rightanswer]\n\n[half]/
+			\![*]\q[Smoke mines,wronganswer]\n\n[half]/
+			\![*]\q[Metal farmsteads,wronganswer]\n\n[half]/
+			\![*]\q[Plastic administrations,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "16"
+		{
+			"\0\s[7]\b[3]Which of these is the smoke mines?\w8\n\n"
+			--
+			"\![*]\q[Bismark,wronganswer]\n\n[half]/
+			\![*]\q[Damien,rightanswer]\n\n[half]/
+			\![*]\q[Shachihata,wronganswer]\n\n[half]/
+			\![*]\q[Pentel,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "17"
+		{
+			"\0\s[7]\b[3]What is the first code you must remember in OFF?\w8\n\n"
+			--
+			"\![*]\q[474768A,wronganswer]\n\n[half]/
+			\![*]\q[458456B,wronganswer]\n\n[half]/
+			\![*]\q[448287C,rightanswer]\n\n[half]/
+			\![*]\q[489343D,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "18"
+		{
+			"\0\s[7]\b[3]Which room is to the Postal Service?\w8\n\n"
+			--
+			"\![*]\q[52768,wronganswer]\n\n[half]/
+			\![*]\q[87666,wronganswer]\n\n[half]/
+			\![*]\q[35726,wronganswer]\n\n[half]/
+			\![*]\q[10258,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "19"
+		{
+			"\0\s[7]\b[3]Which of these is NOT a book within the Library?\w8\n\n"
+			--
+			"\![*]\q[Directions,rightanswer]\n\n[half]/
+			\![*]\q[Tales and Legends,wronganswer]\n\n[half]/
+			\![*]\q[Bismark,wronganswer]\n\n[half]/
+			\![*]\q[Written by E.S.,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "20"
+		{
+			"\0\s[7]\b[3]What do you find within Vault 1402 in Zone 2?\w8\n\n"
+			--
+			"\![*]\q[Grand Diagonal,wronganswer]\n\n[half]/
+			\![*]\q[Michael Bat,rightanswer]\n\n[half]/
+			\![*]\q[Golden Flesh,wronganswer]\n\n[half]/
+			\![*]\q[Loyal Symbol,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "21"
+		{
+			"\0\s[7]\b[3]How is sugar made within Vesper?\w8\n\n"
+			--
+			"\![*]\q[Farming sugarcane in Zone 1,wronganswer]\n\n[half]/
+			\![*]\q[Using machines to magically create it,wronganswer]\n\n[half]/
+			\![*]\q[Burning bodies and using the vapour,rightanswer]\n\n[half]/
+			\![*]\q[It is made by Enoch sent by the Queen,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "22"
+		{
+			"\0\s[7]\b[3]Which plays during Dedan's fight?\w8\n\n"
+			--
+			"\![*]\q[Fake Orchestra,rightanswer]\n\n[half]/
+			\![*]\q[FleshMaze Tango,wronganswer]\n\n[half]/
+			\![*]\q[Minuit A Fond La Caisse,wronganswer]\n\n[half]/
+			\![*]\q[Peper Steak,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "23"
+		{
+			"\0\s[7]\b[3]Which plays during Japhet's fight?\w8\n\n"
+			--
+			"\![*]\q[Unreasonable Behaviour,wronganswer]\n\n[half]/
+			\![*]\q[Dramatic Crescendo,wronganswer]\n\n[half]/
+			\![*]\q[Desperately Safe,wronganswer]\n\n[half]/
+			\![*]\q[Minuit A Fond La Caisse,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "24"
+		{
+			"\0\s[7]\b[3]Which plays during Enoch's fight?\w8\n\n"
+			--
+			"\![*]\q[Tender Sugar,wronganswer]\n\n[half]/
+			\![*]\q[O Rosto De Um Assassino,rightanswer]\n\n[half]/
+			\![*]\q[Front Gate,wronganswer]\n\n[half]/
+			\![*]\q[The Race of a Thousand Pounds,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "25"
+		{
+			"\0\s[7]\b[3]Which plays during The Queen's fight?\w8\n\n"
+			--
+			"\![*]\q[O Rosto De Um Assassino,wronganswer]\n\n[half]/
+			\![*]\q[Not Safe,wronganswer]\n\n[half]/
+			\![*]\q[The Meaning of His Tears,rightanswer]\n\n[half]/
+			\![*]\q[Woman of Your Dreams,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "26"
+		{
+			"\0\s[7]\b[3]How do you encounter Sugar?\w8\n\n"
+			--
+			"\![*]\q[You beat Zone 2 and return to Zone 0,wronganswer]\n\n[half]/
+			\![*]\q[You gain one Grand item and return to Zone 0,rightanswer]\n\n[half]/
+			\![*]\q[You buy a special item and return to Zone 0,wronganswer]\n\n[half]/
+			\![*]\q[You just return to Zone 0 at any point,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "27"
+		{
+			"\0\s[7]\b[3]How do you get the Secret Ending?\w8\n\n"
+			--
+			"\![*]\q[You obtain the Aries-card from Zacharie in Zone 0,rightanswer]\n\n[half]/
+			\![*]\q[You see both endings and beat the Queen,wronganswer]\n\n[half]/
+			\![*]\q[You gain all Grand items and beat the Queen,wronganswer]\n\n[half]/
+			\![*]\q[There is no secret ending,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "28"
+		{
+			"\0\s[7]\b[3]Which of these is NOT an Add-On?\w8\n\n"
+			--
+			"\![*]\q[Delta,wronganswer]\n\n[half]/
+			\![*]\q[Epsilon,wronganswer]\n\n[half]/
+			\![*]\q[Sigma,wronganswer]\n\n[half]/
+			\![*]\q[Gamma,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "29"
+		{
+			"\0\s[7]\b[3]How many spectres are attacking the Elsens in the Residential Area in Zone 2?\w8\n\n"
+			--
+			"\![*]\q[Unlimited - until the timer runs out,wronganswer]\n\n[half]/
+			\![*]\q[6,wronganswer]\n\n[half]/
+			\![*]\q[8,rightanswer]\n\n[half]/
+			\![*]\q[10,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "30"
+		{
+			"\0\s[7]\b[3]What is the secret code to the Warehouse?\w8\n\n"
+			--
+			"\![*]\q[Von Gocy,wronganswer]\n\n[half]/
+			\![*]\q[Von Gacy,rightanswer]\n\n[half]/
+			\![*]\q[Van Gocy,wronganswer]\n\n[half]/
+			\![*]\q[Van Gacy,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "31"
+		{
+			"\0\s[7]\b[3]Which is the first Add-On you obtain?\w8\n\n"
+			--
+			"\![*]\q[Beta,wronganswer]\n\n[half]/
+			\![*]\q[Omega,wronganswer]\n\n[half]/
+			\![*]\q[Alpha,rightanswer]\n\n[half]/
+			\![*]\q[Epsilon,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "32"
+		{
+			"\0\s[7]\b[3]What does Belial's Meat do?\w8\n\n"
+			--
+			"\![*]\q[Restores moderate amount of HP,wronganswer]\n\n[half]/
+			\![*]\q[Restores moderate amount of CP,wronganswer]\n\n[half]/
+			\![*]\q[Cures poison,wronganswer]\n\n[half]/
+			\![*]\q[Cures all negative alterations,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "33"
+		{
+			"\0\s[7]\b[3]What does Golden Flesh do?\w8\n\n"
+			--
+			"\![*]\q[Restores large amount of CP,rightanswer]\n\n[half]/
+			\![*]\q[Restores large amount of HP,wronganswer]\n\n[half]/
+			\![*]\q[Revives a character,wronganswer]\n\n[half]/
+			\![*]\q[Fully heals everyone's HP and CP,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "34"
+		{
+			"\0\s[7]\b[3]How much experience does Dedan give?\w8\n\n"
+			--
+			"\![*]\q[1000 EXP,wronganswer]\n\n[half]/
+			\![*]\q[2000 EXP,wronganswer]\n\n[half]/
+			\![*]\q[3000 EXP,rightanswer]\n\n[half]/
+			\![*]\q[4000 EXP,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "35"
+		{
+			"\0\s[7]\b[3]How much experience does Japhet give?\w8\n\n"
+			--
+			"\![*]\q[5000 EXP,rightanswer]\n\n[half]/
+			\![*]\q[7000 EXP,wronganswer]\n\n[half]/
+			\![*]\q[9000 EXP,wronganswer]\n\n[half]/
+			\![*]\q[10000 EXP,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "36"
+		{
+			"\0\s[7]\b[3]What is The Batter's nickname?\w8\n\n"
+			--
+			"\![*]\q[Savior,wronganswer]\n\n[half]/
+			\![*]\q[Purifier,rightanswer]\n\n[half]/
+			\![*]\q[Ducky,wronganswer]\n\n[half]/
+			\![*]\q[Puppet,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "37"
+		{
+			"\0\s[7]\b[3]What does a Tuesday do?\w8\n\n"
+			--
+			"\![*]\q[Protects you from harmful ground,wronganswer]\n\n[half]/
+			\![*]\q[Protects you from poison,wronganswer]\n\n[half]/
+			\![*]\q[Benefits physical attacks,wronganswer]\n\n[half]/
+			\![*]\q[Reduces CP consumption,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "38"
+		{
+			"\0\s[7]\b[3]What does a Friday do?\w8\n\n"
+			--
+			"\![*]\q[Protects you from poison,wronganswer]\n\n[half]/
+			\![*]\q[Increase agility,wronganswer]\n\n[half]/
+			\![*]\q[Benefits competence attacks,rightanswer]\n\n[half]/
+			\![*]\q[Benefits physical attacks,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "39"
+		{
+			"\0\s[7]\b[3]How much does an Eye cost?\w8\n\n"
+			--
+			"\![*]\q[20 Credits,rightanswer]\n\n[half]/
+			\![*]\q[40 Credits,wronganswer]\n\n[half]/
+			\![*]\q[60 Credits,wronganswer]\n\n[half]/
+			\![*]\q[80 Credits,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "40"
+		{
+			"\0\s[7]\b[3]How much does a Grand Brachial cost?\w8\n\n"
+			--
+			"\![*]\q[2000 Credits,wronganswer]\n\n[half]/
+			\![*]\q[5000 Credits,rightanswer]\n\n[half]/
+			\![*]\q[7000 Credits,wronganswer]\n\n[half]/
+			\![*]\q[10000 Credits,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "41"
+		{
+			"\0\s[7]\b[3]What's the prize for winning the Balloon Game?\w8\n\n"
+			--
+			"\![*]\q[Access to another attraction,wronganswer]\n\n[half]/
+			\![*]\q[A Fortune Ticket,wronganswer]\n\n[half]/
+			\![*]\q[A Golden Flesh,wronganswer]\n\n[half]/
+			\![*]\q[A tie,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "42"
+		{
+			"\0\s[7]\b[3]What does Zacharie give you as a pity prize for \n'losing' his race to Area 2 in Zone 3?\w8\n\n"
+			--
+			"\![*]\q[An Eye,wronganswer]\n\n[half]/
+			\![*]\q[A Fortune Ticket,wronganswer]\n\n[half]/
+			\![*]\q[A Golden Flesh,rightanswer]\n\n[half]/
+			\![*]\q[A Joker,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "43"
+		{
+			"\0\s[7]\b[3]Who is the one who claims to be the chief of spectres?\w8\n\n"
+			--
+			"\![*]\q[Dedan,wronganswer]\n\n[half]/
+			\![*]\q[Japhet,rightanswer]\n\n[half]/
+			\![*]\q[Valerie,wronganswer]\n\n[half]/
+			\![*]\q[The Queen,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "44"
+		{
+			"\0\s[7]\b[3]Why was the rollercoaster shut down in Zone 2?\w8\n\n"
+			--
+			"\![*]\q[It was unfinished,rightanswer]\n\n[half]/
+			\![*]\q[It was in horrible disrepair,wronganswer]\n\n[half]/
+			\![*]\q[Nobody was riding it,wronganswer]\n\n[half]/
+			\![*]\q[It was attacked by spectres,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "45"
+		{
+			"\0\s[7]\b[3]What was the rollercoaster replaced with in Zone 2?\w8\n\n"
+			--
+			"\![*]\q[A ferris wheel,wronganswer]\n\n[half]/
+			\![*]\q[A pedalo ride,wronganswer]\n\n[half]/
+			\![*]\q[An on-rail chair ride,wronganswer]\n\n[half]/
+			\![*]\q[Lines of chairs on the ground,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "46"
+		{
+			"\0\s[7]\b[3]What is the name of the comic Hugo's father gave him?\w8\n\n"
+			--
+			"\![*]\q[Adventures of Boxxer,wronganswer]\n\n[half]/
+			\![*]\q[Ballman's Revenge,wronganswer]\n\n[half]/
+			\![*]\q[Panic in Ballville,rightanswer]\n\n[half]/
+			\![*]\q[Ballville,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "47"
+		{
+			"\0\s[7]\b[3]Who is the antagonist of Panic in Ballville?\w8\n\n"
+			--
+			"\![*]\q[Boxxer,wronganswer]\n\n[half]/
+			\![*]\q[Ballman,rightanswer]\n\n[half]/
+			\![*]\q[The Batter,wronganswer]\n\n[half]/
+			\![*]\q[Clones,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "48"
+		{
+			"\0\s[7]\b[3]In which Zone do you obtain the Delta Add-On?\w8\n\n"
+			--
+			"\![*]\q[Zone 1,wronganswer]\n\n[half]/
+			\![*]\q[Zone 2,wronganswer]\n\n[half]/
+			\![*]\q[Zone 3,wronganswer]\n\n[half]/
+			\![*]\q[You don't get a Delta Add-On,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "49"
+		{
+			"\0\s[7]\b[3]What song plays during the Game Over screen?\w8\n\n"
+			--
+			"\![*]\q[Stay in Your Coma,rightanswer]\n\n[half]/
+			\![*]\q[Fourteen Residents,wronganswer]\n\n[half]/
+			\![*]\q[Today is Worst,wronganswer]\n\n[half]/
+			\![*]\q[Yesterday was Better,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "50"
+		{
+			"\0\s[7]\b[3]What song does the music box play?\w8\n\n"
+			--
+			"\![*]\q[Rainy Day,wronganswer]\n\n[half]/
+			\![*]\q[Desperately Safe,wronganswer]\n\n[half]/
+			\![*]\q[The Race of a Thousand Ants,rightanswer]\n\n[half]/
+			\![*]\q[Stay in Your Coma,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "51"
+		{
+			"\0\s[7]\b[3]Which of these are NOT one of Alpha's Compentences?\w8\n\n"
+			--
+			"\![*]\q[Impossible Bracket,wronganswer]\n\n[half]/
+			\![*]\q[Closed Bracket,rightanswer]\n\n[half]/
+			\![*]\q[Saturated String,wronganswer]\n\n[half]/
+			\![*]\q[Entire String,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "52"
+		{
+			"\0\s[7]\b[3]Which character has injury related Compentences?\w8\n\n"
+			--
+			"\![*]\q[Dedan,wronganswer]\n\n[half]/
+			\![*]\q[Japhet,wronganswer]\n\n[half]/
+			\![*]\q[Enoch,wronganswer]\n\n[half]/
+			\![*]\q[The Judge,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "53"
+		{
+			"\0\s[7]\b[3]How much CP does it cost to use Save First Base?\w8\n\n"
+			--
+			"\![*]\q[5,rightanswer]\n\n[half]/
+			\![*]\q[10,wronganswer]\n\n[half]/
+			\![*]\q[15,wronganswer]\n\n[half]/
+			\![*]\q[20,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "54"
+		{
+			"\0\s[7]\b[3]Which character has theatrical trope related Compentences?\w8\n\n"
+			--
+			"\![*]\q[Japhet,wronganswer]\n\n[half]/
+			\![*]\q[Alpha,wronganswer]\n\n[half]/
+			\![*]\q[Enoch,rightanswer]\n\n[half]/
+			\![*]\q[Epsilon,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "55"
+		{
+			"\0\s[7]\b[3]Which is NOT a bat the Batter can equip?\w8\n\n"
+			--
+			"\![*]\q[Emmanuel,wronganswer]\n\n[half]/
+			\![*]\q[David,rightanswer]\n\n[half]/
+			\![*]\q[Ashley,wronganswer]\n\n[half]/
+			\![*]\q[Lewis,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "56"
+		{
+			"\0\s[7]\b[3]Who is the Guardian of Zone 0?\w8\n\n"
+			--
+			"\![*]\q[The Judge,wronganswer]\n\n[half]/
+			\![*]\q[Zacharie,wronganswer]\n\n[half]/
+			\![*]\q[Sugar,wronganswer]\n\n[half]/
+			\![*]\q[It is undetermined,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "57"
+		{
+			"\0\s[7]\b[3]What is the Batter's mission?\w8\n\n"
+			--
+			"\![*]\q[To save the world,wronganswer]\n\n[half]/
+			\![*]\q[To purify the world,rightanswer]\n\n[half]/
+			\![*]\q[To take over the Queen,wronganswer]\n\n[half]/
+			\![*]\q[To find Hugo,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "58"
+		{
+			"\0\s[7]\b[3]Which is the 'most important' element according to the Elsens?\w8\n\n"
+			--
+			"\![*]\q[Metal,wronganswer]\n\n[half]/
+			\![*]\q[Smoke,wronganswer]\n\n[half]/
+			\![*]\q[Sugar,rightanswer]\n\n[half]/
+			\![*]\q[Meat,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "59"
+		{
+			"\0\s[7]\b[3]Which is NOT a real place in OFF?\w8\n\n"
+			--
+			"\![*]\q[Vadre,rightanswer]\n\n[half]/
+			\![*]\q[Vesper,wronganswer]\n\n[half]/
+			\![*]\q[Elsen,wronganswer]\n\n[half]/
+			\![*]\q[Bismark,wronganswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+		when "60"
+		{
+			"\0\s[7]\b[3]Which is the first of the four elements?\w8\n\n"
+			--
+			"\![*]\q[Smoke,wronganswer]\n\n[half]/
+			\![*]\q[Metal,wronganswer]\n\n[half]/
+			\![*]\q[Plastic,wronganswer]\n\n[half]/
+			\![*]\q[They are all called the first element,rightanswer]\n\n/
+			\![*]\q[Stop the quiz,cancelquiz]\e"
+		}
+	}

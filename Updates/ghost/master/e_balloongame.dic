@@ -1,0 +1,608 @@
+//BALLOON GAME!
+//Wow how I originally wrote this made the Yandere Dev look bloody MASTERFUL, this is so much easier than I was ever expecting
+//Anyway, this is pretty much the balloon game that you play in the park in Zone 2. You get prizes if you win and nothing if y'don't. Simple as that
+//Now this game is true to how the Elsen actually plays in OFF! Too bad it's still extremely easy
+
+Select.balloongame
+{
+	if dedanmode == "ON"
+	{
+		"\b[4]*It is very doubtful that Dedan would like to play a fun balloon game with you.*\e"
+	}
+	elseif burntstatus == "stressburnt" || burntstatus == "sugarburnt"
+	{
+		"*There's no point now.*\e"
+	}
+	elseif sugarlevel < 40
+	{
+		"*He doesn't look in the mood to play a game...*\e"
+	}
+	else
+	{
+		"\b[2]\_q*Play, play, play the Balloon Game! On your turn, you choose whether to pop one, two, or three balloons, and the Elsen will do the same. The one who's left with the last balloon loses.*\n\n[half]*If you win, you'll get a nice prize! But if you lose, you might get sad, so be careful. You can only win a prize once per boot.*"
+		--
+		if pausestatus == "ON"
+		{
+			"\n\n[half]*You are currently \f[color,247,174,41]PAUSED\f[color,default], which means you will not win a prize from this.*"
+		}
+		--
+		"\n\n[half]*Would you like to start the game?*\n\n"
+		--
+		"\![*]\q[Yes!,engagetheballoonsmotherfucker]\n\n[half]/
+		\![*]\q[Back to menu,BACKTOMENU]\e"
+	}
+}
+
+Select.cancelgame
+{
+	"\p[3]\s[-1]\0\s[3]Alright...\e"
+}
+
+Select.fuckoffballoons
+{
+	"\p[3]\s[-1]\e"
+}
+
+//-------------------------
+
+awinnerisyou
+{
+	if gamewon == 1
+	{
+		"\0\s[3]Oh, \w4you won! \w8\0\s[2]How wonderful!\w8\_q\n*You already won a reward this boot.*"
+		--
+		"\n\n\![*]\q[Play again!,engagetheballoonsmotherfucker]\n\n[half]/
+		\![*]\q[Leave,fuckoffballoons]\e"
+	}
+	elseif gamewon != 1
+	{
+		
+		"\0\s[3]Oh, \w4you won! \w8\0\s[2]How wonderful!"
+		--
+		if pausestatus == "OFF"
+		{
+			gamewon = 1
+			
+			" \w8Here, \w4take this as a reward.\w8\w8\c%(prize)"
+		}
+		--
+		"\n\n\![*]\q[Play again!,engagetheballoonsmotherfucker]\n\n[half]/
+		\![*]\q[Leave,fuckoffballoons]\e"
+	}
+	
+}
+
+gameover
+{
+	"\0\s[11]\cYou lost! \w8\0\s[9]Y-you want to try again...?\n\n"
+	--
+	"\![*]\q[Try again!,engagetheballoonsmotherfucker]\n\n[half]/
+	\![*]\q[Leave,fuckoffballoons]\e"
+}
+
+ResetBalloons
+{
+	balloon1 = 0
+	balloon2 = 0
+	balloon3 = 0
+	balloon4 = 0
+	balloon5 = 0
+	balloon6 = 0
+	balloon7 = 0
+	balloon8 = 0
+	balloon9 = 0
+	balloon10 = 0
+	balloon11 = 0
+	balloon12 = 0
+	balloon13 = 0
+}
+
+Select.engagetheballoonsmotherfucker
+{
+	ResetBalloons
+	
+	"\p[3]\s[400]\0\s[2]Alright, \w4I'll start.\w8\w8"
+	--
+	{
+		if RAND(100) < 30 //pop one
+		{
+			"%(pop)%(bone)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn)"
+		}
+		elseif RAND(90) > 60 //pop two
+		{
+			"%(pop)%(bone)\w6%(pop)%(btwo)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn)"
+		}
+		else //pop three
+		{
+			"%(pop)%(bone)\w6%(pop)%(btwo)\w6%(pop)%(bthree)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn)"
+		}
+	}
+}
+
+playturn
+{
+	"\0\s[4]\b[2]\c*Pop how many balloons?*\n\n"
+	--
+	"\![*]\q[One,chooseone]\n\n[half]/
+	\![*]\q[Two,choosetwo]\n\n[half]/
+	\![*]\q[Three,choosethree]\n\n/
+	\![*]\q[End the game,cancelgame]\e"
+}
+
+Select.chooseone
+{
+	if balloon1 == 1
+	{
+		"%(pop)%(btwo)\w8\w8%(elsenturn)"
+	}
+	elseif balloon2 == 1
+	{
+		"%(pop)%(bthree)\w8\w8%(elsenturn)"
+	}
+	elseif balloon3 == 1
+	{
+		"%(pop)%(bfour)\w8\w8%(elsenturn)"
+	}
+}
+
+Select.choosetwo
+{
+	if balloon1 == 1
+	{
+		"%(pop)%(btwo)\w6%(pop)%(bthree)\w8\w8%(elsenturn)"
+	}
+	elseif balloon2 == 1
+	{
+		"%(pop)%(bthree)\w6%(pop)%(bfour)\w8\w8%(elsenturn)"
+	}
+	elseif balloon3 == 1
+	{
+		"%(pop)%(bfour)\w6%(pop)%(bfive)\w8\w8%(elsenturn)"
+	}
+}
+
+Select.choosethree
+{
+	if balloon1 == 1
+	{
+		"%(pop)%(btwo)\w6%(pop)%(bthree)\w6%(pop)%(bfour)\w8\w8%(elsenturn)"
+	}
+	elseif balloon2 == 1
+	{
+		"%(pop)%(bthree)\w6%(pop)%(bfour)\w6%(pop)%(bfive)\w8\w8%(elsenturn)"
+	}
+	elseif balloon3 == 1
+	{
+		"%(pop)%(bfour)\w6%(pop)%(bfive)\w6%(pop)%(bsix)\w8\w8%(elsenturn)"
+	}
+}
+
+//ROUND TWO
+
+elsenturn
+{
+	"\0\s[2]Okay, \w4my turn again!\w8\w8"
+	--
+	if balloon2 == 1
+	{
+		if RAND(100) < 50 //pop one
+		{
+			"%(pop)%(bthree)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+		}
+		else //pop two
+		{
+			"%(pop)%(bthree)\w6%(pop)%(bfour)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+		}
+	}
+	elseif balloon3 == 1
+	{
+		"%(pop)%(bfour)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+	}
+	elseif balloon4 == 1
+	{
+		if RAND(100) < 50 //pop one
+		{
+			"%(pop)%(bfive)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+		}
+		elseif RAND(100) > 50 //pop two
+		{
+			"%(pop)%(bfive)\w6%(pop)%(bsix)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+		}
+		else //pop three
+		{
+			"%(pop)%(bfive)\w6%(pop)%(bsix)\w6%(pop)%(bseven)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+		}
+	}
+	elseif balloon5 == 1
+	{
+		"%(pop)%(bsix)\w6%(pop)%(bseven)\w6%(pop)%(beight)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+	}
+	elseif balloon6 == 1
+	{
+		"%(pop)%(bseven)\w6%(pop)%(beight)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+	}
+}
+
+playturn1 
+{
+	"\0\s[4]\b[2]\c*Pop how many balloons?*\n\n"
+	--
+	"\![*]\q[One,chooseone1]\n\n[half]/
+	\![*]\q[Two,choosetwo1]\n\n[half]/
+	\![*]\q[Three,choosethree1]\n\n/
+	\![*]\q[End the game,cancelgame]\e"
+}
+
+Select.chooseone1
+{
+	if balloon3 == 1
+	{
+		"%(pop)%(bfour)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon4 == 1
+	{
+		"%(pop)%(bfive)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon5 == 1
+	{
+		"%(pop)%(bsix)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon6 == 1
+	{
+		"%(pop)%(bseven)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon7 == 1
+	{
+		"%(pop)%(beight)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon8 == 1
+	{
+		"%(pop)%(bnine)\w8\w8%(elsenturn1)"
+	}
+}
+
+Select.choosetwo1
+{
+	if balloon3 == 1
+	{
+		"%(pop)%(bfour)\w6%(pop)%(bfive)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon4 == 1
+	{
+		"%(pop)%(bfive)\w6%(pop)%(bsix)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon5 == 1
+	{
+		"%(pop)%(bsix)\w6%(pop)%(bseven)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon6 == 1
+	{
+		"%(pop)%(bseven)\w6%(pop)%(beight)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon7 == 1
+	{
+		"%(pop)%(beight)\w6%(pop)%(bnine)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon8 == 1
+	{
+		"%(pop)%(bnine)\w6%(pop)%(bten)\w8\w8%(elsenturn1)"
+	}
+}
+
+Select.choosethree1
+{
+	if balloon3 == 1
+	{
+		"%(pop)%(bfour)\w6%(pop)%(bfive)\w6%(pop)%(bsix)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon4 == 1
+	{
+		"%(pop)%(bfive)\w6%(pop)%(bsix)\w6%(pop)%(bseven)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon5 == 1
+	{
+		"%(pop)%(bsix)\w6%(pop)%(bseven)\w6%(pop)%(beight)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon6 == 1
+	{
+		"%(pop)%(bseven)\w6%(pop)%(beight)\w6%(pop)%(bnine)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon7 == 1
+	{
+		"%(pop)%(beight)\w6%(pop)%(bnine)\w6%(pop)%(bten)\w8\w8%(elsenturn1)"
+	}
+	elseif balloon8 == 1
+	{
+		"%(pop)%(bnine)\w6%(pop)%(bten)\w6%(pop)%(beleven)\w8\w8%(elsenturn1)"
+	}
+}
+
+//ROUND THREE
+
+elsenturn1
+{
+	"\0\s[2]Okay, \w4my turn again!\w8\w8"
+	--
+	if balloon4 == 1
+	{
+		"%(pop)%(bfive)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+	}
+	elseif balloon5 == 1
+	{
+		"%(pop)%(bsix)\w6%(pop)%(bseven)\w6%(pop)%(beight)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+	}
+	elseif balloon6 == 1
+	{
+		"%(pop)%(bseven)\w6%(pop)%(beight)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+	}
+	elseif balloon7 == 1
+	{
+		"%(pop)%(beight)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn2)"
+	}
+	elseif balloon8 == 1
+	{
+		if RAND(100) < 50 //pop one
+		{
+			"%(pop)%(bnine)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn2)"
+		}
+		elseif RAND(100) > 50 //pop two
+		{
+			"%(pop)%(bnine)\w6%(pop)%(bten)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn2)"
+		}
+		else //pop three
+		{
+			"%(pop)%(bnine)\w6%(pop)%(bten)\w6%(pop)%(beleven)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn2)"
+		}
+	}
+	elseif balloon9 == 1
+	{
+		"%(pop)%(bten)\w6%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(gameover)"
+	}
+	elseif balloon10 == 1
+	{
+		"%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(gameover)"
+	}
+	elseif balloon11 == 1
+	{
+		"%(pop)%(btwelve)\w8\w8%(gameover)"
+	}
+}
+
+playturn2
+{
+	"\0\s[4]\b[2]\c*Pop how many balloons?*\n\n"
+	--
+	"\![*]\q[One,chooseone2]\n\n[half]/
+	\![*]\q[Two,choosetwo2]\n\n[half]/
+	\![*]\q[Three,choosethree2]\n\n/
+	\![*]\q[End the game,cancelgame]\e"
+}
+
+Select.chooseone2
+{
+	if balloon5 == 1
+	{
+		"%(pop)%(bsix)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon6 == 1
+	{
+		"%(pop)%(bseven)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon7 == 1
+	{
+		"%(pop)%(beight)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon8 == 1
+	{
+		"%(pop)%(bnine)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon9 == 1
+	{
+		"%(pop)%(bten)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon10 == 1
+	{
+		"%(pop)%(beleven)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon11 == 1
+	{
+		"%(pop)%(btwelve)\w8\w8%(awinnerisyou)"
+	}
+}
+
+Select.choosetwo2
+{
+	if balloon5 == 1
+	{
+		"%(pop)%(bsix)\w6%(pop)%(bseven)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon6 == 1
+	{
+		"%(pop)%(bseven)\w6%(pop)%(beight)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon7 == 1
+	{
+		"%(pop)%(beight)\w6%(pop)%(bnine)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon8 == 1
+	{
+		"%(pop)%(bnine)\w6%(pop)%(bten)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon9 == 1
+	{
+		"%(pop)%(bten)\w6%(pop)%(beleven)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon10 == 1
+	{
+		"%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(awinnerisyou)"
+	}
+	elseif balloon11 == 1
+	{
+		"%(pop)%(btwelve)\w6%(pop)%(bthirteen)\w8\w8%(gameover)"
+	}
+}
+
+Select.choosethree2
+{
+	if balloon5 == 1
+	{
+		"%(pop)%(bsix)\w6%(pop)%(bseven)\w6%(pop)%(beight)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon6 == 1
+	{
+		"%(pop)%(bseven)\w6%(pop)%(beight)\w6%(pop)%(bnine)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon7 == 1
+	{
+		"%(pop)%(beight)\w6%(pop)%(bnine)\w6%(pop)%(bten)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon8 == 1
+	{
+		"%(pop)%(bnine)\w6%(pop)%(bten)\w6%(pop)%(beleven)\w8\w8%(elsenturn2)"
+	}
+	elseif balloon9 == 1
+	{
+		"%(pop)%(bten)\w6%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(awinnerisyou)"
+	}
+	elseif balloon10 == 1
+	{
+		"%(pop)%(beleven)\w6%(pop)%(btwelve)\w6%(pop)%(bthirteen)\w8\w8%(gameover)"
+	}
+	elseif balloon11 == 1
+	{
+		"%(pop)%(btwelve)\w6%(pop)%(bthirteen)\w8\w8%(gameover)"
+	}
+}
+
+//ROUND FOUR
+
+elsenturn2
+{
+	"\0\s[2]Okay, \w4my turn again!\w8\w8"
+	--
+	if balloon6 == 1
+	{
+		"%(pop)%(bseven)\w6%(pop)%(beight)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn1)"
+	}
+	elseif balloon7 == 1
+	{
+		"%(pop)%(beight)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn2)"
+	}
+	elseif balloon8 == 1
+	{
+		if RAND(100) < 50 //pop one
+		{
+			"%(pop)%(bnine)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn2)"
+		}
+		elseif RAND(100) > 50 //pop two
+		{
+			"%(pop)%(bnine)\w6%(pop)%(bten)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn2)"
+		}
+		else //pop three
+		{
+			"%(pop)%(bnine)\w6%(pop)%(bten)\w6%(pop)%(beleven)\w8\w8\0\s[3]\cOkay, \w4your turn.\w8\w8%(playturn2)"
+		}
+	}
+	elseif balloon9 == 1
+	{
+		"%(pop)%(bten)\w6%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(gameover)"
+	}
+	elseif balloon10 == 1
+	{
+		"%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(gameover)"
+	}
+	elseif balloon11 == 1
+	{
+		"%(pop)%(btwelve)\w8\w8%(gameover)"
+	}
+}
+
+playturn3
+{
+	"\0\s[4]\b[2]\c*Pop how many balloons?*\n\n"
+	--
+	"\![*]\q[One,chooseone3]\n\n[half]/
+	\![*]\q[Two,choosetwo3]\n\n[half]/
+	\![*]\q[Three,choosethree3]\n\n/
+	\![*]\q[End the game,cancelgame]\e"
+}
+
+Select.chooseone3
+{
+	if balloon8 == 1
+	{
+		"%(pop)%(bnine)\w8\w8%(elsenturn3)"
+	}
+	elseif balloon9 == 1
+	{
+		"%(pop)%(bten)\w8\w8%(elsenturn3)"
+	}
+	elseif balloon10 == 1
+	{
+		"%(pop)%(beleven)\w8\w8%(elsenturn3)"
+	}
+	elseif balloon11 == 1
+	{
+		"%(pop)%(btwelve)\w8\w8%(awinnerisyou)"
+	}
+}
+
+Select.choosetwo3
+{
+	if balloon8 == 1
+	{
+		"%(pop)%(bnine)\w6%(pop)%(bten)\w8\w8%(elsenturn3)"
+	}
+	elseif balloon9 == 1
+	{
+		"%(pop)%(bten)\w6%(pop)%(beleven)\w8\w8%(elsenturn3)"
+	}
+	elseif balloon10 == 1
+	{
+		"%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(awinnerisyou)"
+	}
+	elseif balloon11 == 1
+	{
+		"%(pop)%(btwelve)\w6%(pop)%(bthirteen)\w8\w8%(gameover)"
+	}
+}
+
+Select.choosethree3
+{
+	if balloon8 == 1
+	{
+		"%(pop)%(bnine)\w6%(pop)%(bten)\w6%(pop)%(beleven)\w8\w8%(elsenturn3)"
+	}
+	elseif balloon9 == 1
+	{
+		"%(pop)%(bten)\w6%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(awinnerisyou)"
+	}
+	elseif balloon10 == 1
+	{
+		"%(pop)%(beleven)\w6%(pop)%(btwelve)\w6\%(pop)%(bthirteen)\w8\w8%(gameover)"
+	}
+	elseif balloon11 == 1
+	{
+		"%(pop)%(btwelve)\w6%(pop)%(bthirteen)\w8\w8%(gameover)"
+	}
+}
+
+//ROUND FOUR
+
+elsenturn3
+{
+	"\0\s[2]Okay, \w4my turn again!\w8\w8"
+	--
+	if balloon9 == 1
+	{
+		"%(pop)%(bten)\w6%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(gameover)"
+	}
+	elseif balloon10 == 1
+	{
+		"%(pop)%(beleven)\w6%(pop)%(btwelve)\w8\w8%(gameover)"
+	}
+	elseif balloon11 == 1
+	{
+		"%(pop)%(btwelve)\w8\w8%(gameover)"
+	}
+}
